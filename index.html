@@ -631,11 +631,12 @@
     <a href="#hero" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
     </a>
-    <ul class="nav-links-desktop">
+      <ul class="nav-links-desktop">
       <li><a href="#about">О проекте</a></li>
       <li><a href="#music">Музыка</a></li>
       <li><a href="#concerts">Концерты</a></li>
       <li><a href="#band">Состав</a></li>
+      <li><a href="#video">Видео</a></li>
       <li><a href="#contact">Контакт</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
@@ -644,11 +645,12 @@
   </nav>
 
   <!-- Мобильное меню — вне nav, прямо в body, z-index свободен -->
-  <ul class="nav-links-mobile" id="navLinks">
+    <ul class="nav-links-mobile" id="navLinks">
     <li><a href="#about">О проекте</a></li>
     <li><a href="#music">Музыка</a></li>
     <li><a href="#concerts">Концерты</a></li>
     <li><a href="#band">Состав</a></li>
+    <li><a href="#video">Видео</a></li>
     <li><a href="#contact">Контакт</a></li>
   </ul>
 
@@ -903,6 +905,69 @@
     <div class="ornament-line"></div>
   </div>
 
+ 
+
+  <!-- VIDEO -->
+  <section id="video">
+    <div class="container">
+      <p class="section-label reveal">Видео</p>
+      <h2 class="section-title reveal">Моменты выступлений</h2>
+      <div class="band-grid">
+        <!-- Видео 1 -->
+        <div class="member-card reveal">
+          <div class="member-portrait">
+            <!-- Замени src на ссылку на видео (YouTube/VK) или на постер-превью -->
+            <video controls style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+              <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/default.mp4" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
+          <div class="member-name">Выступление на «Ладе»</div>
+          <div class="member-role">Соликамск, 8 июля</div>
+          <p class="member-bio">Фрагмент с фестиваля семьи — энергия хоровода и электроника в одном ритме.</p>
+        </div>
+
+        <!-- Видео 2 -->
+        <div class="member-card reveal">
+          <div class="member-portrait">
+            <video controls style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+              <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/16493967378953.mp4" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
+          <div class="member-name">Сет на «Биармии»</div>
+          <div class="member-role">Плехово, 8 августа</div>
+          <p class="member-bio">Эксперимент с фольклорными распевами и синтезаторными слоями.</p>
+        </div>
+
+        <!-- Видео 3 (если нужно) -->
+        <!--
+        <div class="member-card reveal">
+          <div class="member-portrait">
+            <video controls poster="images/video3-poster.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+              <source src="videos/concert3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="member-name">Репетиция-стрим</div>
+          <div class="member-role">Онлайн, май</div>
+          <p class="member-bio">Покажем, как рождается аранжировка изнутри.</p>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+<!-- ORNAMENT: волна (как между Music и Concerts) -->
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <span class="ornament-symbol ornament-wave">
+      <svg viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
+        <path d="M2 7 Q9 1 16 7 T30 7 T44 7 T58 7 T72 7 T86 7 T100 7 T114 7 T128 7 T138 7" />
+      </svg>
+    </span>
+    <div class="ornament-line"></div>
+  </div>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
@@ -928,6 +993,39 @@
   </footer>
 
   <script>
+
+   document.addEventListener('DOMContentLoaded', () => {
+    // Проверяем, не создан ли уже observer (защита от дублей)
+    if (window.videoObserver) return;
+
+    const videos = document.querySelectorAll('.member-portrait video');
+    
+    if (!videos.length) {
+      console.warn('Видео с классом .member-portrait video не найдены.');
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        
+        // readyState >= 2 означает, что метаданные и достаточно данных загружены для воспроизведения
+        if (entry.isIntersecting && video.readyState >= 2) {
+          video.play().catch(e => {
+            // Игнорируем ошибку автоплея со звуком — это стандартное поведение браузеров
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 }); // Видео должно быть видно минимум на 50%
+
+    videos.forEach(video => observer.observe(video));
+    
+    // Сохраняем в window, чтобы при повторном запуске код понял, что observer уже есть
+    window.videoObserver = observer;
+  });
+
     // Появление элементов при скролле
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
