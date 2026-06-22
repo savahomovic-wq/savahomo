@@ -58,7 +58,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.4rem 3rem;
-      background: rgba(10, 10, 10, 0.9);
+      background: rgba(10, 10, 10, 0.95);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border-color);
@@ -68,12 +68,12 @@
       height: 75px;
       width: auto;
     }
-    .nav-links {
+    .nav-links-desktop {
       display: flex;
       gap: 2.5rem;
       list-style: none;
     }
-    .nav-links a {
+    .nav-links-desktop a {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 0.75rem;
@@ -81,34 +81,93 @@
       text-transform: uppercase;
       transition: color 0.3s, text-shadow 0.3s;
     }
-    .nav-links a:hover {
+    .nav-links-desktop a:hover {
       color: var(--text-pure);
       text-shadow: 0 0 8px rgba(255,255,255,0.6);
     }
+    /* Мобильное меню — скрыто по умолчанию всегда */
+    .nav-links-mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background: #050505;
+      z-index: 9999;
+      overflow-y: auto;
+      flex-direction: column;
+    }
+    .nav-links-mobile.open {
+      display: flex;
+    }
+    .nav-links-mobile li {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-links-mobile li:first-child {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-links-mobile a {
+      display: block;
+      padding: 1.2rem 2rem;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links-mobile a:hover,
+    .nav-links-mobile a:active {
+      color: var(--accent);
+      background: rgba(255,255,255,0.04);
+    }
 
+    /* ── БУРГЕР-КНОПКА (исправлено) ── */
     .nav-toggle {
       display: none;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       gap: 5px;
-      width: 32px;
-      height: 32px;
-      background: none;
-      border: none;
+      width: 44px;
+      height: 44px;
+      /* Видимый фон чтобы не сливался с тёмным навбаром */
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
       cursor: pointer;
-      z-index: 210;
-      padding: 0;
+      z-index: 300;
+      padding: 8px;
+      /* Убираем нативные стили кнопки */
+      -webkit-appearance: none;
+      appearance: none;
+      flex-shrink: 0;
+    }
+    .nav-toggle:active {
+      background: rgba(255, 255, 255, 0.15);
     }
     .nav-toggle span {
       display: block;
-      width: 100%;
-      height: 1px;
-      background: var(--text-pure);
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      width: 22px;
+      height: 2px;
+      /* Более яркий белый для контраста */
+      background: #ffffff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+      flex-shrink: 0;
     }
-    .nav-toggle.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .nav-toggle.active span:nth-child(2) { opacity: 0; }
-    .nav-toggle.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-toggle.active {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .nav-toggle.active span { background: #ffffff; }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ── РАЗДЕЛИТЕЛЬ ── */
     .ornament {
@@ -536,28 +595,11 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 0.6rem 1.5rem; }
+
       .nav-toggle { display: flex; }
-      .nav-links {
-        position: fixed;
-        inset: 0;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2.2rem;
-        background: rgba(8, 8, 8, 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: transform 0.45s cubic-bezier(.65,0,.35,1), opacity 0.3s ease, visibility 0.45s;
-      }
-      .nav-links.open {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
-      .nav-links a { font-size: 0.95rem; letter-spacing: 0.2em; }
+
+      /* Десктопные ссылки скрыты на мобиле */
+      .nav-links-desktop { display: none; }
 
       section { padding: 6rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
@@ -588,17 +630,26 @@
     <a href="#hero" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links-desktop">
       <li><a href="#about">О проекте</a></li>
       <li><a href="#music">Музыка</a></li>
       <li><a href="#concerts">Концерты</a></li>
       <li><a href="#band">Состав</a></li>
       <li><a href="#contact">Контакт</a></li>
     </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Мобильное меню — вне nav, прямо в body, z-index свободен -->
+  <ul class="nav-links-mobile" id="navLinks">
+    <li><a href="#about">О проекте</a></li>
+    <li><a href="#music">Музыка</a></li>
+    <li><a href="#concerts">Концерты</a></li>
+    <li><a href="#band">Состав</a></li>
+    <li><a href="#contact">Контакт</a></li>
+  </ul>
 
   <!-- HERO -->
   <section id="hero">
@@ -869,7 +920,6 @@
     </div>
   </section>
 
-  
   <!-- FOOTER -->
   <footer>
     <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Таволга" class="footer-logo">
