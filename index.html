@@ -14,39 +14,58 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-dark:    #0a0a0a;
+      --bg-dark:    #0a0808;
       --bg-panel:   #121212;
       --text-pure:  #ffffff;
       --text-muted: #999999;
       --border-color: rgba(255, 255, 255, 0.15);
       --border-glow:  rgba(255, 255, 255, 0.4);
-      --accent:      #b08a4f;
+      --accent:       #b08a4f;
       --accent-soft: rgba(176, 138, 79, 0.35);
       --nav-h: 82px;
     }
 
     html { scroll-behavior: smooth; }
 
+    /* ── ГЛОБАЛЬНЫЙ ФОН ── */
     body {
-      background: var(--bg-dark);
+      background-color: var(--bg-dark);
       color: var(--text-pure);
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3Cpattern id='rus' x='0' y='0' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18'/%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18' transform='rotate(45 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18' transform='rotate(90 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18' transform='rotate(135 60 60)'/%3E%3Ccircle cx='60' cy='60' r='3' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.22'/%3E%3Cellipse cx='0' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='0' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 0 0)'/%3E%3Cellipse cx='120' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='120' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 120 0)'/%3E%3Cellipse cx='0' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='0' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 0 120)'/%3E%3Cellipse cx='120' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='120' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 120 120)'/%3E%3Cpath d='M60 0 L120 60 L60 120 L0 60 Z' fill='none' stroke='%23b08a4f' stroke-width='0.3' opacity='0.07'/%3E%3Cpath d='M60 48 Q66 42 60 36 Q54 42 60 48' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M60 72 Q66 78 60 84 Q54 78 60 72' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M48 60 Q42 66 36 60 Q42 54 48 60' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M72 60 Q78 66 84 60 Q78 54 72 60' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23rus)'/%3E%3C/svg%3E");
+      opacity: 1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 50% 30%, rgba(10,8,8,0.55) 0%, rgba(10,8,8,0.82) 100%);
+    }
+
+    nav, section, .ornament, footer, .nav-links-mobile {
+      position: relative;
+      z-index: 1;
     }
 
     img { max-width: 100%; display: block; }
-
     a { -webkit-tap-highlight-color: transparent; }
-
     ::selection { background: var(--accent); color: var(--bg-dark); }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     section { scroll-margin-top: var(--nav-h); }
 
     /* ── NAV ── */
@@ -59,21 +78,29 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.4rem 3rem;
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border-color);
+      background: rgba(10, 8, 8, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(176,138,79,0.2);
     }
+
+    nav::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 8px,
+        rgba(176,138,79,0.18) 8px,
+        rgba(176,138,79,0.18) 10px
+      );
+    }
+
     .logo-link { display: flex; align-items: center; }
-    .logo-img {
-      height: 75px;
-      width: auto;
-    }
-    .nav-links-desktop {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
+    .logo-img { height: 75px; width: auto; }
+    .nav-links-desktop { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links-desktop a {
       color: var(--text-muted);
       text-decoration: none;
@@ -86,31 +113,21 @@
       color: var(--text-pure);
       text-shadow: 0 0 8px rgba(255,255,255,0.6);
     }
-    /* Мобильное меню — скрыто по умолчанию всегда */
+
     .nav-links-mobile {
       display: none;
       position: fixed;
       top: calc(var(--nav-h) + 12px);
-      left: 0;
-      right: 0;
-      bottom: 0;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      background: #050505;
+      left: 0; right: 0; bottom: 0;
+      list-style: none; padding: 0; margin: 0;
+      background: #080606;
       z-index: 9999;
       overflow-y: auto;
       flex-direction: column;
     }
-    .nav-links-mobile.open {
-      display: flex;
-    }
-    .nav-links-mobile li {
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .nav-links-mobile li:first-child {
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
+    .nav-links-mobile.open { display: flex; }
+    .nav-links-mobile li { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .nav-links-mobile li:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
     .nav-links-mobile a {
       display: block;
       padding: 1.2rem 2rem;
@@ -127,57 +144,40 @@
       background: rgba(255,255,255,0.04);
     }
 
-    /* ── БУРГЕР-КНОПКА (исправлено) ── */
     .nav-toggle {
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 5px;
-      width: 44px;
-      height: 44px;
-      /* Видимый фон чтобы не сливался с тёмным навбаром */
+      width: 44px; height: 44px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 8px;
       cursor: pointer;
       z-index: 300;
       padding: 8px;
-      /* Убираем нативные стили кнопки */
       -webkit-appearance: none;
       appearance: none;
-      flex-shrink: 0;
-    }
-    .nav-toggle:active {
-      background: rgba(255, 255, 255, 0.15);
     }
     .nav-toggle span {
       display: block;
-      width: 22px;
-      height: 2px;
-      /* Более яркий белый для контраста */
+      width: 22px; height: 2px;
       background: #ffffff;
       border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
-      flex-shrink: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .nav-toggle.active {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-    .nav-toggle.active span { background: #ffffff; }
     .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ── РАЗДЕЛИТЕЛЬ ── */
+    /* ── РАЗДЕЛИТЕЛИ ── */
     .ornament {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
       padding: 2rem 0;
-      background: var(--bg-dark);
     }
     .ornament-line {
       flex: 1;
@@ -185,25 +185,11 @@
       background: linear-gradient(to right, transparent, var(--border-glow), transparent);
       max-width: 250px;
     }
-    .ornament-symbol {
-      display: flex;
-      align-items: center;
-      color: var(--accent);
-      opacity: 0.9;
-    }
+    .ornament-symbol { display: flex; align-items: center; color: var(--accent); opacity: 0.9; }
     .ornament-symbol.ornament-trio { gap: 1.1rem; }
     .ornament-symbol.ornament-pair { gap: 1.8rem; }
     .ornament-symbol.ornament-pair svg:last-child { transform: scaleX(-1); }
     .ornament-symbol.ornament-wave svg { width: min(200px, 46vw); height: auto; }
-
-    .hero-emblem {
-      display: flex;
-      justify-content: center;
-      color: var(--accent);
-      margin-bottom: 1.4rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.1s forwards;
-    }
 
     /* ── HERO ── */
     #hero {
@@ -220,418 +206,164 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(30,30,30,0.4) 0%, var(--bg-dark) 80%);
+      background: radial-gradient(circle at 50% 50%, rgba(10,8,8,0.0) 0%, rgba(10,8,8,0.6) 80%);
       z-index: 0;
     }
+    #hero::before, #hero::after {
+      content: '';
+      position: absolute;
+      width: 120px; height: 120px;
+      z-index: 1; pointer-events: none; opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M8 8 L40 8 L40 12 L12 12 L12 40 L8 40 Z' fill='%23b08a4f'/%3E%3Cpath d='M20 8 Q20 20 8 20' fill='none' stroke='%23b08a4f' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='3' fill='none' stroke='%23b08a4f' stroke-width='0.8'/%3E%3Cpath d='M30 8 Q30 30 8 30' fill='none' stroke='%23b08a4f' stroke-width='0.6' opacity='0.6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+    }
+    #hero::before { top: 90px; left: 20px; }
+    #hero::after  { top: 90px; right: 20px; transform: scaleX(-1); }
+
+    /* УГОЛКИ ПЕРЕД ФУТЕРОМ */
+    .ornament-corners {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      margin: 0; padding: 0;
+    }
+    .ornament-corner {
+      position: absolute;
+      width: 120px; height: 120px;
+      z-index: 1; pointer-events: none; opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M8 8 L40 8 L40 12 L12 12 L12 40 L8 40 Z' fill='%23b08a4f'/%3E%3Cpath d='M20 8 Q20 20 8 20' fill='none' stroke='%23b08a4f' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='3' fill='none' stroke='%23b08a4f' stroke-width='0.8'/%3E%3Cpath d='M30 8 Q30 30 8 30' fill='none' stroke='%23b08a4f' stroke-width='0.6' opacity='0.6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+    }
+    .ornament-corner--left { bottom: 0; left: 20px; transform: rotate(180deg) scaleX(-1); }
+    .ornament-corner--right { bottom: 0; right: 20px; transform: rotate(180deg); }
+
     .hero-sprig {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: min(900px, 150vw);
-      height: auto;
+      top: 50%; left: 50%;
+      width: min(900px, 150vw); height: auto;
       transform: translate(-50%, -50%) rotate(-10deg);
-      color: var(--accent);
-      opacity: 0.05;
-      pointer-events: none;
-      z-index: 1;
+      color: var(--accent); opacity: 0.04; pointer-events: none; z-index: 1;
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-logo-big {
-      width: clamp(160px, 42vw, 425px);
-      height: auto;
-      margin-bottom: 2rem;
-      filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));
-      animation: fadeUp 1.2s ease forwards;
-    }
-    .hero-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-    }
-    .hero-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      letter-spacing: 0.03em;
-      color: var(--text-pure);
-      max-width: 600px;
-      margin: 1rem auto 0;
-      padding: 0 0.5rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.6s forwards;
-    }
-    .hero-scroll {
-      margin-top: 4.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-      opacity: 0;
-      animation: fadeUp 1s 1s forwards;
-    }
-    .hero-scroll span {
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .scroll-line {
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--text-pure), transparent);
-      animation: scrollPulse 2s infinite;
-    }
+    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+    .hero-logo-big { width: clamp(160px, 42vw, 425px); height: auto; margin-bottom: 2rem; }
+    .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-pure); max-width: 600px; margin: 1rem auto 0; }
+    
+    .hero-scroll { margin-top: 4.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+    .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); }
+    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--text-pure), transparent); }
 
-    /* ── СЕКЦИИ ОБЩИЕ ── */
-    section { padding: 8rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    /* ── СЕКЦИИ (ЛИНИЯ УБРАНА) ── */
+    section { padding: 8rem 2rem; }
     .container { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      line-height: 1.1;
-      color: var(--text-pure);
-      margin-bottom: 2rem;
-    }
-    .body-text {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 580px;
-      line-height: 1.9;
-    }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.1; color: var(--text-pure); margin-bottom: 2rem; }
+    .body-text { font-size: 0.95rem; color: var(--text-muted); max-width: 580px; line-height: 1.9; }
 
     /* ── ABOUT ── */
-    #about { background: var(--bg-dark); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    .about-links {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.2rem, 2.6vw, 1.6rem);
-      color: var(--text-pure);
-      border-left: 1px solid var(--accent);
-      padding-left: 2rem;
-      margin-top: 3rem;
-    }
-    .about-links a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      padding: 0.8em 0;
-      transition: color 0.3s;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-links { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.2rem, 2.6vw, 1.6rem); color: var(--text-pure); border-left: 1px solid var(--accent); padding-left: 2rem; margin-top: 3rem; }
+    .about-links a { text-decoration: none; color: inherit; display: block; padding: 0.8em 0; transition: color 0.3s; }
     .about-links a:hover { color: var(--accent); }
     .about-links a + a { border-top: 1px solid rgba(255,255,255,0.12); }
-    .about-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .gothic-frame {
-      display: inline-block;
-      padding: 28px;
-      background:
-        linear-gradient(45deg, #000000 0%, #111111 100%),
-        radial-gradient(ellipse at center, #0a0a0a 0%, transparent 70%);
-      border: 3px solid #000000;
-      box-shadow:
-        0 0 0 1px #000000,
-        0 0 25px 10px rgba(0, 0, 0, 0.5),
-        inset 0 0 20px rgba(0, 0, 0, 0.7);
-      border-radius: 12px;
-      position: relative;
-      overflow: hidden;
-      max-width: 100%;
-      width: 100%;
-      margin: 0 auto;
-    }
-    .gothic-frame img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin: 0 auto;
-      transition: transform 0.4s ease;
-    }
+    .gothic-frame { display: inline-block; padding: 28px; background: linear-gradient(45deg, #000000 0%, #111111 100%); border: 3px solid #000000; border-radius: 12px; width: 100%; }
+    .gothic-frame img { width: 100%; height: auto; border-radius: 8px; transition: transform 0.4s; }
     .gothic-frame:hover img { transform: scale(1.04); }
 
-    /* ── MUSIC & ALBUM COVERS ── */
-    #music { background: #0c0c0c; }
-    .albums-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .album-card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: border-color 0.4s, transform 0.4s;
-    }
-    .album-card:hover {
-      border-color: var(--accent-soft);
-      transform: translateY(-5px);
-    }
-    .album-art {
-      width: 100%;
-      aspect-ratio: 1;
-      background: #181818;
-      border: 1px solid rgba(255,255,255,0.05);
-      margin-bottom: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .album-art img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
+    /* ── MUSIC ── */
+    .albums-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
+    .album-card { background: rgba(18,18,18,0.75); border: 1px solid var(--border-color); padding: 1.5rem; text-decoration: none; color: inherit; display: block; transition: transform 0.4s; }
+    .album-card:hover { transform: translateY(-5px); }
+    .album-art { width: 100%; aspect-ratio: 1; background: #181818; margin-bottom: 1.5rem; overflow: hidden; }
+    .album-art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
     .album-card:hover .album-art img { transform: scale(1.06); }
-    .album-year {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-    .album-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .album-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+    .album-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .album-desc { font-size: 0.85rem; color: var(--text-muted); }
 
     /* ── CONCERTS ── */
-    #concerts { background: #0c0c0c; }
     .concert-list { margin-top: 3rem; }
-    .concert-item {
-      display: grid;
-      grid-template-columns: 100px 1fr auto;
-      align-items: center;
-      gap: 2rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border-color);
-      transition: border-color 0.4s ease;
-    }
-    .concert-item:hover { border-color: var(--accent-soft); }
+    .concert-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid rgba(176,138,79,0.12); }
     .concert-date { text-align: left; }
-    .concert-day {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-      line-height: 1;
-      color: var(--accent);
-    }
+    .concert-day { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--accent); }
     .concert-month { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
-    .concert-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-    .concert-info p { font-size: 0.85rem; color: var(--text-muted); }
-    .concert-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      align-items: flex-end;
-    }
-    .btn-outline {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      border: 1px solid var(--text-pure);
-      color: var(--text-pure);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
-      background: transparent;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-      white-space: nowrap;
-    }
+    .concert-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-transform: uppercase; }
+    .btn-outline { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--text-pure); color: var(--text-pure); font-size: 0.7rem; text-transform: uppercase; text-decoration: none; transition: background 0.3s, color 0.3s; }
     .btn-outline:hover { background: var(--text-pure); color: var(--bg-dark); }
-    .btn-outline.vk-link:hover { background: var(--accent); border-color: var(--accent); color: var(--bg-dark); }
 
     /* ── BAND ── */
-    #band { background: var(--bg-dark); }
-    .band-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem;
-      margin-top: 3rem;
-    }
-    .member-portrait {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: var(--bg-panel);
-      border: 3px solid #000000;
-      box-shadow:
-        0 0 0 1px #000000,
-        0 0 25px 10px rgba(0, 0, 0, 0.5),
-        inset 0 0 20px rgba(0, 0, 0, 0.7);
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      padding: 18px;
-    }
-    .member-portrait img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px;
-      transition: transform 0.4s ease;
-    }
+    .band-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; margin-top: 3rem; }
+    .member-portrait { width: 100%; aspect-ratio: 3/4; background: var(--bg-panel); border: 3px solid #000000; border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; padding: 18px; }
+    .member-portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; transition: transform 0.4s; }
     .member-portrait:hover img { transform: scale(1.05); }
-    .member-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.3rem;
-    }
-    .member-role {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      text-align: center;
-      text-transform: uppercase;
-    }
-    .member-bio {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-align: center;
-    }
+    .member-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-align: center; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .member-role { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--accent); text-align: center; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .member-bio { font-size: 0.85rem; color: var(--text-muted); text-align: center; }
 
     /* ── CONTACT ── */
-    #contact { background: #0c0c0c; text-align: center; }
-    #contact .section-title { margin-bottom: 2rem; }
-    #contact .body-text { margin: 0 auto 4rem; }
-    .btn-primary {
-      display: inline-block;
-      padding: 1.1rem 3.2rem;
-      background: var(--text-pure);
-      color: var(--bg-dark);
-      font-size: 0.8rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s, color 0.3s;
-    }
-    .btn-primary:hover { background: var(--accent); color: var(--bg-dark); }
+    #contact { text-align: center; }
+    .btn-primary { display: inline-block; padding: 1.1rem 3.2rem; background: var(--text-pure); color: var(--bg-dark); font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; font-weight: 600; transition: background 0.3s; }
+    .btn-primary:hover { background: var(--accent); }
     .contact-links { display: flex; justify-content: center; gap: 3rem; margin-top: 5rem; flex-wrap: wrap; }
     .contact-link { text-decoration: none; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; }
     .contact-link:hover { color: var(--accent); }
 
+    /* ── VIDEO ── */
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-top: 3rem; border: 1px solid var(--border-color); }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
     /* ── FOOTER ── */
-    footer {
-      background: #050505;
-      text-align: center;
-      padding: 4rem 2rem;
-      border-top: 1px solid var(--border-color);
-    }
-    .footer-logo {
-      height: 75px;
-      width: auto;
-      margin: 0 auto 1.5rem;
-      opacity: 0.85;
-    }
-    .footer-copy {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
+    footer { background: rgba(5,4,4,0.97); text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(176,138,79,0.2); }
+    .footer-logo { height: 75px; width: auto; margin: 0 auto 1.5rem; opacity: 0.85; }
+    .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 0.15em; text-transform: uppercase; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50%       { opacity: 1;   transform: scaleY(1.2); }
-    }
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
-    /* ── RESPONSIVE ── */
+    /* ── АДАПТИВНОСТЬ И МОБИЛЬНЫЕ УГОЛКИ ── */
     @media (max-width: 900px) {
       nav { padding: 0.6rem 1.5rem; }
-
       .nav-toggle { display: flex; }
-
-      /* Десктопные ссылки скрыты на мобиле */
       .nav-links-desktop { display: none; }
-
       section { padding: 6rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-      .about-visual { order: -1; }
       .gothic-frame { padding: 16px; }
       .band-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
       .concert-item { grid-template-columns: 70px 1fr; row-gap: 1.2rem; }
-      .concert-actions {
-        grid-column: 1 / -1;
-        flex-direction: row;
-        align-items: stretch;
+      .concert-actions { grid-column: 1 / -1; }
+      
+      /* Адаптивные уголки героя */
+      #hero::before, #hero::after {
+        width: 60px; height: 60px;
+        background-size: contain;
+        top: 95px;
       }
-      .concert-actions a { flex: 1; }
+      #hero::before { left: 10px; }
+      #hero::after { right: 10px; }
     }
+
+    @media (max-width: 768px) {
+      /* Включаем и адаптируем нижние уголки для мобильных */
+      .ornament-corners { height: 60px; }
+      .ornament-corner {
+        width: 60px; height: 60px;
+        background-size: contain;
+      }
+      .ornament-corner--left { left: 10px; }
+      .ornament-corner--right { right: 10px; }
+    }
+
     @media (max-width: 600px) {
       .albums-grid { grid-template-columns: 1fr; }
-      .band-grid { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .band-grid { grid-template-columns: 1fr; max-width: 320px; margin: 3rem auto 0; }
       .contact-links { flex-direction: column; gap: 1.5rem; }
-      .concert-actions { flex-direction: column; }
       section { padding: 5rem 1.25rem; }
       .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.32em; }
     }
   </style>
 </head>
 <body>
-
   <nav>
     <a href="#hero" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
     </a>
-      <ul class="nav-links-desktop">
+    <ul class="nav-links-desktop">
       <li><a href="#about">О проекте</a></li>
       <li><a href="#music">Музыка</a></li>
       <li><a href="#concerts">Концерты</a></li>
@@ -644,8 +376,7 @@
     </button>
   </nav>
 
-  <!-- Мобильное меню — вне nav, прямо в body, z-index свободен -->
-    <ul class="nav-links-mobile" id="navLinks">
+  <ul class="nav-links-mobile" id="navLinks">
     <li><a href="#about">О проекте</a></li>
     <li><a href="#music">Музыка</a></li>
     <li><a href="#concerts">Концерты</a></li>
@@ -789,7 +520,6 @@
     <div class="ornament-line"></div>
   </div>
 
-
   <!-- CONCERTS -->
   <section id="concerts">
     <div class="container">
@@ -905,18 +635,14 @@
     <div class="ornament-line"></div>
   </div>
 
- 
-
   <!-- VIDEO -->
   <section id="video">
     <div class="container">
       <p class="section-label reveal">Видео</p>
       <h2 class="section-title reveal">Моменты выступлений</h2>
       <div class="band-grid">
-        <!-- Видео 1 -->
         <div class="member-card reveal">
           <div class="member-portrait">
-            <!-- Замени src на ссылку на видео (YouTube/VK) или на постер-превью -->
             <video controls style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
               <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/default.mp4" type="video/mp4">
               Ваш браузер не поддерживает видео.
@@ -927,7 +653,6 @@
           <p class="member-bio">Фрагмент с фестиваля семьи — энергия хоровода и электроника в одном ритме.</p>
         </div>
 
-        <!-- Видео 2 -->
         <div class="member-card reveal">
           <div class="member-portrait">
             <video controls style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
@@ -939,34 +664,37 @@
           <div class="member-role">Плехово, 8 августа</div>
           <p class="member-bio">Эксперимент с фольклорными распевами и синтезаторными слоями.</p>
         </div>
-
-        <!-- Видео 3 (если нужно) -->
-        <!--
-        <div class="member-card reveal">
-          <div class="member-portrait">
-            <video controls poster="images/video3-poster.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-              <source src="videos/concert3.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="member-name">Репетиция-стрим</div>
-          <div class="member-role">Онлайн, май</div>
-          <p class="member-bio">Покажем, как рождается аранжировка изнутри.</p>
-        </div>
-        -->
       </div>
     </div>
   </section>
 
-<!-- ORNAMENT: волна (как между Music и Concerts) -->
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <span class="ornament-symbol ornament-wave">
-      <svg viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
-        <path d="M2 7 Q9 1 16 7 T30 7 T44 7 T58 7 T72 7 T86 7 T100 7 T114 7 T128 7 T138 7" />
-      </svg>
-    </span>
-    <div class="ornament-line"></div>
-  </div>
+  
+<div class="ornament">
+  <div class="ornament-line"></div>
+  <span class="ornament-symbol ornament-wave">
+    <svg viewBox="0 0 200 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <!-- Центральная плавная ветка -->
+      <path d="M10 20 C 50 5, 150 35, 190 20" />
+
+      <!-- Листья слева (симметрично расположены вдоль ветки) -->
+      <path d="M30 18 L25 10 L35 12 Z" fill="currentColor"/>
+      <path d="M70 22 L65 30 L75 28 Z" fill="currentColor"/>
+      <path d="M110 16 L105 8 L115 10 Z" fill="currentColor"/>
+
+      <!-- Листья справа (симметрично относительно ветки) -->
+      <path d="M45 22 L50 30 L40 28 Z" fill="currentColor"/>
+      <path d="M85 18 L90 10 L80 12 Z" fill="currentColor"/>
+      <path d="M130 24 L135 32 L125 30 Z" fill="currentColor"/>
+
+      <!-- Мелкие декоративные завитки вдоль ветки -->
+      <path d="M20 20 Q25 15, 30 20 T40 20"/>
+      <path d="M60 20 Q65 25, 70 20 T80 20"/>
+      <path d="M100 20 Q105 15, 110 20 T120 20"/>
+      <path d="M140 20 Q145 25, 150 20 T160 20"/>
+    </svg>
+  </span>
+  <div class="ornament-line"></div>
+</div>
 
   <!-- CONTACT -->
   <section id="contact">
@@ -986,6 +714,14 @@
     </div>
   </section>
 
+<!-- ORNAMENT: уголки перед футером -->
+<div class="ornament-corners" id="footer-ornaments">
+  <div class="ornament-corner ornament-corner--left"></div>
+  <div class="ornament-corner ornament-corner--right"></div>
+</div>
+ 
+
+
   <!-- FOOTER -->
   <footer>
     <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Таволга" class="footer-logo">
@@ -993,40 +729,28 @@
   </footer>
 
   <script>
-
    document.addEventListener('DOMContentLoaded', () => {
-    // Проверяем, не создан ли уже observer (защита от дублей)
     if (window.videoObserver) return;
 
     const videos = document.querySelectorAll('.member-portrait video');
     
-    if (!videos.length) {
-      console.warn('Видео с классом .member-portrait video не найдены.');
-      return;
-    }
+    if (!videos.length) return;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const video = entry.target;
-        
-        // readyState >= 2 означает, что метаданные и достаточно данных загружены для воспроизведения
         if (entry.isIntersecting && video.readyState >= 2) {
-          video.play().catch(e => {
-            // Игнорируем ошибку автоплея со звуком — это стандартное поведение браузеров
-          });
+          video.play().catch(e => {});
         } else {
           video.pause();
         }
       });
-    }, { threshold: 0.5 }); // Видео должно быть видно минимум на 50%
+    }, { threshold: 0.5 });
 
     videos.forEach(video => observer.observe(video));
-    
-    // Сохраняем в window, чтобы при повторном запуске код понял, что observer уже есть
     window.videoObserver = observer;
   });
 
-    // Появление элементов при скролле
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1038,7 +762,6 @@
     }, { threshold: 0.1 });
     revealEls.forEach(el => observer.observe(el));
 
-    // Мобильное меню
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
 
@@ -1066,7 +789,6 @@
       if (window.innerWidth > 900) closeMenu();
     });
 
-    // Плавный скролл с учётом фиксированной навигации
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', e => {
         const target = document.querySelector(link.getAttribute('href'));
