@@ -84,20 +84,6 @@
       border-bottom: 1px solid rgba(176,138,79,0.2);
     }
 
-    nav::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 3px;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 8px,
-        rgba(176,138,79,0.18) 8px,
-        rgba(176,138,79,0.18) 10px
-      );
-    }
-
     .logo-link { display: flex; align-items: center; }
     .logo-img { height: 75px; width: auto; }
     .nav-links-desktop { display: flex; gap: 2.5rem; list-style: none; }
@@ -312,6 +298,14 @@
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
     /* ── FOOTER ── */
+    
+    footer { 
+      background: rgba(5,4,4,0.97); 
+      text-align: center; 
+      padding: 4rem 2rem; 
+      position: relative; 
+    }
+
     footer { background: rgba(5,4,4,0.97); text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(176,138,79,0.2); }
     .footer-logo { height: 75px; width: auto; margin: 0 auto 1.5rem; opacity: 0.85; }
     .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 0.15em; text-transform: uppercase; }
@@ -326,8 +320,45 @@
       .gothic-frame { padding: 16px; }
       .band-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
       .concert-item { grid-template-columns: 70px 1fr; row-gap: 1.2rem; }
-      .concert-actions { grid-column: 1 / -1; }
-      
+      .concert-item { 
+        grid-template-columns: 70px 1fr auto; 
+        gap: 1rem; 
+        align-items: center; 
+      }
+
+   .concert-item { 
+        display: grid;
+        grid-template-columns: 70px 1fr; 
+        gap: 1rem 1.5rem; /* отступы: 1rem между строками, 1.5rem между колонками */
+        padding: 1.5rem 0;
+      }
+
+      .concert-date {
+        grid-column: 1;
+      }
+
+      .concert-info {
+        grid-column: 2;
+      }
+
+      /* Переносим блок кнопок на вторую строку под текст и выстраиваем их в линию справа */
+      .concert-actions { 
+        grid-column: 1 / -1; /* растягиваем контейнер на всю ширину под текстом */
+        display: flex;
+        flex-direction: row; /* выстраиваем строго в линию (в ряд) */
+        justify-content: flex-end; /* прижимаем всю линию к правому краю */
+        gap: 0.75rem; /* расстояние между кнопками в ряду */
+        margin-top: 0.25rem; /* небольшой отступ сверху от названия концерта */
+      }
+
+      /* Сама кнопка: аккуратная, компактная и не ломает экран */
+      .btn-outline {
+        padding: 0.45rem 1.2rem;
+        font-size: 0.65rem;
+        white-space: nowrap; /* текст внутри кнопки не переносится */
+        width: auto;
+      }
+    }
       /* Адаптивные уголки героя */
       #hero::before, #hero::after {
         width: 60px; height: 60px;
@@ -336,7 +367,7 @@
       }
       #hero::before { left: 10px; }
       #hero::after { right: 10px; }
-    }
+    
 
     @media (max-width: 768px) {
       /* Включаем и адаптируем нижние уголки для мобильных */
