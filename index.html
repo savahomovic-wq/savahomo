@@ -72,23 +72,25 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
+      z-index: 10000;
       min-height: var(--nav-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.4rem 3rem;
-      background: rgba(10, 8, 8, 0.96);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(176,138,79,0.2);
-    }
+    background-color: var(--bg-dark); 
+  
+  /* Убираем эффекты размытия */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+    
 
     .logo-link { display: flex; align-items: center; }
     .logo-img { height: 75px; width: auto; }
     .nav-links-desktop { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links-desktop a {
-      color: var(--text-muted);
+      color: var(--accent);
       text-decoration: none;
       font-size: 0.75rem;
       letter-spacing: 0.25em;
@@ -101,28 +103,40 @@
     }
 
     .nav-links-mobile {
-      display: none;
-      position: fixed;
-      top: calc(var(--nav-h) + 12px);
-      left: 0; right: 0; bottom: 0;
-      list-style: none; padding: 0; margin: 0;
-      background: #080606;
-      z-index: 9999;
-      overflow-y: auto;
-      flex-direction: column;
-    }
+  display: none;
+  position: fixed;
+  /* Занимаем всё пространство экрана */
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  
+  list-style: none; 
+  padding: 82px 0 0 0; /* Отступ сверху, чтобы меню не перекрывало вашу кнопку закрытия */
+  margin: 0;
+  
+  /* 1. Делаем фон сплошным и полупрозрачным */
+  background: rgba(10, 8, 8, 0.1); 
+  
+  /* 2. Добавляем размытие того, что за меню */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  z-index: 9999;
+  overflow-y: auto;
+  flex-direction: column;
+}
     .nav-links-mobile.open { display: flex; }
-    .nav-links-mobile li { border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .nav-links-mobile li:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+    
     .nav-links-mobile a {
       display: block;
       padding: 1.2rem 2rem;
-      color: rgba(255,255,255,0.8);
+      color:var(--accent);
       text-decoration: none;
       font-size: 0.8rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.2s, ;
     }
     .nav-links-mobile a:hover,
     .nav-links-mobile a:active {
@@ -195,34 +209,7 @@
       background: radial-gradient(circle at 50% 50%, rgba(10,8,8,0.0) 0%, rgba(10,8,8,0.6) 80%);
       z-index: 0;
     }
-    #hero::before, #hero::after {
-      content: '';
-      position: absolute;
-      width: 120px; height: 120px;
-      z-index: 1; pointer-events: none; opacity: 0.35;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M8 8 L40 8 L40 12 L12 12 L12 40 L8 40 Z' fill='%23b08a4f'/%3E%3Cpath d='M20 8 Q20 20 8 20' fill='none' stroke='%23b08a4f' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='3' fill='none' stroke='%23b08a4f' stroke-width='0.8'/%3E%3Cpath d='M30 8 Q30 30 8 30' fill='none' stroke='%23b08a4f' stroke-width='0.6' opacity='0.6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-    }
-    #hero::before { top: 90px; left: 20px; }
-    #hero::after  { top: 90px; right: 20px; transform: scaleX(-1); }
-
-    /* УГОЛКИ ПЕРЕД ФУТЕРОМ */
-    .ornament-corners {
-      position: relative;
-      width: 100%;
-      height: 120px;
-      margin: 0; padding: 0;
-    }
-    .ornament-corner {
-      position: absolute;
-      width: 120px; height: 120px;
-      z-index: 1; pointer-events: none; opacity: 0.35;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M8 8 L40 8 L40 12 L12 12 L12 40 L8 40 Z' fill='%23b08a4f'/%3E%3Cpath d='M20 8 Q20 20 8 20' fill='none' stroke='%23b08a4f' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='3' fill='none' stroke='%23b08a4f' stroke-width='0.8'/%3E%3Cpath d='M30 8 Q30 30 8 30' fill='none' stroke='%23b08a4f' stroke-width='0.6' opacity='0.6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-    }
-    .ornament-corner--left { bottom: 0; left: 20px; transform: rotate(180deg) scaleX(-1); }
-    .ornament-corner--right { bottom: 0; right: 20px; transform: rotate(180deg); }
-
+   
     .hero-sprig {
       position: absolute;
       top: 50%; left: 50%;
@@ -300,16 +287,66 @@
     /* ── FOOTER ── */
     
     footer { 
-      background: rgba(5,4,4,0.97); 
-      text-align: center; 
-      padding: 4rem 2rem; 
-      position: relative; 
-    }
+  background:  transparent !important; /* Тот же цвет, что и в nav */
+  backdrop-filter: none;        /* Эффект размытия */
+  -webkit-backdrop-filter:none;
+  border-top: none !important;
+  padding: 3rem; 
+  text-align: center; 
 
-    footer { background: rgba(5,4,4,0.97); text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(176,138,79,0.2); }
-    .footer-logo { height: 75px; width: auto; margin: 0 auto 1.5rem; opacity: 0.85; }
-    .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 0.15em; text-transform: uppercase; }
+}
 
+.footer-logo { 
+  height: 75px; 
+  width: auto; 
+  margin: 0 auto 1.5rem; 
+  opacity: 0.85; 
+}
+
+.footer-copy { 
+  font-size: 0.7rem; 
+  color: var(--text-muted); 
+  letter-spacing: 0.15em; 
+  text-transform: uppercase; 
+}
+/* ── КОМБИНИРОВАННАЯ ИДЕАЛЬНО ЗАМКНУТАЯ РАМКА ── */
+.rose-frame-container {
+  content: '';
+  position: fixed;
+  pointer-events: none; /* Пропускает клики */
+  z-index: 99999;       /* Поверх всего контента */
+  opacity: 0.85;
+  border: none !important; /* Убираем любые бордеры, чтобы они не ломали SVG */
+  filter: drop-shadow(0 0 4px rgba(10, 8, 8, 0.95));
+
+
+}
+
+
+/* НАСТРОЙКИ ДЛЯ ПК (Оставляем разомкнутый сверху метод фонов, чтобы лоза шла под меню) */
+/* НАСТРОЙКИ ДЛЯ ПК (Лоза идет под главным меню) */
+@media (min-width: 769px) {
+  .rose-frame-container {
+    top: 90px;      
+    left: 5px;      
+    right: 5px;     
+    bottom: 5px;    
+    
+    background-image: 
+      /* Верхняя линия лозы */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+      /* Нижняя линия лозы */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+      /* Левая боковая лоза */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+      /* Правая боковая лоза */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E");
+
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-position: top left, bottom left, top left, top right;
+    background-size: 80px 16px, 80px 16px, 16px 80px, 16px 80px;
+  }
+}
     /* ── АДАПТИВНОСТЬ И МОБИЛЬНЫЕ УГОЛКИ ── */
     @media (max-width: 900px) {
       nav { padding: 0.6rem 1.5rem; }
@@ -359,27 +396,37 @@
         width: auto;
       }
     }
-      /* Адаптивные уголки героя */
-      #hero::before, #hero::after {
-        width: 60px; height: 60px;
-        background-size: contain;
-        top: 95px;
-      }
-      #hero::before { left: 10px; }
-      #hero::after { right: 10px; }
+
     
+   @media (max-width: 768px) {
+  .rose-frame-container {
+    /* Рамка идет вкруговую по всему экрану, прижатая к краям на 3px */
+    top: 3px !important;    
+    left: 3px !important;
+    right: 3px !important;
+    bottom: 3px !important;
+    
+    /* Используем ту же качественную векторную графику, что и на ПК */
+    background-image: 
+      /* 1. Верхняя ветка (теперь включена и на телефонах) */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+      /* 2. Нижная ветка */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+      /* 3. Левая ветка */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+      /* 4. Правая ветка */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E");
 
-    @media (max-width: 768px) {
-      /* Включаем и адаптируем нижние уголки для мобильных */
-      .ornament-corners { height: 60px; }
-      .ornament-corner {
-        width: 60px; height: 60px;
-        background-size: contain;
-      }
-      .ornament-corner--left { left: 10px; }
-      .ornament-corner--right { right: 10px; }
-    }
-
+    /* Повторение по осям */
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
+    /* Позиционирование по краям мобильного дисплея */
+    background-position: top left, bottom left, top left, top right !important;
+    
+    /* Делаем узор тонким, миниатюрным, но сохраняем правильные пропорции (без сплющивания) */
+    background-size: 50px 10px, 50px 10px, 10px 50px, 10px 50px !important;
+  }
+}
+   
     @media (max-width: 600px) {
       .albums-grid { grid-template-columns: 1fr; }
       .band-grid { grid-template-columns: 1fr; max-width: 320px; margin: 3rem auto 0; }
@@ -387,9 +434,11 @@
       section { padding: 5rem 1.25rem; }
       .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.32em; }
     }
+    
   </style>
 </head>
 <body>
+  <div class="rose-frame-container"></div>
   <nav>
     <a href="#hero" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
@@ -755,10 +804,11 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Таволга" class="footer-logo">
-    <p class="footer-copy">© 2026 Фолк-проект ТАВОЛГА · Все права защищены</p>
-  </footer>
-
+  <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
+  <div class="footer-copy">
+    © Таволга, 2026. Все права защищены.
+  </div>
+</footer>
   <script>
    document.addEventListener('DOMContentLoaded', () => {
     if (window.videoObserver) return;
