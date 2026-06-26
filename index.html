@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <meta name="description" content="Таволга — фолк-проект, соединяющий электронную музыку и фольклорное наследие. Музыка, концерты, состав группы." />
+  <meta name="theme-color" content="#060408" />
+  <meta name="description" content="Таволга — фолк-проект, соединяющий электронную музыку и фольклорное наследие." />
   <title>ТАВОЛГА — Фолк-проект</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      --bg-deep:    #060408;
       --bg-dark:    #0a0808;
-      --bg-panel:   #121212;
-      --text-pure:  #ffffff;
-      --text-muted: #999999;
-      --border-color: rgba(255, 255, 255, 0.15);
-      --border-glow:  rgba(255, 255, 255, 0.4);
+      --bg-panel:   #110f10;
+      --text-pure:  #f5f0e8;
+      --text-muted: #7a7068;
+      --border-color: rgba(176, 138, 79, 0.15);
+      --border-glow:  rgba(176, 138, 79, 0.5);
       --accent:       #b08a4f;
-      --accent-soft: rgba(176, 138, 79, 0.35);
+      --accent-light: #d4ab72;
+      --accent-soft:  rgba(176, 138, 79, 0.18);
+      --accent-glow:  rgba(176, 138, 79, 0.08);
       --nav-h: 82px;
     }
 
     html { scroll-behavior: smooth; }
 
-    /* ── ГЛОБАЛЬНЫЙ ФОН ── */
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg-deep);
       color: var(--text-pure);
       font-family: 'Inter', sans-serif;
       font-weight: 300;
@@ -38,37 +40,90 @@
       position: relative;
     }
 
-    body::before {
-      content: '';
+    ::selection { background: var(--accent); color: var(--bg-deep); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    img { max-width: 100%; display: block; }
+    a { -webkit-tap-highlight-color: transparent; }
+    section { scroll-margin-top: var(--nav-h); }
+
+    /* ══════════════════════════════
+       CANVAS BACKGROUND
+    ══════════════════════════════ */
+    #bg-canvas {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3Cpattern id='rus' x='0' y='0' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18'/%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18' transform='rotate(45 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18' transform='rotate(90 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='5' ry='10' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.18' transform='rotate(135 60 60)'/%3E%3Ccircle cx='60' cy='60' r='3' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.22'/%3E%3Cellipse cx='0' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='0' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 0 0)'/%3E%3Cellipse cx='120' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='120' cy='0' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 120 0)'/%3E%3Cellipse cx='0' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='0' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 0 120)'/%3E%3Cellipse cx='120' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13'/%3E%3Cellipse cx='120' cy='120' rx='3' ry='6' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.13' transform='rotate(90 120 120)'/%3E%3Cpath d='M60 0 L120 60 L60 120 L0 60 Z' fill='none' stroke='%23b08a4f' stroke-width='0.3' opacity='0.07'/%3E%3Cpath d='M60 48 Q66 42 60 36 Q54 42 60 48' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M60 72 Q66 78 60 84 Q54 78 60 72' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M48 60 Q42 66 36 60 Q42 54 48 60' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M72 60 Q78 66 84 60 Q78 54 72 60' fill='none' stroke='%23b08a4f' stroke-width='0.5' opacity='0.16'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23rus)'/%3E%3C/svg%3E");
+    }
+
+    /* Мистический градиент поверх canvas */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(50, 20, 5, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 100%, rgba(20, 10, 40, 0.4) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 80% 80%,  rgba(30, 5, 5, 0.35) 0%, transparent 65%);
+    }
+
+    /* Фольклорный орнаментальный паттерн (тонкий, поверх canvas) */
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cdefs%3E%3Cpattern id='p' x='0' y='0' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='40' cy='40' r='1.5' fill='none' stroke='%23b08a4f' stroke-width='0.4' opacity='0.12'/%3E%3Cellipse cx='40' cy='40' rx='3' ry='7' fill='none' stroke='%23b08a4f' stroke-width='0.35' opacity='0.08'/%3E%3Cellipse cx='40' cy='40' rx='3' ry='7' fill='none' stroke='%23b08a4f' stroke-width='0.35' opacity='0.08' transform='rotate(45 40 40)'/%3E%3Cellipse cx='40' cy='40' rx='3' ry='7' fill='none' stroke='%23b08a4f' stroke-width='0.35' opacity='0.08' transform='rotate(90 40 40)'/%3E%3Cellipse cx='40' cy='40' rx='3' ry='7' fill='none' stroke='%23b08a4f' stroke-width='0.35' opacity='0.08' transform='rotate(135 40 40)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='80' height='80' fill='url(%23p)'/%3E%3C/svg%3E");
       opacity: 1;
     }
 
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background: radial-gradient(ellipse at 50% 30%, rgba(10,8,8,0.55) 0%, rgba(10,8,8,0.82) 100%);
-    }
-
-    nav, section, .ornament, footer, .nav-links-mobile {
+    /* Рамка из лозы (поверх всего) */
+    nav, section, .ornament, footer, .nav-links-mobile, .rose-frame-container {
       position: relative;
-      z-index: 1;
+      z-index: 10;
     }
 
-    img { max-width: 100%; display: block; }
-    a { -webkit-tap-highlight-color: transparent; }
-    ::selection { background: var(--accent); color: var(--bg-dark); }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    section { scroll-margin-top: var(--nav-h); }
+    /* ══════════════════════════════
+       ЛОЗА-РАМКА
+    ══════════════════════════════ */
+    .rose-frame-container {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.9;
+    }
 
-    /* ── NAV ── */
+    @media (min-width: 769px) {
+      .rose-frame-container {
+        top: 90px; left: 5px; right: 5px; bottom: 5px;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E");
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+        background-position: top left, bottom left, top left, top right;
+        background-size: 80px 16px, 80px 16px, 16px 80px, 16px 80px;
+      }
+    }
+    @media (max-width: 768px) {
+      .rose-frame-container {
+        top: 3px; left: 3px; right: 3px; bottom: 3px;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E");
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
+        background-position: top left, bottom left, top left, top right !important;
+        background-size: 50px 10px, 50px 10px, 10px 50px, 10px 50px !important;
+      }
+    }
+
+    /* ══════════════════════════════
+       NAV
+    ══════════════════════════════ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -78,71 +133,64 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.4rem 3rem;
-    background-color: var(--bg-dark); 
-  
-  /* Убираем эффекты размытия */
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
+      background: none;
+      backdrop-filter:none;
+      -webkit-backdrop-filter: none;
     
+    }
 
     .logo-link { display: flex; align-items: center; }
-    .logo-img { height: 75px; width: auto; }
+    .logo-img { height: 75px; width: auto; filter: brightness(70%);}
+
     .nav-links-desktop { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links-desktop a {
       color: var(--accent);
       text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
+      font-size: 0.73rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       transition: color 0.3s, text-shadow 0.3s;
+      position: relative;
     }
-    .nav-links-desktop a:hover {
-      color: var(--text-pure);
-      text-shadow: 0 0 8px rgba(255,255,255,0.6);
+    .nav-links-desktop a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--accent-light);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
     }
+    .nav-links-desktop a:hover { color: var(--text-pure); }
+    .nav-links-desktop a:hover::after { transform: scaleX(1); }
 
     .nav-links-mobile {
-  display: none;
-  position: fixed;
-  /* Занимаем всё пространство экрана */
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0;
-  
-  list-style: none; 
-  padding: 82px 0 0 0; /* Отступ сверху, чтобы меню не перекрывало вашу кнопку закрытия */
-  margin: 0;
-  
-  /* 1. Делаем фон сплошным и полупрозрачным */
-  background: rgba(10, 8, 8, 0.1); 
-  
-  /* 2. Добавляем размытие того, что за меню */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  
-  z-index: 9999;
-  overflow-y: auto;
-  flex-direction: column;
-}
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      list-style: none;
+      padding: 82px 0 0 0;
+      margin: 0;
+      background:none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 9999;
+      overflow-y: auto;
+      flex-direction: column;
+    }
     .nav-links-mobile.open { display: flex; }
-    
     .nav-links-mobile a {
       display: block;
       padding: 1.2rem 2rem;
-      color:var(--accent);
+      color: var(--accent);
       text-decoration: none;
       font-size: 0.8rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      transition: color 0.2s, ;
+      transition: color 0.2s, background 0.2s;
     }
-    .nav-links-mobile a:hover,
-    .nav-links-mobile a:active {
-      color: var(--accent);
-      background: rgba(255,255,255,0.04);
-    }
+    .nav-links-mobile a:hover { color: var(--text-pure); background: rgba(176,138,79,0.05); }
 
     .nav-toggle {
       display: none;
@@ -151,27 +199,34 @@
       align-items: center;
       gap: 5px;
       width: 44px; height: 44px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(176,138,79,0.08);
+      border: 1px solid rgba(176,138,79,0.3);
       border-radius: 8px;
       cursor: pointer;
       z-index: 300;
       padding: 8px;
-      -webkit-appearance: none;
-      appearance: none;
     }
-    .nav-toggle span {
-      display: block;
-      width: 22px; height: 2px;
-      background: #ffffff;
-      border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--accent); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
     .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ── РАЗДЕЛИТЕЛИ ── */
+    /* ══════════════════════════════
+       REVEAL ANIMATION
+    ══════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ══════════════════════════════
+       РАЗДЕЛИТЕЛИ
+    ══════════════════════════════ */
     .ornament {
       display: flex;
       align-items: center;
@@ -183,7 +238,7 @@
       flex: 1;
       height: 1px;
       background: linear-gradient(to right, transparent, var(--border-glow), transparent);
-      max-width: 250px;
+      max-width: 280px;
     }
     .ornament-symbol { display: flex; align-items: center; color: var(--accent); opacity: 0.9; }
     .ornament-symbol.ornament-trio { gap: 1.1rem; }
@@ -191,7 +246,9 @@
     .ornament-symbol.ornament-pair svg:last-child { transform: scaleX(-1); }
     .ornament-symbol.ornament-wave svg { width: min(200px, 46vw); height: auto; }
 
-    /* ── HERO ── */
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
     #hero {
       position: relative;
       min-height: 100svh;
@@ -203,243 +260,388 @@
       padding: 7rem 1.5rem 4rem;
       overflow: hidden;
     }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(10,8,8,0.0) 0%, rgba(10,8,8,0.6) 80%);
-      z-index: 0;
-    }
-   
-    .hero-sprig {
+
+    /* Пульсирующий круг-аура под логотипом */
+    .hero-aura {
       position: absolute;
       top: 50%; left: 50%;
-      width: min(900px, 150vw); height: auto;
-      transform: translate(-50%, -50%) rotate(-10deg);
-      color: var(--accent); opacity: 0.04; pointer-events: none; z-index: 1;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(176,138,79,0.07) 0%, transparent 70%);
+      animation: aura-pulse 6s ease-in-out infinite;
+      pointer-events: none;
     }
-    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
-    .hero-logo-big { width: clamp(160px, 42vw, 425px); height: auto; margin-bottom: 2rem; }
-    .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
-    .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-pure); max-width: 600px; margin: 1rem auto 0; }
-    
-    .hero-scroll { margin-top: 4.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
-    .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); }
-    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--text-pure), transparent); }
+    .hero-aura-2 {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(100,50,150,0.04) 0%, transparent 65%);
+      animation: aura-pulse 9s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+    @keyframes aura-pulse {
+      0%, 100% { opacity: 0.4; transform: translate(-50%,-50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.12); }
+    }
 
-    /* ── СЕКЦИИ (ЛИНИЯ УБРАНА) ── */
+    /* Медленно вращающийся большой орнамент */
+    .hero-sprig-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(900px, 140vw);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: slow-spin 90s linear infinite;
+      opacity: 0.045;
+      color: var(--accent);
+    }
+    @keyframes slow-spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    .hero-content { position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; }
+    .hero-logo-big { width: clamp(250px, 42vw, 425px); height: auto; margin-bottom: 2rem; filter: brightness(50%); }
+    .hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.5em; text-transform: uppercase; color:rgba(245,240,232,0.8);filter: brightness(70%); margin-bottom: 1.5rem; }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+      font-style: italic;
+      color: rgba(245,240,232,0.8);
+      filter: brightness(70%);
+      max-width: 560px;
+      margin: 1rem auto 0;
+      line-height: 1.6;
+    }
+
+    .hero-emblem { color: var(--accent); margin-bottom: 3.5rem; animation: emblem-glow 4s ease-in-out infinite; }
+    @keyframes emblem-glow {
+      0%, 100% { filter: drop-shadow(0 0 4px rgba(176,138,79,0.3)); }
+      50%       { filter: drop-shadow(0 0 12px rgba(176,138,79,0.7)); }
+    }
+
+    .hero-scroll { margin-top: 4.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+    .hero-scroll span { font-size: 0.62rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(245,240,232,0.8);filter: brightness(70%) }
+    .scroll-line { width: 1px; height: 55px; background: linear-gradient(to bottom, rgba(176,138,79,0.6), transparent); animation: scroll-drop 2.5s ease-in-out infinite; }
+    @keyframes scroll-drop {
+      0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      40%  { opacity: 1; transform: scaleY(1); }
+      100% { opacity: 0; transform: scaleY(1) translateY(10px); }
+    }
+
+    /* ══════════════════════════════
+       СЕКЦИИ
+    ══════════════════════════════ */
     section { padding: 8rem 2rem; }
     .container { max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.1; color: var(--text-pure); margin-bottom: 2rem; }
-    .body-text { font-size: 0.95rem; color: var(--text-muted); max-width: 580px; line-height: 1.9; }
 
-    /* ── ABOUT ── */
+    .section-label { font-size: 0.68rem; letter-spacing: 0.55em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; opacity: 0.8; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.05;
+      color: var(--text-pure);
+      margin-bottom: 2rem;
+    }
+    .body-text { font-size: 0.95rem; color: var(--text-muted); max-width: 580px; line-height: 1.95; }
+
+    /* ══════════════════════════════
+       ABOUT
+    ══════════════════════════════ */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .about-links { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.2rem, 2.6vw, 1.6rem); color: var(--text-pure); border-left: 1px solid var(--accent); padding-left: 2rem; margin-top: 3rem; }
-    .about-links a { text-decoration: none; color: inherit; display: block; padding: 0.8em 0; transition: color 0.3s; }
-    .about-links a:hover { color: var(--accent); }
-    .about-links a + a { border-top: 1px solid rgba(255,255,255,0.12); }
-    .gothic-frame { display: inline-block; padding: 28px; background: linear-gradient(45deg, #000000 0%, #111111 100%); border: 3px solid #000000; border-radius: 12px; width: 100%; }
-    .gothic-frame img { width: 100%; height: auto; border-radius: 8px; transition: transform 0.4s; }
-    .gothic-frame:hover img { transform: scale(1.04); }
 
-    /* ── MUSIC ── */
+    .about-links {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+      color: var(--text-pure);
+      border-left: 1px solid var(--accent);
+      padding-left: 2rem;
+      margin-top: 3rem;
+    }
+    .about-links a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      padding: 0.8em 0;
+      transition: color 0.3s, padding-left 0.3s;
+    }
+    .about-links a:hover { color: var(--accent-light); padding-left: 0.5em; }
+    .about-links a + a { border-top: 1px solid rgba(176,138,79,0.15); }
+
+    /* Фоторамка — глубокая золотая */
+    .gothic-frame {
+      display: inline-block;
+      padding: 3px;
+      background: linear-gradient(135deg, #2a1f0a 0%, #1a120a 50%, #2a1f0a 100%);
+      border-radius: 4px;
+      width: 100%;
+      box-shadow:
+        0 0 0 1px rgba(176,138,79,0.3),
+        0 0 30px rgba(176,138,79,0.08),
+        inset 0 0 20px rgba(0,0,0,0.5);
+    }
+    .gothic-frame-inner {
+      padding: 20px;
+      background: linear-gradient(135deg, #0e0b08 0%, #120e08 100%);
+      border: 1px solid rgba(176,138,79,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .gothic-frame-inner img {
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+      display: block;
+    }
+    .gothic-frame:hover .gothic-frame-inner img { transform: scale(1.04); }
+
+    /* ══════════════════════════════
+       MUSIC
+    ══════════════════════════════ */
     .albums-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
-    .album-card { background: rgba(18,18,18,0.75); border: 1px solid var(--border-color); padding: 1.5rem; text-decoration: none; color: inherit; display: block; transition: transform 0.4s; }
-    .album-card:hover { transform: translateY(-5px); }
-    .album-art { width: 100%; aspect-ratio: 1; background: #181818; margin-bottom: 1.5rem; overflow: hidden; }
-    .album-art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-    .album-card:hover .album-art img { transform: scale(1.06); }
-    .album-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-    .album-desc { font-size: 0.85rem; color: var(--text-muted); }
 
-    /* ── CONCERTS ── */
+    .album-card {
+      background: rgba(16, 12, 10, 0.7);
+      border: 1px solid rgba(176,138,79,0.12);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .album-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(176,138,79,0.06) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .album-card:hover { transform: translateY(-6px); border-color: rgba(176,138,79,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(176,138,79,0.06); }
+    .album-card:hover::before { opacity: 1; }
+
+    .album-art { width: 100%; aspect-ratio: 1; background: #0e0b08; margin-bottom: 1.5rem; overflow: hidden; position: relative; }
+    .album-art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .album-card:hover .album-art img { transform: scale(1.07); }
+    .album-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,4,8,0.5) 0%, transparent 50%); }
+
+    .album-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .album-desc { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+    /* ══════════════════════════════
+       CONCERTS
+    ══════════════════════════════ */
     .concert-list { margin-top: 3rem; }
-    .concert-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid rgba(176,138,79,0.12); }
+    .concert-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid rgba(176,138,79,0.1);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .concert-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem; right: -2rem; top: 0; bottom: 0;
+      background: linear-gradient(to right, rgba(176,138,79,0.03), transparent, rgba(176,138,79,0.03));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .concert-item:hover::before { opacity: 1; }
+
     .concert-date { text-align: left; }
-    .concert-day { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--accent); }
-    .concert-month { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
-    .concert-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-transform: uppercase; }
-    .btn-outline { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--text-pure); color: var(--text-pure); font-size: 0.7rem; text-transform: uppercase; text-decoration: none; transition: background 0.3s, color 0.3s; }
-    .btn-outline:hover { background: var(--text-pure); color: var(--bg-dark); }
+    .concert-day { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--accent); line-height: 1; }
+    .concert-month { font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem; }
+    .concert-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
 
-    /* ── BAND ── */
+    .btn-outline {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(176,138,79,0.5);
+      color: var(--accent);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .btn-outline:hover { background: var(--accent); color: var(--bg-deep); border-color: var(--accent); }
+
+    /* ══════════════════════════════
+       BAND
+    ══════════════════════════════ */
     .band-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; margin-top: 3rem; }
-    .member-portrait { width: 100%; aspect-ratio: 3/4; background: var(--bg-panel); border: 3px solid #000000; border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; padding: 18px; }
-    .member-portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; transition: transform 0.4s; }
-    .member-portrait:hover img { transform: scale(1.05); }
-    .member-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; text-align: center; text-transform: uppercase; margin-bottom: 0.3rem; }
-    .member-role { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--accent); text-align: center; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .member-bio { font-size: 0.85rem; color: var(--text-muted); text-align: center; }
 
-    /* ── CONTACT ── */
+    .member-card { position: relative; }
+
+    .member-portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--bg-panel);
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Золотая рамочка-оверлей на фото участника */
+    .member-portrait::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(176,138,79,0.25);
+      z-index: 2;
+      pointer-events: none;
+      transition: border-color 0.3s;
+    }
+    .member-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,4,8,0.7) 0%, transparent 50%);
+      z-index: 1;
+    }
+    .member-portrait:hover::before { border-color: rgba(176,138,79,0.6); }
+
+    .member-portrait img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .member-card:hover .member-portrait img { transform: scale(1.06); }
+
+    .member-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; text-align: center; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .member-role { font-size: 0.65rem; letter-spacing: 0.4em; color: var(--accent); text-align: center; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .member-bio { font-size: 0.83rem; color: var(--text-muted); text-align: center; }
+
+    /* ══════════════════════════════
+       VIDEO
+    ══════════════════════════════ */
+    .video-portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #0a0806;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .video-portrait video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+    .video-portrait::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(176,138,79,0.2);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════
+       CONTACT
+    ══════════════════════════════ */
     #contact { text-align: center; }
-    .btn-primary { display: inline-block; padding: 1.1rem 3.2rem; background: var(--text-pure); color: var(--bg-dark); font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; font-weight: 600; transition: background 0.3s; }
-    .btn-primary:hover { background: var(--accent); }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1.1rem 3.5rem;
+      background: transparent;
+      color: var(--accent-light);
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 400;
+      border: 1px solid var(--accent);
+      transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .btn-primary:hover { color: var(--bg-deep); box-shadow: 0 0 30px rgba(176,138,79,0.2); }
+    .btn-primary:hover::before { transform: scaleX(1); }
+    .btn-primary span { position: relative; z-index: 1; }
+
     .contact-links { display: flex; justify-content: center; gap: 3rem; margin-top: 5rem; flex-wrap: wrap; }
-    .contact-link { text-decoration: none; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; }
-    .contact-link:hover { color: var(--accent); }
+    .contact-link { text-decoration: none; color: var(--text-muted); font-size: 0.73rem; letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.3s; }
+    .contact-link:hover { color: var(--accent-light); }
 
-    /* ── VIDEO ── */
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-top: 3rem; border: 1px solid var(--border-color); }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      background: transparent;
+      padding: 3rem;
+      text-align: center;
+    }
+    .footer-logo { height: 65px; width: auto; margin: 0 auto 1.5rem; opacity: 0.7; filter: drop-shadow(0 0 10px rgba(176,138,79,0.15)); }
+    .footer-copy { font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase; }
 
-    /* ── FOOTER ── */
-    
-    footer { 
-  background:  transparent !important; /* Тот же цвет, что и в nav */
-  backdrop-filter: none;        /* Эффект размытия */
-  -webkit-backdrop-filter:none;
-  border-top: none !important;
-  padding: 3rem; 
-  text-align: center; 
-
-}
-
-.footer-logo { 
-  height: 75px; 
-  width: auto; 
-  margin: 0 auto 1.5rem; 
-  opacity: 0.85; 
-}
-
-.footer-copy { 
-  font-size: 0.7rem; 
-  color: var(--text-muted); 
-  letter-spacing: 0.15em; 
-  text-transform: uppercase; 
-}
-/* ── КОМБИНИРОВАННАЯ ИДЕАЛЬНО ЗАМКНУТАЯ РАМКА ── */
-.rose-frame-container {
-  content: '';
-  position: fixed;
-  pointer-events: none; /* Пропускает клики */
-  z-index: 99999;       /* Поверх всего контента */
-  opacity: 0.85;
-  border: none !important; /* Убираем любые бордеры, чтобы они не ломали SVG */
-  filter: drop-shadow(0 0 4px rgba(10, 8, 8, 0.95));
-
-
-}
-
-
-/* НАСТРОЙКИ ДЛЯ ПК (Оставляем разомкнутый сверху метод фонов, чтобы лоза шла под меню) */
-/* НАСТРОЙКИ ДЛЯ ПК (Лоза идет под главным меню) */
-@media (min-width: 769px) {
-  .rose-frame-container {
-    top: 90px;      
-    left: 5px;      
-    right: 5px;     
-    bottom: 5px;    
-    
-    background-image: 
-      /* Верхняя линия лозы */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
-      /* Нижняя линия лозы */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
-      /* Левая боковая лоза */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
-      /* Правая боковая лоза */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E");
-
-    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    background-position: top left, bottom left, top left, top right;
-    background-size: 80px 16px, 80px 16px, 16px 80px, 16px 80px;
-  }
-}
-    /* ── АДАПТИВНОСТЬ И МОБИЛЬНЫЕ УГОЛКИ ── */
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
     @media (max-width: 900px) {
       nav { padding: 0.6rem 1.5rem; }
       .nav-toggle { display: flex; }
       .nav-links-desktop { display: none; }
       section { padding: 6rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-      .gothic-frame { padding: 16px; }
       .band-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
       .concert-item { grid-template-columns: 70px 1fr; row-gap: 1.2rem; }
-      .concert-item { 
-        grid-template-columns: 70px 1fr auto; 
-        gap: 1rem; 
-        align-items: center; 
-      }
-
-   .concert-item { 
-        display: grid;
-        grid-template-columns: 70px 1fr; 
-        gap: 1rem 1.5rem; /* отступы: 1rem между строками, 1.5rem между колонками */
-        padding: 1.5rem 0;
-      }
-
-      .concert-date {
-        grid-column: 1;
-      }
-
-      .concert-info {
-        grid-column: 2;
-      }
-
-      /* Переносим блок кнопок на вторую строку под текст и выстраиваем их в линию справа */
-      .concert-actions { 
-        grid-column: 1 / -1; /* растягиваем контейнер на всю ширину под текстом */
-        display: flex;
-        flex-direction: row; /* выстраиваем строго в линию (в ряд) */
-        justify-content: flex-end; /* прижимаем всю линию к правому краю */
-        gap: 0.75rem; /* расстояние между кнопками в ряду */
-        margin-top: 0.25rem; /* небольшой отступ сверху от названия концерта */
-      }
-
-      /* Сама кнопка: аккуратная, компактная и не ломает экран */
-      .btn-outline {
-        padding: 0.45rem 1.2rem;
-        font-size: 0.65rem;
-        white-space: nowrap; /* текст внутри кнопки не переносится */
-        width: auto;
-      }
     }
-
-    
-   @media (max-width: 768px) {
-  .rose-frame-container {
-    /* Рамка идет вкруговую по всему экрану, прижатая к краям на 3px */
-    top: 3px !important;    
-    left: 3px !important;
-    right: 3px !important;
-    bottom: 3px !important;
-    
-    /* Используем ту же качественную векторную графику, что и на ПК */
-    background-image: 
-      /* 1. Верхняя ветка (теперь включена и на телефонах) */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
-      /* 2. Нижная ветка */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16' viewBox='0 0 80 16' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 0 8 Q 20 2, 40 8 T 80 8' /%3E%3Cpath d='M 15 5 L 17 1 L 19 6' fill='%23b08a4f' /%3E%3Cpath d='M 55 11 L 53 15 L 51 10' fill='%23b08a4f' /%3E%3Cpath d='M 25 7 Q 30 1, 35 6 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 62 9 Q 67 15, 72 10 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
-      /* 3. Левая ветка */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E"),
-      /* 4. Правая ветка */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='80' viewBox='0 0 16 80' fill='none' stroke='%23b08a4f' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M 8 0 Q 2 20, 8 40 T 8 80' /%3E%3Cpath d='M 5 15 L 1 17 L 6 19' fill='%23b08a4f' /%3E%3Cpath d='M 11 55 L 15 53 L 10 51' fill='%23b08a4f' /%3E%3Cpath d='M 7 25 Q 1 30, 6 35 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3Cpath d='M 9 62 Q 15 67, 10 72 Z' fill='%23b08a4f' fill-opacity='0.2' /%3E%3C/svg%3E");
-
-    /* Повторение по осям */
-    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
-    /* Позиционирование по краям мобильного дисплея */
-    background-position: top left, bottom left, top left, top right !important;
-    
-    /* Делаем узор тонким, миниатюрным, но сохраняем правильные пропорции (без сплющивания) */
-    background-size: 50px 10px, 50px 10px, 10px 50px, 10px 50px !important;
-  }
-}
-   
     @media (max-width: 600px) {
       .albums-grid { grid-template-columns: 1fr; }
       .band-grid { grid-template-columns: 1fr; max-width: 320px; margin: 3rem auto 0; }
       .contact-links { flex-direction: column; gap: 1.5rem; }
       section { padding: 5rem 1.25rem; }
-      .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.32em; }
+      .concert-item {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 1rem 1.5rem;
+        padding: 1.5rem 0;
+      }
+      .concert-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 0.25rem;
+      }
     }
-    
   </style>
-  <meta name="google-site-verification" content="nMhPbefNcqRunoCeZrwEQFpO7t5rZKlky9ny-DaWzwU" />
 </head>
 <body>
+
+  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-overlay"></div>
+  <div class="bg-pattern"></div>
+
+  <!-- РАМКА ИЗ ЛОЗЫ -->
   <div class="rose-frame-container"></div>
+
+  <!-- NAV -->
   <nav>
     <a href="#hero" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
@@ -466,34 +668,38 @@
     <li><a href="#contact">Контакт</a></li>
   </ul>
 
-  <!-- HERO -->
+  <!-- ══════════ HERO ══════════ -->
   <section id="hero">
-    <div class="hero-bg"></div>
-    <svg class="hero-sprig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.4" stroke-linecap="round" aria-hidden="true">
-      <path d="M12 1 L12 23" />
-      <path d="M12 5 Q8 4 6 1" />
-      <path d="M12 5 Q16 4 18 1" />
-      <path d="M12 10 Q8 9 5 6.5" />
-      <path d="M12 10 Q16 9 19 6.5" />
-      <path d="M12 15 Q8.5 14 6.5 11.5" />
-      <path d="M12 15 Q15.5 14 17.5 11.5" />
-      <path d="M12 19.5 Q9.5 18.7 8 17" />
-      <path d="M12 19.5 Q14.5 18.7 16 17" />
-    </svg>
+    <div class="hero-aura"></div>
+    <div class="hero-aura-2"></div>
+
+    <!-- Большой медленно вращающийся символ -->
+    <div class="hero-sprig-wrap" aria-hidden="true">
+      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.5">
+        <circle cx="100" cy="100" r="90"/>
+        <circle cx="100" cy="100" r="70"/>
+        <circle cx="100" cy="100" r="50"/>
+        <line x1="100" y1="10" x2="100" y2="190"/>
+        <line x1="10" y1="100" x2="190" y2="100"/>
+        <line x1="36" y1="36" x2="164" y2="164"/>
+        <line x1="164" y1="36" x2="36" y2="164"/>
+        <ellipse cx="100" cy="100" rx="8" ry="20"/>
+        <ellipse cx="100" cy="100" rx="8" ry="20" transform="rotate(45 100 100)"/>
+        <ellipse cx="100" cy="100" rx="8" ry="20" transform="rotate(90 100 100)"/>
+        <ellipse cx="100" cy="100" rx="8" ry="20" transform="rotate(135 100 100)"/>
+      </svg>
+    </div>
+
     <div class="hero-content">
-     <div class="hero-emblem" aria-hidden="true" style="color: var(--accent); margin-bottom: 3.5rem;">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-      <circle cx="12" cy="12" r="5" />
-      <path d="M12 1 L12 4" />
-      <path d="M12 20 L12 23" />
-      <path d="M1 12 L4 12" />
-      <path d="M20 12 L23 12" />
-      <path d="M4.2 4.2 L6.3 6.3" />
-      <path d="M17.7 17.7 L19.8 19.8" />
-      <path d="M4.2 19.8 L6.3 17.7" />
-      <path d="M17.7 6.3 L19.8 4.2" />
-    </svg>
-  </div>
+      <div class="hero-emblem" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="12" cy="12" r="5" />
+          <path d="M12 1 L12 4"/><path d="M12 20 L12 23"/>
+          <path d="M1 12 L4 12"/><path d="M20 12 L23 12"/>
+          <path d="M4.2 4.2 L6.3 6.3"/><path d="M17.7 17.7 L19.8 19.8"/>
+          <path d="M4.2 19.8 L6.3 17.7"/><path d="M17.7 6.3 L19.8 4.2"/>
+        </svg>
+      </div>
       <p class="hero-eyebrow">Фолк-проект &nbsp;·&nbsp; Живая музыка</p>
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png"
            alt="Логотип группы «Таволга»"
@@ -506,80 +712,75 @@
     </div>
   </section>
 
-  <!-- ORNAMENT: ромб -->
+  <!-- ORNAMENT -->
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2 L20 12 L12 22 L4 12 Z" />
-        <path d="M12 7 L16 12 L12 17 L8 12 Z" />
+        <path d="M12 2 L20 12 L12 22 L4 12 Z"/><path d="M12 7 L16 12 L12 17 L8 12 Z"/>
       </svg>
     </span>
     <div class="ornament-line"></div>
   </div>
 
-  <!-- ABOUT -->
+  <!-- ══════════ ABOUT ══════════ -->
   <section id="about">
     <div class="container">
       <div class="about-grid">
-        <div class="reveal">
-          <p class="section-label">О проекте</p>
-          <h2 class="section-title">Корни глубокого звука</h2>
-          <p class="body-text">
+        <div>
+          <p class="section-label reveal">О проекте</p>
+          <h2 class="section-title reveal reveal-delay-1">Корни глубокого звука</h2>
+          <p class="body-text reveal reveal-delay-2">
             В творчестве фолк-проекта переплетаются наследие старины и энергия клубной культуры — так рождается синтез исконного и трендового. Под песни «Та́волги» можно отрываться на городском рейве и водить хороводы в поле.
           </p>
-          <p class="body-text" style="margin-top:1.5rem;">
-            «Та́волга» ещё только в начале своего авторского, творческого пути, на котором работает совместно с хорошим другом и автором электро-фолк проекта «Tehnohisha» — Сергеем Давыдовым. Вместе мы соединяем электронную музыку и фольклор воедино!
+          <p class="body-text reveal reveal-delay-3" style="margin-top:1.5rem;">
+            «Та́волга» ещё только в начале своего авторского пути — работает совместно с автором электро-фолк проекта «Tehnohisha» Сергеем Давыдовым. Вместе мы соединяем электронную музыку и фольклор воедино.
           </p>
-          <div class="about-links">
+          <div class="about-links reveal">
             <a href="https://music.yandex.ru/artist/25782035" target="_blank" rel="noopener noreferrer">Мы на Яндекс Музыке</a>
             <a href="https://vk.com/tavolga_folkgroup" target="_blank" rel="noopener noreferrer">Мы в ВКонтакте</a>
           </div>
         </div>
-        <div class="about-visual reveal">
+        <div class="reveal reveal-delay-2">
           <div class="gothic-frame">
-            <img src="images/фото таволги.jpg" alt="Фотография группы Таволга">
+            <div class="gothic-frame-inner">
+              <img src="images/фото таволги.jpg" alt="Фотография группы Таволга">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ORNAMENT -->
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
-        <path d="M12 2 L12 22" />
-        <path d="M12 6 Q9 5 7.5 2.5" />
-        <path d="M12 6 Q15 5 16.5 2.5" />
-        <path d="M12 11 Q9 10 7 7.5" />
-        <path d="M12 11 Q15 10 17 7.5" />
-        <path d="M12 16 Q9.5 15 8 13" />
-        <path d="M12 16 Q14.5 15 16 13" />
+        <path d="M12 2 L12 22"/>
+        <path d="M12 6 Q9 5 7.5 2.5"/><path d="M12 6 Q15 5 16.5 2.5"/>
+        <path d="M12 11 Q9 10 7 7.5"/><path d="M12 11 Q15 10 17 7.5"/>
+        <path d="M12 16 Q9.5 15 8 13"/><path d="M12 16 Q14.5 15 16 13"/>
       </svg>
     </span>
     <div class="ornament-line"></div>
   </div>
 
-  <!-- MUSIC -->
+  <!-- ══════════ MUSIC ══════════ -->
   <section id="music">
     <div class="container">
       <p class="section-label reveal">Дискография</p>
-      <h2 class="section-title reveal">Ритуалы и записи</h2>
-
+      <h2 class="section-title reveal reveal-delay-1">Ритуалы и записи</h2>
       <div class="albums-grid">
-        <a href="https://music.yandex.ru/album/41541761/track/150167969?utm_source=web&utm_medium=copy_link"
-           class="album-card reveal" target="_blank" rel="noopener noreferrer">
+        <a href="https://music.yandex.ru/album/41541761/track/150167969"
+           class="album-card reveal reveal-delay-1" target="_blank" rel="noopener noreferrer">
           <div class="album-art">
             <img src="images/ВЕСНА.jpg" alt="Обложка сингла «Весна-девица»">
           </div>
           <div class="album-title">Весна-девица</div>
           <p class="album-desc">Первый сингл группы</p>
         </a>
-
-        <a href="https://music.yandex.ru/album/41659696/track/150430578?utm_source=web&utm_medium=copy_link"
-           class="album-card reveal" target="_blank" rel="noopener noreferrer">
+        <a href="https://music.yandex.ru/album/41659696/track/150430578"
+           class="album-card reveal reveal-delay-2" target="_blank" rel="noopener noreferrer">
           <div class="album-art">
             <img src="images/воды.jpg" alt="Обложка второго сингла">
           </div>
@@ -590,22 +791,21 @@
     </div>
   </section>
 
-  <!-- ORNAMENT: волна -->
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol ornament-wave">
       <svg viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
-        <path d="M2 7 Q9 1 16 7 T30 7 T44 7 T58 7 T72 7 T86 7 T100 7 T114 7 T128 7 T138 7" />
+        <path d="M2 7 Q9 1 16 7 T30 7 T44 7 T58 7 T72 7 T86 7 T100 7 T114 7 T128 7 T138 7"/>
       </svg>
     </span>
     <div class="ornament-line"></div>
   </div>
 
-  <!-- CONCERTS -->
+  <!-- ══════════ CONCERTS ══════════ -->
   <section id="concerts">
     <div class="container">
       <p class="section-label reveal">Ближайшие даты</p>
-      <h2 class="section-title reveal">Календарь выступлений</h2>
+      <h2 class="section-title reveal reveal-delay-1">Календарь выступлений</h2>
       <div class="concert-list">
         <div class="concert-item reveal">
           <div class="concert-date">
@@ -615,12 +815,11 @@
           <div class="concert-info">
             <h3>ЭкоФестиваль семьи «Лада» на Сользаводе</h3>
           </div>
-          <div class="concert-actions">
+          <div class="concert-actions" style="display:flex;gap:0.75rem;">
             <a href="https://quicktickets.ru/solikamsk-dk-prikame/e1" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
-            <a href="https://vk.com/wall-95826361_27993" class="btn-outline vk-link" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+            <a href="https://vk.com/wall-95826361_27993" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
         </div>
-
         <div class="concert-item reveal">
           <div class="concert-date">
             <div class="concert-day">8</div>
@@ -629,39 +828,38 @@
           <div class="concert-info">
             <h3>Фестиваль «Биармия»</h3>
           </div>
-          <div class="concert-actions">
+          <div class="concert-actions" style="display:flex;gap:0.75rem;">
             <a href="https://quicktickets.ru/plekhovo-dk/e2" class="btn-outline" target="_blank" rel="noopener noreferrer">Плехово</a>
-            <a href="https://vk.com/biarmiasolkam" class="btn-outline vk-link" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+            <a href="https://vk.com/biarmiasolkam" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ORNAMENT: цветок -->
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="1.6" />
-        <ellipse cx="12" cy="6" rx="1.6" ry="3.2" />
-        <ellipse cx="12" cy="18" rx="1.6" ry="3.2" />
-        <ellipse cx="6" cy="9" rx="1.6" ry="3.2" transform="rotate(-60 6 9)" />
-        <ellipse cx="18" cy="9" rx="1.6" ry="3.2" transform="rotate(60 18 9)" />
-        <ellipse cx="6" cy="15" rx="1.6" ry="3.2" transform="rotate(60 6 15)" />
-        <ellipse cx="18" cy="15" rx="1.6" ry="3.2" transform="rotate(-60 18 15)" />
+        <circle cx="12" cy="12" r="1.6"/>
+        <ellipse cx="12" cy="6" rx="1.6" ry="3.2"/>
+        <ellipse cx="12" cy="18" rx="1.6" ry="3.2"/>
+        <ellipse cx="6" cy="9" rx="1.6" ry="3.2" transform="rotate(-60 6 9)"/>
+        <ellipse cx="18" cy="9" rx="1.6" ry="3.2" transform="rotate(60 18 9)"/>
+        <ellipse cx="6" cy="15" rx="1.6" ry="3.2" transform="rotate(60 6 15)"/>
+        <ellipse cx="18" cy="15" rx="1.6" ry="3.2" transform="rotate(-60 18 15)"/>
       </svg>
     </span>
     <div class="ornament-line"></div>
   </div>
 
-  <!-- BAND -->
+  <!-- ══════════ BAND ══════════ -->
   <section id="band">
     <div class="container">
       <p class="section-label reveal">Участники</p>
-      <h2 class="section-title reveal">Проводники звука</h2>
+      <h2 class="section-title reveal reveal-delay-1">Проводники звука</h2>
       <div class="band-grid">
-        <div class="member-card reveal">
+        <div class="member-card reveal reveal-delay-1">
           <div class="member-portrait">
             <img src="images/надя.jpg" alt="Надежда Синицина">
           </div>
@@ -669,8 +867,7 @@
           <div class="member-role">Вокал</div>
           <p class="member-bio"></p>
         </div>
-
-        <div class="member-card reveal">
+        <div class="member-card reveal reveal-delay-2">
           <div class="member-portrait">
             <img src="images/алена.jpg" alt="Алена Давыдова">
           </div>
@@ -678,8 +875,7 @@
           <div class="member-role">Вокал</div>
           <p class="member-bio"></p>
         </div>
-
-        <div class="member-card reveal">
+        <div class="member-card reveal reveal-delay-1">
           <div class="member-portrait">
             <img src="images/савелий.jpg" alt="Савелий Хомович">
           </div>
@@ -687,8 +883,7 @@
           <div class="member-role">Барабаны</div>
           <p class="member-bio"></p>
         </div>
-
-        <div class="member-card reveal">
+        <div class="member-card reveal reveal-delay-2">
           <div class="member-portrait">
             <img src="images/серега.jpg" alt="Сергей Давыдов">
           </div>
@@ -700,45 +895,39 @@
     </div>
   </section>
 
-  <!-- ORNAMENT: птицы -->
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol ornament-pair">
       <svg width="22" height="15" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M1 10 Q6 2 12 8 Q18 2 23 10" />
-        <path d="M12 8 L12 13" />
+        <path d="M1 10 Q6 2 12 8 Q18 2 23 10"/><path d="M12 8 L12 13"/>
       </svg>
       <svg width="22" height="15" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M1 10 Q6 2 12 8 Q18 2 23 10" />
-        <path d="M12 8 L12 13" />
+        <path d="M1 10 Q6 2 12 8 Q18 2 23 10"/><path d="M12 8 L12 13"/>
       </svg>
     </span>
     <div class="ornament-line"></div>
   </div>
 
-  <!-- VIDEO -->
+  <!-- ══════════ VIDEO ══════════ -->
   <section id="video">
     <div class="container">
       <p class="section-label reveal">Видео</p>
-      <h2 class="section-title reveal">Моменты выступлений</h2>
+      <h2 class="section-title reveal reveal-delay-1">Моменты выступлений</h2>
       <div class="band-grid">
-        <div class="member-card reveal">
-          <div class="member-portrait">
-            <video controls style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        <div class="member-card reveal reveal-delay-1">
+          <div class="video-portrait">
+            <video controls style="width:100%;height:100%;object-fit:cover;border-radius:2px;">
               <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/default.mp4" type="video/mp4">
-              Ваш браузер не поддерживает видео.
             </video>
           </div>
           <div class="member-name">Выступление на «Ладе»</div>
           <div class="member-role">Соликамск, 8 июля</div>
           <p class="member-bio">Фрагмент с фестиваля семьи — энергия хоровода и электроника в одном ритме.</p>
         </div>
-
-        <div class="member-card reveal">
-          <div class="member-portrait">
-            <video controls style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        <div class="member-card reveal reveal-delay-2">
+          <div class="video-portrait">
+            <video controls style="width:100%;height:100%;object-fit:cover;border-radius:2px;">
               <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/16493967378953.mp4" type="video/mp4">
-              Ваш браузер не поддерживает видео.
             </video>
           </div>
           <div class="member-name">Сет на «Биармии»</div>
@@ -749,137 +938,242 @@
     </div>
   </section>
 
-  
-<div class="ornament">
-  <div class="ornament-line"></div>
-  <span class="ornament-symbol ornament-wave">
-    <svg viewBox="0 0 200 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <!-- Центральная плавная ветка -->
-      <path d="M10 20 C 50 5, 150 35, 190 20" />
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <span class="ornament-symbol ornament-wave">
+      <svg viewBox="0 0 200 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 20 C 50 5, 150 35, 190 20"/>
+        <path d="M30 18 L25 10 L35 12 Z" fill="currentColor"/>
+        <path d="M70 22 L65 30 L75 28 Z" fill="currentColor"/>
+        <path d="M110 16 L105 8 L115 10 Z" fill="currentColor"/>
+        <path d="M45 22 L50 30 L40 28 Z" fill="currentColor"/>
+        <path d="M85 18 L90 10 L80 12 Z" fill="currentColor"/>
+        <path d="M130 24 L135 32 L125 30 Z" fill="currentColor"/>
+        <path d="M20 20 Q25 15, 30 20 T40 20"/>
+        <path d="M60 20 Q65 25, 70 20 T80 20"/>
+        <path d="M100 20 Q105 15, 110 20 T120 20"/>
+        <path d="M140 20 Q145 25, 150 20 T160 20"/>
+      </svg>
+    </span>
+    <div class="ornament-line"></div>
+  </div>
 
-      <!-- Листья слева (симметрично расположены вдоль ветки) -->
-      <path d="M30 18 L25 10 L35 12 Z" fill="currentColor"/>
-      <path d="M70 22 L65 30 L75 28 Z" fill="currentColor"/>
-      <path d="M110 16 L105 8 L115 10 Z" fill="currentColor"/>
-
-      <!-- Листья справа (симметрично относительно ветки) -->
-      <path d="M45 22 L50 30 L40 28 Z" fill="currentColor"/>
-      <path d="M85 18 L90 10 L80 12 Z" fill="currentColor"/>
-      <path d="M130 24 L135 32 L125 30 Z" fill="currentColor"/>
-
-      <!-- Мелкие декоративные завитки вдоль ветки -->
-      <path d="M20 20 Q25 15, 30 20 T40 20"/>
-      <path d="M60 20 Q65 25, 70 20 T80 20"/>
-      <path d="M100 20 Q105 15, 110 20 T120 20"/>
-      <path d="M140 20 Q145 25, 150 20 T160 20"/>
-    </svg>
-  </span>
-  <div class="ornament-line"></div>
-</div>
-
-  <!-- CONTACT -->
+  <!-- ══════════ CONTACT ══════════ -->
   <section id="contact">
-    <div class="container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-      <p class="section-label">Связь</p>
-      <h2 class="section-title" style="margin-bottom: 1.5rem;">Пригласить проект</h2>
-      <p class="body-text" style="max-width: 600px; margin: 0 auto 2.5rem; text-align: center;">
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+      <p class="section-label reveal">Связь</p>
+      <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:1.5rem;">Пригласить проект</h2>
+      <p class="body-text reveal reveal-delay-2" style="max-width:600px;margin:0 auto 2.5rem;text-align:center;">
         По вопросам организации концертов, участия в фестивалях и концептуальных мероприятиях.
       </p>
-      
-      <a href="mailto:booking@tavolga.ru" class="btn-primary" style="margin-bottom: 4rem;">Отправить запрос</a>
-      
-      <div class="contact-links" style="display: flex; justify-content: center; gap: 3rem; margin-top: 0;">
+      <a href="mailto:booking@tavolga.ru" class="btn-primary reveal reveal-delay-3" style="margin-bottom:4rem;">
+        <span>Отправить запрос</span>
+      </a>
+      <div class="contact-links reveal">
         <a href="https://vk.com/tavolga_folkgroup" class="contact-link" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
         <a href="https://music.yandex.ru/artist/25782035" class="contact-link" target="_blank" rel="noopener noreferrer">Яндекс Музыка</a>
       </div>
     </div>
   </section>
 
-<!-- ORNAMENT: уголки перед футером -->
-<div class="ornament-corners" id="footer-ornaments">
-  <div class="ornament-corner ornament-corner--left"></div>
-  <div class="ornament-corner ornament-corner--right"></div>
-</div>
- 
-
-
   <!-- FOOTER -->
   <footer>
-  <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
-  <div class="footer-copy">
-    © Таволга, 2026. Все права защищены.
-  </div>
-</footer>
+    <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
+    <div class="footer-copy">© Таволга, 2026. Все права защищены.</div>
+  </footer>
+
   <script>
-   document.addEventListener('DOMContentLoaded', () => {
-    if (window.videoObserver) return;
+  /* ══════════════════════════════════════════════════════
+     CANVAS: частицы + дышащие ореолы + звёздное поле
+  ══════════════════════════════════════════════════════ */
+  (function() {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, raf;
+    let mouse = { x: -9999, y: -9999 };
 
-    const videos = document.querySelectorAll('.member-portrait video');
-    
-    if (!videos.length) return;
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
+    // — Звёздное поле (статичные точки)
+    const STAR_COUNT = 200;
+    const stars = Array.from({ length: STAR_COUNT }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.2 + 0.2,
+      a: Math.random() * 0.7 + 0.1,
+      twinkle: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.008 + 0.002
+    }));
+
+    // — Плавающие светлячки-частицы (золотые)
+    const FIREFLY_COUNT = 55;
+    const fireflies = Array.from({ length: FIREFLY_COUNT }, () => ({
+      x: Math.random() * 1,
+      y: Math.random() * 1,
+      r: Math.random() * 2.5 + 0.5,
+      vx: (Math.random() - 0.5) * 0.00015,
+      vy: (Math.random() - 0.5) * 0.00015 - 0.00005,
+      a: Math.random() * 0.6 + 0.1,
+      phase: Math.random() * Math.PI * 2,
+      freq: Math.random() * 0.012 + 0.004,
+      // Цвет: золотой или чуть фиолетовый
+      hue: Math.random() > 0.85 ? 270 : (Math.random() > 0.5 ? 38 : 30),
+      sat: Math.random() > 0.85 ? 40 : 65,
+    }));
+
+    // — Крупные пульсирующие сферы-ореолы
+    const orbs = [
+      { x: 0.15, y: 0.25, r: 320, hue: 30,  sat: 60, baseA: 0.035, phase: 0 },
+      { x: 0.85, y: 0.70, r: 280, hue: 260, sat: 40, baseA: 0.025, phase: 1.5 },
+      { x: 0.50, y: 0.10, r: 400, hue: 20,  sat: 50, baseA: 0.04,  phase: 3.1 },
+      { x: 0.30, y: 0.85, r: 240, hue: 280, sat: 35, baseA: 0.02,  phase: 4.7 },
+    ];
+
+    let t = 0;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // 1. Пульсирующие ореолы
+      orbs.forEach(o => {
+        const pulse = Math.sin(t * 0.003 + o.phase) * 0.4 + 0.6;
+        const grad = ctx.createRadialGradient(o.x*W, o.y*H, 0, o.x*W, o.y*H, o.r * pulse);
+        grad.addColorStop(0,   `hsla(${o.hue}, ${o.sat}%, 40%, ${o.baseA * pulse})`);
+        grad.addColorStop(0.5, `hsla(${o.hue}, ${o.sat}%, 30%, ${o.baseA * pulse * 0.4})`);
+        grad.addColorStop(1,   `hsla(${o.hue}, ${o.sat}%, 20%, 0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(o.x*W, o.y*H, o.r * pulse, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 2. Звёзды с мерцанием
+      stars.forEach(s => {
+        s.twinkle += s.speed;
+        const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+        ctx.fillStyle = `rgba(245, 235, 210, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 3. Светлячки
+      fireflies.forEach(f => {
+        // Движение + лёгкое притяжение к курсору (очень слабое)
+        const dx = mouse.x / W - f.x;
+        const dy = mouse.y / H - f.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 0.3) {
+          f.vx += dx * 0.0000008;
+          f.vy += dy * 0.0000008;
+        }
+
+        f.x += f.vx;
+        f.y += f.vy;
+
+        // Bounce
+        if (f.x < 0 || f.x > 1) f.vx *= -1;
+        if (f.y < 0 || f.y > 1) f.vy *= -1;
+        f.x = Math.max(0, Math.min(1, f.x));
+        f.y = Math.max(0, Math.min(1, f.y));
+
+        f.phase += f.freq;
+        const breathe = 0.5 + 0.5 * Math.sin(f.phase);
+        const alpha = f.a * breathe;
+        const radius = f.r * (0.7 + 0.3 * breathe);
+
+        // Свечение вокруг
+        const glowGrad = ctx.createRadialGradient(f.x*W, f.y*H, 0, f.x*W, f.y*H, radius * 12);
+        glowGrad.addColorStop(0,   `hsla(${f.hue}, ${f.sat}%, 65%, ${alpha * 0.5})`);
+        glowGrad.addColorStop(1,   `hsla(${f.hue}, ${f.sat}%, 55%, 0)`);
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(f.x*W, f.y*H, radius * 12, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Ядро
+        ctx.fillStyle = `hsla(${f.hue}, ${f.sat}%, 80%, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(f.x*W, f.y*H, radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      t++;
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Пауза, когда вкладка скрыта
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else draw();
+    });
+  })();
+
+  /* ══════════════════════════════════════════════════════
+     REVEAL on scroll
+  ══════════════════════════════════════════════════════ */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  /* ══════════════════════════════════════════════════════
+     NAV toggle
+  ══════════════════════════════════════════════════════ */
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
+
+  /* ══════════════════════════════════════════════════════
+     Smooth scroll
+  ══════════════════════════════════════════════════════ */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  /* ══════════════════════════════════════════════════════
+     Автовоспроизведение видео при появлении в зоне видимости
+  ══════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', () => {
+    const videos = document.querySelectorAll('video');
+    if (!videos.length || window.videoObserver) return;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const video = entry.target;
-        if (entry.isIntersecting && video.readyState >= 2) {
-          video.play().catch(e => {});
-        } else {
-          video.pause();
-        }
+        if (entry.isIntersecting && video.readyState >= 2) video.play().catch(() => {});
+        else video.pause();
       });
     }, { threshold: 0.5 });
-
-    videos.forEach(video => observer.observe(video));
+    videos.forEach(v => observer.observe(v));
     window.videoObserver = observer;
   });
-
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => observer.observe(el));
-
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    function closeMenu() {
-      navLinks.classList.remove('open');
-      navToggle.classList.remove('active');
-      navToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      navToggle.classList.toggle('active', isOpen);
-      navToggle.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 900) closeMenu();
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', e => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
   </script>
 </body>
 </html>
