@@ -465,7 +465,7 @@
     .concert-month { font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem; }
     .concert-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
 
-    .btn-outline {
+       .btn-outline {
       display: inline-block;
       padding: 0.5rem 1.5rem;
       border: 1px solid rgba(176,138,79,0.5);
@@ -475,9 +475,15 @@
       text-decoration: none;
       letter-spacing: 0.2em;
       transition: background 0.3s, color 0.3s, border-color 0.3s;
+      position: relative;
+      z-index: 10;
+      cursor: pointer;
     }
-    .btn-outline:hover { background: var(--accent); color: var(--bg-deep); border-color: var(--accent); }
-
+    .btn-outline:hover { 
+      background: var(--accent); 
+      color: var(--bg-deep); 
+      border-color: var(--accent); 
+    }
     /* ══════════════════════════════
        BAND
     ══════════════════════════════ */
