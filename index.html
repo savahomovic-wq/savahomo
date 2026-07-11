@@ -601,32 +601,7 @@
     .member-role { font-size: 0.65rem; letter-spacing: 0.4em; color: var(--accent); text-align: center; text-transform: uppercase; margin-bottom: 0.5rem; }
     .member-bio { font-size: 0.83rem; color: var(--text-muted); text-align: center; }
 
-    /* ══════════════════════════════
-       VIDEO
-    ══════════════════════════════ */
-    .video-portrait {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: #0a0806;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-      overflow: hidden;
-      position: relative;
-    }
-    .video-portrait video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      border-radius: 2px;
-    }
-    .video-portrait::before {
-      content: '';
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(176,138,79,0.2);
-      z-index: 2;
-      pointer-events: none;
-    }
-
+    
     /* ══════════════════════════════
        CONTACT
     ══════════════════════════════ */
@@ -728,7 +703,6 @@
       <li><a href="#music">Музыка</a></li>
       <li><a href="#concerts">Концерты</a></li>
       <li><a href="#band">Состав</a></li>
-      <li><a href="#video">Видео</a></li>
       <li><a href="#contact">Контакт</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
@@ -741,7 +715,6 @@
     <li><a href="#music">Музыка</a></li>
     <li><a href="#concerts">Концерты</a></li>
     <li><a href="#band">Состав</a></li>
-    <li><a href="#video">Видео</a></li>
     <li><a href="#contact">Контакт</a></li>
   </ul>
 
@@ -1084,107 +1057,6 @@
       </div>
     </div>
   </section>
-
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <span class="ornament-symbol ornament-pair">
-      <svg width="22" height="15" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M1 10 Q6 2 12 8 Q18 2 23 10"/><path d="M12 8 L12 13"/>
-      </svg>
-      <svg width="22" height="15" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M1 10 Q6 2 12 8 Q18 2 23 10"/><path d="M12 8 L12 13"/>
-      </svg>
-    </span>
-    <div class="ornament-line"></div>
-  </div>
-<!-- ══════════ VIDEO ══════════ -->
-<section id="video" class="section-wrap">
-
-  <div class="container">
-    <p class="section-label reveal">Видео</p>
-    <div class="mystic-title-wrap reveal reveal-delay-1">
-      <span class="title-glyph" aria-hidden="true">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="14" cy="14" r="11"/>
-  <path d="M14 3 L14 8"/>
-  <path d="M14 8 Q18 10 18 14"/>
-  <path d="M25 14 L20 14"/>
-  <path d="M20 14 Q18 18 14 18"/>
-  <path d="M14 25 L14 20"/>
-  <path d="M14 20 Q10 18 10 14"/>
-  <path d="M3 14 L8 14"/>
-  <path d="M8 14 Q10 10 14 10"/>
-  <circle cx="14" cy="14" r="3"/>
-</svg>
-      </span>
-      <h2 class="section-title">Моменты выступлений</h2>
-      <span class="title-glyph right" aria-hidden="true">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="14" cy="14" r="11"/>
-  <path d="M14 3 L14 8"/>
-  <path d="M14 8 Q18 10 18 14"/>
-  <path d="M25 14 L20 14"/>
-  <path d="M20 14 Q18 18 14 18"/>
-  <path d="M14 25 L14 20"/>
-  <path d="M14 20 Q10 18 10 14"/>
-  <path d="M3 14 L8 14"/>
-  <path d="M8 14 Q10 10 14 10"/>
-  <circle cx="14" cy="14" r="3"/>
-</svg>
-      </span>
-    </div>
-    <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
-      <div class="mystic-sub-line"></div>
-      <span>свет · память · живое</span>
-      <div class="mystic-sub-line"></div>
-    </div>
-    <div class="band-grid">
-      <div class="member-card reveal reveal-delay-1">
-        <div class="video-portrait">
-          <video controls style="width:100%;height:100%;object-fit:cover;border-radius:2px;">
-            <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/20260708_192429.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="member-name">Выступление на «Ладе»</div>
-        <div class="member-role">Соликамск, 8 июля</div>
-        <p class="member-bio">Фрагмент с фестиваля семьи — энергия хоровода и электроника в одном ритме.</p>
-      </div>
-      <div class="member-card reveal reveal-delay-2">
-        <div class="video-portrait">
-          <video controls style="width:100%;height:100%;object-fit:cover;border-radius:2px;">
-            <source src="https://github.com/savahomovic-wq/savahomo/releases/download/T1/16493967378953.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="member-name">Сет на «Биармии»</div>
-        <div class="member-role">Плехово, 8 августа</div>
-        <p class="member-bio">Эксперимент с фольклорными распевами и синтезаторными слоями.</p>
-      </div>
-    </div>
-  </div>
-</section>
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <span class="ornament-symbol ornament-wave">
-      <svg viewBox="0 0 200 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M10 20 C 50 5, 150 35, 190 20"/>
-        <path d="M30 18 L25 10 L35 12 Z" fill="currentColor"/>
-        <path d="M70 22 L65 30 L75 28 Z" fill="currentColor"/>
-        <path d="M110 16 L105 8 L115 10 Z" fill="currentColor"/>
-        <path d="M45 22 L50 30 L40 28 Z" fill="currentColor"/>
-        <path d="M85 18 L90 10 L80 12 Z" fill="currentColor"/>
-        <path d="M130 24 L135 32 L125 30 Z" fill="currentColor"/>
-        <path d="M20 20 Q25 15, 30 20 T40 20"/>
-        <path d="M60 20 Q65 25, 70 20 T80 20"/>
-        <path d="M100 20 Q105 15, 110 20 T120 20"/>
-        <path d="M140 20 Q145 25, 150 20 T160 20"/>
-      </svg>
-    </span>
-    <div class="ornament-line"></div>
-  </div>
-  <section id="contact" class="section-wrap">
-
-
-
 
     <div class="container" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
 
