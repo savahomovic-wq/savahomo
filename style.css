@@ -819,3 +819,202 @@
     gap: 0.6rem;
   }
 }
+
+/* ============================================
+   БУРГЕР-МЕНЮ – КНОПКИ С ЗАТЕМНЕНИЕМ
+   ============================================ */
+.nav-links-mobile.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;              /* расстояние между кнопками */
+  padding: 2rem;
+}
+
+.nav-links-mobile a {
+  display: inline-block;
+  padding: 0.8rem 2.5rem;   /* внутренние отступы */
+  background: rgba(0, 0, 0, 0.55); /* тёмный полупрозрачный фон */
+  border: 1px solid rgba(176, 138, 79, 0.2);
+  border-radius: 8px;       /* скругление углов */
+  color: var(--text-muted);
+  font-size: 1rem;          /* размер на мобильных */
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  width: auto;              /* ширина по содержимому */
+  min-width: 180px;         /* минимальная ширина */
+  text-align: center;
+}
+
+.nav-links-mobile a:hover {
+  color: var(--accent-light);
+  background: rgba(176, 138, 79, 0.15);
+  border-color: rgba(176, 138, 79, 0.5);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+}
+
+.nav-links-mobile a.active {
+  color: var(--accent-light);
+  background: rgba(176, 138, 79, 0.25);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(176, 138, 79, 0.15);
+  /* подчёркивание убрано, вместо него — золотая рамка */
+}
+
+/* На больших экранах делаем кнопки крупнее */
+@media (min-width: 901px) {
+  .nav-links-mobile a {
+    font-size: 1.4rem;
+    padding: 1rem 3rem;
+    min-width: 220px;
+  }
+}
+/* ============================================
+   БУРГЕР-МЕНЮ – КНОПКИ ПОМЕНЬШЕ
+   ============================================ */
+.nav-links-mobile.open {
+  gap: 0.9rem !important;         /* уменьшили расстояние между кнопками */
+  padding: 1.5rem !important;
+}
+
+.nav-links-mobile a {
+  width: 200px !important;        /* с 260px → 200px */
+  max-width: 200px !important;
+  min-width: 200px !important;
+  padding: 0.55rem 0.5rem !important; /* сжали вертикаль */
+  font-size: 0.82rem !important;  /* чуть мельче шрифт */
+  border-radius: 6px !important;  /* чуть меньше скругление */
+}
+
+/* На больших экранах тоже уменьшаем */
+@media (min-width: 901px) {
+  .nav-links-mobile a {
+    width: 240px !important;
+    max-width: 240px !important;
+    min-width: 240px !important;
+    font-size: 1.1rem !important;
+    padding: 0.7rem 0.5rem !important;
+  }
+  .nav-links-mobile.open {
+    gap: 1rem !important;
+  }
+}
+/* ============================================
+   МИСТИЧЕСКИЙ ФОЛЬКЛОРНЫЙ ФОН
+   ============================================ */
+
+/* 1. Основной цвет фона — глубокий тёмно-фиолетовый с налётом старины */
+body {
+  background-color: #0c0810;
+}
+
+/* 2. Переопределяем градиенты оверлея — добавляем мистические оттенки */
+.bg-overlay {
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 10%, rgba(80, 30, 60, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(30, 60, 40, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(20, 10, 30, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 30% at 20% 80%, rgba(120, 70, 30, 0.15) 0%, transparent 50%);
+}
+
+/* 4. Лёгкая зернистая текстура для эффекта старой бумаги/полотна */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
+}
+
+/* 5. Настроим цвета акцентов под мистику (золото, медь, охра) */
+:root {
+  --accent: #b8925c;
+  --accent-light: #dbb57c;
+  --text-pure: #ede6d8;
+  --text-muted: #9a8b7a;
+  --border-glow: rgba(184, 146, 92, 0.5);
+  --accent-soft: rgba(184, 146, 92, 0.18);
+  --accent-glow: rgba(184, 146, 92, 0.08);
+}
+
+/* 6. Затемним светящиеся орбы (чтобы были более приглушёнными, таинственными) */
+#bg-canvas {
+  filter: brightness(0.7) saturate(0.8) contrast(1.1);
+}
+
+/* ============================================
+   НИЖНЯЯ НАВИГАЦИЯ – 3 КОЛОНКИ НА ВСЕХ ЭКРАНАХ
+   ============================================ */
+.page-links {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  margin-top: 3rem !important;
+  padding: 0 0.5rem !important;
+  max-width: 100% !important;
+}
+
+.page-links a {
+  display: inline-block !important;
+  padding: 0.5rem 0.2rem !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(176, 138, 79, 0.2) !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  color: var(--text-muted) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+  text-align: center !important;
+  flex: 0 0 calc(33.33% - 0.6rem) !important;  /* три колонки */
+  max-width: calc(33.33% - 0.6rem) !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Для очень маленьких экранов шрифт можно уменьшить, но колонки остаются 3 */
+/* ============================================
+   НИЖНЯЯ НАВИГАЦИЯ – ЧУТЬ МЕНЬШЕ НА КОМПЬЮТЕРАХ
+   ============================================ */
+@media (min-width: 768px) {
+  .page-links a {
+    padding: 0.7rem 1rem !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.18em !important;
+    border-radius: 7px !important;
+  }
+}
+@media (min-width: 1200px) {
+  .page-links a {
+    padding: 0.8rem 1.2rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+.page-links a:hover {
+  color: var(--accent-light) !important;
+  background: rgba(176, 138, 79, 0.12) !important;
+  border-color: rgba(176, 138, 79, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.page-links a.active {
+  color: var(--accent-light) !important;
+  background: rgba(176, 138, 79, 0.18) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 20px rgba(176, 138, 79, 0.1) !important;
+  border-bottom: 1px solid var(--accent) !important;
+}
