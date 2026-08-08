@@ -716,3 +716,64 @@
   color: var(--accent-light);
 }
 .page-links a:hover { color: var(--accent-light); }
+
+/* ============================================
+   БУРГЕР-МЕНЮ НА ВСЕХ ЭКРАНАХ
+   ============================================ */
+/* Всегда показываем кнопку-бургер */
+.nav-toggle {
+  display: flex !important; /* принудительно показываем */
+}
+
+/* Скрываем десктопные ссылки всегда */
+.nav-links-desktop {
+  display: none !important;
+}
+
+/* Адаптация мобильного меню под большие экраны (опционально) */
+@media (min-width: 901px) {
+  .nav-links-mobile {
+    padding-top: 100px; /* чуть больше отступ сверху, чтобы не перекрывать лого */
+  }
+  .nav-links-mobile a {
+    font-size: 1rem;   /* чуть крупнее на ПК */
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* ============================================
+   ЦЕНТРИРОВАНИЕ ПУНКТОВ В БУРГЕР-МЕНЮ
+   ============================================ */
+.nav-links-mobile.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* вертикальное центрирование */
+  gap: 1.8rem;              /* расстояние между пунктами */
+  padding: 0;               /* убираем лишние отступы */
+}
+
+.nav-links-mobile a {
+  padding: 0.5rem 1rem;     /* только небольшие внутренние отступы */
+  font-size: 1.2rem;        /* чуть крупнее для читаемости */
+  text-align: center;
+  width: auto;              /* чтобы ширина была по тексту */
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links-mobile a:hover,
+.nav-links-mobile a.active {
+  color: var(--text-pure);
+  border-bottom: 1px solid var(--accent);
+}
+
+/* Для больших экранов можно увеличить шрифт */
+@media (min-width: 901px) {
+  .nav-links-mobile a {
+    font-size: 1.6rem;
+  }
+}
