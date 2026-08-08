@@ -13,18 +13,17 @@
 </head>
 <body>
 
-   <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
-
+  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
   <canvas id="bg-canvas"></canvas>
+  <!-- Логотип на фоне (водяной знак) – добавлен ранее -->
+  <div class="logo-watermark"></div>
   <div class="bg-overlay"></div>
   <div class="bg-pattern"></div>
 
-   <!-- РАМКА ИЗ ЛОЗЫ -->
-
+  <!-- РАМКА ИЗ ЛОЗЫ -->
   <div class="rose-frame-container"></div>
 
-   <!-- NAV -->
-
+  <!-- NAV -->
   <nav>
     <a href="index.html" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
@@ -52,9 +51,10 @@
   </ul>
 
   <section id="about" class="section-wrap">
-
     <div class="container">
       <div class="about-grid">
+
+        <!-- ЛЕВАЯ КОЛОНКА: ТЕКСТ + ИКОНКИ СОЦСЕТЕЙ -->
         <div>
           <p class="section-label reveal">О проекте</p>
           <div class="mystic-title-wrap reveal reveal-delay-1">
@@ -91,11 +91,31 @@
           <p class="body-text reveal reveal-delay-3" style="margin-top:1.5rem;">
             «Та́волга» ещё только в начале своего авторского пути — работает совместно с автором электро-фолк проекта «Tehnohisha» Сергеем Давыдовым. Вместе мы соединяем электронную музыку и фольклор воедино.
           </p>
+
+          <!-- БЛОК С ИКОНКАМИ (ВАШИ ССЫЛКИ) -->
           <div class="about-links reveal">
-            <a href="https://music.yandex.ru/artist/25782035" target="_blank" rel="noopener noreferrer">Мы на Яндекс Музыке</a>
-            <a href="https://vk.com/tavolga_folkgroup" target="_blank" rel="noopener noreferrer">Мы в ВКонтакте</a>
+            <a href="https://music.yandex.ru/artist/25782035" target="_blank" rel="noopener noreferrer" class="social-link">
+              <img src="https://logo-teka.com/wp-content/uploads/2025/07/yandex-music-sign-logo.svg" 
+                   alt="Яндекс Музыка" 
+                   class="social-icon" 
+                   width="24" 
+                   height="24" 
+                   loading="lazy">
+              Мы на Яндекс Музыке
+            </a>
+            <a href="https://vk.com/tavolga_folkgroup" target="_blank" rel="noopener noreferrer" class="social-link">
+              <img src="https://logo-teka.com/wp-content/uploads/2025/06/vk-logo.svg" 
+                   alt="ВКонтакте" 
+                   class="social-icon" 
+                   width="24" 
+                   height="24" 
+                   loading="lazy">
+              Мы в ВКонтакте
+            </a>
           </div>
         </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: ФОТО ГРУППЫ -->
         <div class="reveal reveal-delay-2">
           <div class="gothic-frame">
             <div class="gothic-frame-inner">
@@ -103,9 +123,12 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+
+      </div> <!-- /about-grid -->
+    </div> <!-- /container -->
   </section>
+
+  <!-- ОРНАМЕНТ -->
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol">
@@ -119,8 +142,7 @@
     <div class="ornament-line"></div>
   </div>
 
-<!-- ══════════ ПЕРЕХОДЫ ПО САЙТУ ══════════ -->
-
+  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
   <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
     <div class="container">
       <p class="section-label reveal">Навигация</p>
@@ -135,10 +157,8 @@
     </div>
   </section>
 
-   <!-- ══════════ FOOTER ══════════ -->
-
+  <!-- FOOTER -->
   <footer>
-    
     <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
       <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
