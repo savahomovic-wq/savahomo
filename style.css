@@ -765,3 +765,57 @@
   }
 }
 
+/* ============================================
+   НИЖНЯЯ НАВИГАЦИЯ – КНОПКИ С ЗАТЕМНЕНИЕМ
+   ============================================ */
+.page-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;            /* уменьшили расстояние между кнопками */
+  margin-top: 5rem;
+  flex-wrap: wrap;
+}
+
+.page-links a {
+  display: inline-block;
+  padding: 0.7rem 1.8rem;  /* внутренние отступы как у кнопок */
+  background: rgba(0, 0, 0, 0.45);  /* затемнённый фон */
+  border: 1px solid rgba(176, 138, 79, 0.2);
+  border-radius: 6px;      /* скруглённые углы */
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.73rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.page-links a:hover {
+  color: var(--accent-light);
+  background: rgba(176, 138, 79, 0.12);
+  border-color: rgba(176, 138, 79, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.page-links a.active {
+  color: var(--accent-light);
+  background: rgba(176, 138, 79, 0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(176, 138, 79, 0.1);
+  /* убираем подчёркивание, если оно было */
+  border-bottom: 1px solid var(--accent); /* можно оставить для акцента, но без отдельной линии */
+}
+
+/* На мобильных устройствах кнопки могут быть шире */
+@media (max-width: 600px) {
+  .page-links a {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.65rem;
+    flex: 0 0 calc(50% - 0.8rem); /* две колонки */
+    text-align: center;
+  }
+  .page-links {
+    gap: 0.6rem;
+  }
+}
