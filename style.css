@@ -139,19 +139,7 @@
       transition: color 0.3s, text-shadow 0.3s;
       position: relative;
     }
-    .nav-links-desktop a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 1px;
-      background: var(--accent-light);
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.3s ease;
-    }
-    .nav-links-desktop a:hover { color: var(--text-pure); }
-    .nav-links-desktop a:hover::after { transform: scaleX(1); }
-
+  
     .nav-links-mobile {
       display: none;
       position: fixed;
@@ -768,7 +756,6 @@
 .nav-links-mobile a:hover,
 .nav-links-mobile a.active {
   color: var(--text-pure);
-  border-bottom: 1px solid var(--accent);
 }
 
 /* Для больших экранов можно увеличить шрифт */
