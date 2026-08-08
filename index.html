@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#060408" />
+  <meta name="description" content="Таволга — фолк-проект, соединяющий электронную музыку и фольклорное наследие." />
+  <title>ТАВОЛГА — Фолк-проект</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+   <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-overlay"></div>
+  <div class="bg-pattern"></div>
+
+   <!-- РАМКА ИЗ ЛОЗЫ -->
+
+  <div class="rose-frame-container"></div>
+
+   <!-- NAV -->
+
+  <nav>
+    <a href="index.html" class="logo-link">
+      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
+    </a>
+    <ul class="nav-links-desktop">
+      <li><a href="about.html">О проекте</a></li>
+      <li><a href="music.html">Музыка</a></li>
+      <li><a href="concerts.html">Концерты</a></li>
+      <li><a href="band.html">Состав</a></li>
+      <li><a href="contact.html">Контакт</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <ul class="nav-links-mobile" id="navLinks">
+    <li><a href="about.html">О проекте</a></li>
+    <li><a href="music.html">Музыка</a></li>
+    <li><a href="concerts.html">Концерты</a></li>
+    <li><a href="band.html">Состав</a></li>
+    <li><a href="contact.html">Контакт</a></li>
+  </ul>
+
+<section id="hero">
+  <div class="hero-aura"></div>
+  <div class="hero-aura-2"></div>
+
+  <div class="hero-sprig-wrap" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.5">
+      <circle cx="100" cy="100" r="90"/>
+      <circle cx="100" cy="100" r="70"/>
+      <circle cx="100" cy="100" r="50"/>
+      <line x1="100" y1="10" x2="100" y2="190"/>
+      <line x1="10" y1="100" x2="190" y2="100"/>
+      <line x1="36" y1="36" x2="164" y2="164"/>
+      <line x1="164" y1="36" x2="36" y2="164"/>
+      <ellipse cx="100" cy="100" rx="8" ry="20"/>
+      <ellipse cx="100" cy="100" rx="8" ry="20" transform="rotate(45 100 100)"/>
+      <ellipse cx="100" cy="100" rx="8" ry="20" transform="rotate(90 100 100)"/>
+      <ellipse cx="100" cy="100" rx="8" ry="20" transform="rotate(135 100 100)"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-emblem" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="12" cy="12" r="5" />
+        <path d="M12 1 L12 4"/><path d="M12 20 L12 23"/>
+        <path d="M1 12 L4 12"/><path d="M20 12 L23 12"/>
+        <path d="M4.2 4.2 L6.3 6.3"/><path d="M17.7 17.7 L19.8 19.8"/>
+        <path d="M4.2 19.8 L6.3 17.7"/><path d="M17.7 6.3 L19.8 4.2"/>
+      </svg>
+    </div>
+    <p class="hero-eyebrow">Фолк-проект &nbsp;·&nbsp; Живая музыка</p>
+    <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png"
+         alt="Логотип группы «Таволга»"
+         class="hero-logo-big">
+    <p class="hero-sub">«Та́волга» — сочетание электронной музыки с фольклорным колоритом.</p>
+    <div class="hero-scroll">
+      <span>Листать вниз</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <span class="ornament-symbol">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2 L20 12 L12 22 L4 12 Z"/><path d="M12 7 L16 12 L12 17 L8 12 Z"/>
+      </svg>
+    </span>
+    <div class="ornament-line"></div>
+  </div>
+
+   <!-- ══════════ ПЕРЕХОДЫ ПО САЙТУ ══════════ -->
+
+  <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
+    <div class="container">
+      <p class="section-label reveal">Навигация</p>
+      <div class="mystic-title-wrap reveal reveal-delay-1" style="justify-content:center;">
+        <h2 class="section-title">Куда дальше</h2>
+      </div>
+      <div class="page-links reveal reveal-delay-2">
+        <a href="about.html" class="contact-link">О проекте</a>
+        <a href="music.html" class="contact-link">Музыка</a>
+        <a href="concerts.html" class="contact-link">Концерты</a>
+        <a href="band.html" class="contact-link">Состав</a>
+        <a href="contact.html" class="contact-link">Контакт</a>
+      </div>
+    </div>
+  </section>
+
+   <!-- ══════════ FOOTER ══════════ -->
+
+  <footer>
+  <footer>
+    
+    <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
+      <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
+        <path d="M32 12 L28 5 L36 8 Z"   fill="currentColor"/>
+        <path d="M80 16 L76 23 L84 20 Z"  fill="currentColor"/>
+        <path d="M140 11 L136 4 L144 7 Z" fill="currentColor"/>
+        <path d="M200 17 L196 24 L204 21 Z" fill="currentColor"/>
+        <path d="M248 12 L244 5 L252 8 Z" fill="currentColor"/>
+        <path d="M18 14 Q23 9, 28 14 T38 14"/>
+        <path d="M60 14 Q65 19, 70 14 T80 14"/>
+        <path d="M108 14 Q113 9, 118 14 T128 14"/>
+        <path d="M155 14 Q160 19, 165 14 T175 14"/>
+        <path d="M198 14 Q203 9, 208 14 T218 14"/>
+        <path d="M240 14 Q245 19, 250 14 T260 14"/>
+        <circle cx="5"   cy="14" r="2.5" fill="currentColor" opacity=".5"/>
+        <circle cx="275" cy="14" r="2.5" fill="currentColor" opacity=".5"/>
+      </svg>
+    </div>
+    <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
+    <div class="footer-copy">© Таволга, 2026. Все права защищены.</div>
+  </footer>
+
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#060408" />
+  <meta name="description" content="О фолк-проекте «Таволга»: сочетание электронной музыки с фольклорным колоритом." />
+  <title>О проекте — ТАВОЛГА</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+   <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-overlay"></div>
+  <div class="bg-pattern"></div>
+
+   <!-- РАМКА ИЗ ЛОЗЫ -->
+
+  <div class="rose-frame-container"></div>
+
+   <!-- NAV -->
+
+  <nav>
+    <a href="index.html" class="logo-link">
+      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
+    </a>
+    <ul class="nav-links-desktop">
+      <li><a href="about.html" class="active">О проекте</a></li>
+      <li><a href="music.html">Музыка</a></li>
+      <li><a href="concerts.html">Концерты</a></li>
+      <li><a href="band.html">Состав</a></li>
+      <li><a href="contact.html">Контакт</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <ul class="nav-links-mobile" id="navLinks">
+    <li><a href="about.html" class="active">О проекте</a></li>
+    <li><a href="music.html">Музыка</a></li>
+    <li><a href="concerts.html">Концерты</a></li>
+    <li><a href="band.html">Состав</a></li>
+    <li><a href="contact.html">Контакт</a></li>
+  </ul>
+
+  <section id="about" class="section-wrap">
+
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <p class="section-label reveal">О проекте</p>
+          <div class="mystic-title-wrap reveal reveal-delay-1">
+            <span class="title-glyph" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+                <circle cx="14" cy="14" r="12"/>
+                <circle cx="14" cy="14" r="7"/>
+                <line x1="14" y1="2"  x2="14" y2="26"/>
+                <line x1="2"  y1="14" x2="26" y2="14"/>
+                <line x1="5"  y1="5"  x2="23" y2="23"/>
+                <line x1="23" y1="5"  x2="5"  y2="23"/>
+              </svg>
+            </span>
+            <h2 class="section-title">Корни глубокого звука</h2>
+            <span class="title-glyph right" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+                <circle cx="14" cy="14" r="12"/>
+                <circle cx="14" cy="14" r="7"/>
+                <line x1="14" y1="2"  x2="14" y2="26"/>
+                <line x1="2"  y1="14" x2="26" y2="14"/>
+                <line x1="5"  y1="5"  x2="23" y2="23"/>
+                <line x1="23" y1="5"  x2="5"  y2="23"/>
+              </svg>
+            </span>
+          </div>
+          <div class="mystic-sub reveal reveal-delay-2" aria-hidden="true">
+            <div class="mystic-sub-line"></div>
+            <span>древо · голос · земля</span>
+            <div class="mystic-sub-line"></div>
+          </div>
+          <p class="body-text reveal reveal-delay-2">
+            В творчестве фолк-проекта переплетаются наследие старины и энергия клубной культуры — так рождается синтез исконного и трендового. Под песни «Та́волги» можно отрываться на городском рейве и водить хороводы в поле.
+          </p>
+          <p class="body-text reveal reveal-delay-3" style="margin-top:1.5rem;">
+            «Та́волга» ещё только в начале своего авторского пути — работает совместно с автором электро-фолк проекта «Tehnohisha» Сергеем Давыдовым. Вместе мы соединяем электронную музыку и фольклор воедино.
+          </p>
+          <div class="about-links reveal">
+            <a href="https://music.yandex.ru/artist/25782035" target="_blank" rel="noopener noreferrer">Мы на Яндекс Музыке</a>
+            <a href="https://vk.com/tavolga_folkgroup" target="_blank" rel="noopener noreferrer">Мы в ВКонтакте</a>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="gothic-frame">
+            <div class="gothic-frame-inner">
+              <img src="images/фото таволги.jpg" alt="Фотография группы Таволга">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <span class="ornament-symbol">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 2 L12 22"/>
+        <path d="M12 6 Q9 5 7.5 2.5"/><path d="M12 6 Q15 5 16.5 2.5"/>
+        <path d="M12 11 Q9 10 7 7.5"/><path d="M12 11 Q15 10 17 7.5"/>
+        <path d="M12 16 Q9.5 15 8 13"/><path d="M12 16 Q14.5 15 16 13"/>
+      </svg>
+    </span>
+    <div class="ornament-line"></div>
+  </div>
+
+   <!-- ══════════ FOOTER ══════════ -->
+
+  <footer>
+  <footer>
+    
+    <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
+      <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
+        <path d="M32 12 L28 5 L36 8 Z"   fill="currentColor"/>
+        <path d="M80 16 L76 23 L84 20 Z"  fill="currentColor"/>
+        <path d="M140 11 L136 4 L144 7 Z" fill="currentColor"/>
+        <path d="M200 17 L196 24 L204 21 Z" fill="currentColor"/>
+        <path d="M248 12 L244 5 L252 8 Z" fill="currentColor"/>
+        <path d="M18 14 Q23 9, 28 14 T38 14"/>
+        <path d="M60 14 Q65 19, 70 14 T80 14"/>
+        <path d="M108 14 Q113 9, 118 14 T128 14"/>
+        <path d="M155 14 Q160 19, 165 14 T175 14"/>
+        <path d="M198 14 Q203 9, 208 14 T218 14"/>
+        <path d="M240 14 Q245 19, 250 14 T260 14"/>
+        <circle cx="5"   cy="14" r="2.5" fill="currentColor" opacity=".5"/>
+        <circle cx="275" cy="14" r="2.5" fill="currentColor" opacity=".5"/>
+      </svg>
+    </div>
+    <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
+    <div class="footer-copy">© Таволга, 2026. Все права защищены.</div>
+  </footer>
+
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
