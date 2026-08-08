@@ -712,4 +712,7 @@
   text-transform: uppercase;
   transition: color 0.3s;
 }
+.page-links a.active {
+  color: var(--accent-light);
+}
 .page-links a:hover { color: var(--accent-light); }
