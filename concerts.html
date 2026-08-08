@@ -13,18 +13,16 @@
 </head>
 <body>
 
-   <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
-
+  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
   <canvas id="bg-canvas"></canvas>
+  <div class="logo-watermark"></div>
   <div class="bg-overlay"></div>
   <div class="bg-pattern"></div>
 
-   <!-- РАМКА ИЗ ЛОЗЫ -->
-
+  <!-- РАМКА ИЗ ЛОЗЫ -->
   <div class="rose-frame-container"></div>
 
-   <!-- NAV -->
-
+  <!-- NAV -->
   <nav>
     <a href="index.html" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
@@ -52,7 +50,6 @@
   </ul>
 
   <section id="concerts" class="section-wrap">
-
     <div class="container">
       <p class="section-label reveal">Ближайшие даты</p>
       <div class="mystic-title-wrap reveal reveal-delay-1">
@@ -77,8 +74,11 @@
         <span>место · время · встреча</span>
         <div class="mystic-sub-line"></div>
       </div>
-      <div class="concert-list">
-        <div class="concert-item reveal">
+
+      <!-- БЛИЖАЙШИЕ КОНЦЕРТЫ -->
+      <div class="concert-list" id="upcoming-list">
+        <!-- Концерт 1: 8 Июля 2026 (уже прошёл) – будет перемещён в архив -->
+        <div class="concert-item reveal" data-date="2026-07-08">
           <div class="concert-date">
             <div class="concert-day">8</div>
             <div class="concert-month">Июля</div>
@@ -91,9 +91,11 @@
             <a href="https://vk.com/wall-95826361_27993" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
         </div>
-        <div class="concert-item reveal">
+
+        <!-- Концерт 2: 8 Августа 2026 (ещё предстоит) -->
+        <div class="concert-item reveal" data-date="2026-08-09">
           <div class="concert-date">
-            <div class="concert-day">8</div>
+            <div class="concert-day">9</div>
             <div class="concert-month">Августа</div>
           </div>
           <div class="concert-info">
@@ -105,8 +107,34 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+
+      <!-- АРХИВ ВЫСТУПЛЕНИЙ -->
+<div id="archive-section" style="margin-top: 4rem; display: none;">
+ <div class="mystic-title-wrap reveal reveal-delay-1">
+    <span class="title-glyph" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
+        <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
+        <circle cx="13" cy="13" r="3"/>
+      </svg>
+    </span>
+    <h2 class="section-title">Архив выступлений</h2>
+    <span class="title-glyph right" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
+        <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
+        <circle cx="13" cy="13" r="3"/>
+      </svg>
+    </span>
+  </div>
+  <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
+    <div class="mystic-sub-line"></div>
+    <span>архив · хроники · турне</span>
+    <div class="mystic-sub-line"></div>
+  </div>
+  <div class="concert-list" id="archive-list"></div>
+</div>
+
   <div class="ornament">
     <div class="ornament-line"></div>
     <span class="ornament-symbol">
@@ -123,8 +151,7 @@
     <div class="ornament-line"></div>
   </div>
 
-  <!-- ══════════ ПЕРЕХОДЫ ПО САЙТУ ══════════ -->
-
+  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
   <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
     <div class="container">
       <p class="section-label reveal">Навигация</p>
@@ -139,10 +166,8 @@
     </div>
   </section>
 
-   <!-- ══════════ FOOTER ══════════ -->
-
+  <!-- FOOTER -->
   <footer>
-    
     <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
       <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
@@ -166,5 +191,46 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Дополнительный скрипт для архивации -->
+  <script>
+    (function() {
+      // Получаем текущую дату (без времени)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Находим все элементы концертов с data-date
+      const concertItems = document.querySelectorAll('#upcoming-list .concert-item');
+      const archiveList = document.getElementById('archive-list');
+      const archiveSection = document.getElementById('archive-section');
+
+      let hasArchived = false;
+
+      concertItems.forEach(item => {
+        const dateAttr = item.getAttribute('data-date');
+        if (!dateAttr) return;
+
+        const parts = dateAttr.split('-');
+        // парсим дату в UTC, чтобы избежать смещения часового пояса
+        const concertDate = new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])));
+        // сравниваем только даты (без времени)
+        if (concertDate < today) {
+          // концерт прошёл – перемещаем в архив
+          archiveList.appendChild(item);
+          hasArchived = true;
+        }
+      });
+
+      // Если есть архивированные концерты – показываем блок архива
+      if (hasArchived) {
+        archiveSection.style.display = 'block';
+        // Также можно скрыть заголовок "Ближайшие даты", если концертов не осталось
+        const upcomingTitle = document.querySelector('#concerts .section-label');
+        const upcomingList = document.getElementById('upcoming-list');
+        if (upcomingList.children.length === 0) {
+          upcomingTitle.textContent = 'Нет ближайших выступлений';
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
