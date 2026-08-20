@@ -151,3 +151,63 @@
     });
   });
 
+// ============================================
+// КАРУСЕЛЬ (горизонтальный слайдер)
+// ============================================
+function initCarousel() {
+  const carousels = document.querySelectorAll('.carousel');
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = track.querySelectorAll('.slide');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    const dots = carousel.querySelectorAll('.dot');
+    let currentIndex = 0;
+    let interval;
+    const slideCount = slides.length;
+
+    function goTo(index) {
+      if (index < 0) index = slideCount - 1;
+      if (index >= slideCount) index = 0;
+      currentIndex = index;
+      const offset = -index * 100;
+      track.style.transform = `translateX(${offset}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    function next() {
+      goTo(currentIndex + 1);
+    }
+
+    function prev() {
+      goTo(currentIndex - 1);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { clearInterval(interval); next(); startAuto(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { clearInterval(interval); prev(); startAuto(); });
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        clearInterval(interval);
+        goTo(idx);
+        startAuto();
+      });
+    });
+
+    function startAuto() {
+      clearInterval(interval);
+      interval = setInterval(next, 5000);
+    }
+
+    carousel.addEventListener('mouseenter', () => clearInterval(interval));
+    carousel.addEventListener('mouseleave', startAuto);
+
+    goTo(0);
+    startAuto();
+  });
+}
+
+// Инициализация после загрузки DOM
+document.addEventListener('DOMContentLoaded', initCarousel);
