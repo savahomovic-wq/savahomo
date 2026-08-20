@@ -115,15 +115,27 @@
           </div>
         </div>
 
-        <!-- ПРАВАЯ КОЛОНКА: ФОТО ГРУППЫ -->
-        <div class="reveal reveal-delay-2">
-          <div class="gothic-frame">
-            <div class="gothic-frame-inner">
-              <img src="images/фото таволги.jpg" alt="Фотография группы Таволга">
-            </div>
-          </div>
+        <!-- ПРАВАЯ КОЛОНКА: КАРУСЕЛЬ -->
+<div class="reveal reveal-delay-2">
+  <div class="gothic-frame">
+    <div class="gothic-frame-inner">
+      <div class="carousel">
+        <div class="carousel-track">
+          <img src="images/фото таволги.jpg" alt="Фото группы 1" class="slide">
+          <img src="images/фото2.jpg" alt="Фото группы 2" class="slide">
+          <img src="images/фото3.jpg" alt="Фото группы 3" class="slide">
         </div>
-
+        <button class="carousel-btn prev" aria-label="Предыдущее фото">‹</button>
+        <button class="carousel-btn next" aria-label="Следующее фото">›</button>
+        <div class="carousel-indicators">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
       </div> <!-- /about-grid -->
     </div> <!-- /container -->
   </section>
