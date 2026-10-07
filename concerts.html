@@ -11,15 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Дополнительные стили ТОЛЬКО для сетки с афишей и защиты от переполнения -->
   <style>
-    /* Защита от горизонтального переполнения — чтобы рамка из роз не смещалась */
-    html, body {
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-
-    /* Сетка концерта с афишей: 2 колонки, minmax(0,...) не даёт растягивать страницу */
+    /* =========================================================
+       1. Сетка концерта с афишей (2 колонки) + мобильный адаптив
+       ========================================================= */
     .concert-item-with-poster {
       display: grid !important;
       grid-template-columns: minmax(0, 350px) minmax(0, 1fr) !important;
@@ -53,7 +48,6 @@
       border-color: rgba(176, 138, 79, 0.9);
     }
 
-    /* Текстовый блок справа */
     .concert-details {
       display: flex;
       flex-direction: column;
@@ -64,7 +58,6 @@
       word-wrap: break-word;
     }
 
-    /* Дата над названием */
     .concert-date-horizontal {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.4rem;
@@ -75,7 +68,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* Название концерта */
     .concert-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2rem;
@@ -88,7 +80,6 @@
       overflow-wrap: break-word;
     }
 
-    /* Описание */
     .concert-description {
       font-size: 1.05rem;
       color: var(--text-muted);
@@ -97,7 +88,6 @@
       overflow-wrap: break-word;
     }
 
-    /* Кнопки под описанием */
     .concert-details .concert-actions {
       display: flex;
       gap: 1rem;
@@ -112,7 +102,6 @@
       white-space: nowrap !important;
     }
 
-    /* Адаптив для планшетов и телефонов */
     @media (max-width: 900px) {
       .concert-item-with-poster {
         grid-template-columns: 1fr !important;
@@ -137,37 +126,75 @@
       .concert-description { font-size: 1rem; }
     }
 
-    /* Только защита от переполнения — стили кнопок не трогаем */
-    section,
-    .container,
-    .concert-list,
-    .concert-item,
-    .concert-info,
-    .concert-details,
-    .concert-actions {
-      max-width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+    /* =========================================================
+       2. Центрирование секции «Концерты» на десктопе
+       ========================================================= */
+    @media (min-width: 901px) {
+      #concerts .section-label { text-align: center; display: block; }
+      #concerts .mystic-title-wrap { justify-content: center; }
+      #concerts .mystic-sub { justify-content: center; }
+      #concerts .concert-list { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+      #archive-section .mystic-title-wrap { justify-content: center; }
+      #archive-section .mystic-sub { justify-content: center; }
+      #archive-section .concert-list { max-width: 900px; margin-left: auto; margin-right: auto; }
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
+    /* =========================================================
+       3. Уменьшаем отступ под календарём и над орнаментом
+       ========================================================= */
+    #concerts.section-wrap { padding-bottom: 1rem !important; }
+    #concerts + .ornament { padding-top: 1rem !important; }
+
+    @media (max-width: 900px) {
+      #concerts.section-wrap { padding-bottom: 1rem !important; }
+      #concerts + .ornament { padding-top: 1rem !important; }
+    }
+
+    /* =========================================================
+       4. ВОЗВРАЩАЕМ КНОПКИ НИЖНЕЙ НАВИГАЦИИ К ВИДУ КАК НА ДРУГИХ СТРАНИЦАХ
+       (отменяем лишние правила, которые могли остаться в style.css)
+       ========================================================= */
+    .page-links a {
+      display: inline-block !important;
+      padding: 0.5rem 0.2rem !important;
+      font-size: 0.65rem !important;
+      letter-spacing: 0.15em !important;
+      border-radius: 6px !important;
+      white-space: normal !important;
+      flex: 0 0 calc(33.33% - 0.6rem) !important;
+      max-width: calc(33.33% - 0.6rem) !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      text-align: center !important;
+    }
+
+    @media (min-width: 768px) {
+      .page-links a {
+        padding: 0.7rem 1rem !important;
+        font-size: 0.8rem !important;
+        letter-spacing: 0.18em !important;
+        border-radius: 7px !important;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .page-links a {
+        padding: 0.8rem 1.2rem !important;
+        font-size: 0.85rem !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
   <canvas id="bg-canvas"></canvas>
   <div class="logo-watermark"></div>
   <div class="bg-overlay"></div>
   <div class="bg-pattern"></div>
 
-  <!-- РАМКА ИЗ ЛОЗЫ -->
   <div class="rose-frame-container"></div>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
@@ -220,10 +247,8 @@
         <div class="mystic-sub-line"></div>
       </div>
 
-      <!-- БЛИЖАЙШИЕ КОНЦЕРТЫ -->
       <div class="concert-list" id="upcoming-list">
 
-        <!-- Концерт 1: 8 Июля 2026 -->
         <div class="concert-item reveal" data-date="2026-07-08">
           <div class="concert-date">
             <div class="concert-day">8</div>
@@ -238,7 +263,6 @@
           </div>
         </div>
 
-        <!-- Концерт 2: 9 Августа 2026 -->
         <div class="concert-item reveal" data-date="2026-08-09">
           <div class="concert-date">
             <div class="concert-day">9</div>
@@ -253,17 +277,13 @@
           </div>
         </div>
 
-        <!-- Концерт 3: 31 Октября 2026 (С АФИШЕЙ) -->
         <div class="concert-item concert-item-with-poster reveal" data-date="2026-10-31">
-
-          <!-- Афиша слева -->
           <div class="concert-poster">
             <a href="images/Афиша.jpg" target="_blank" rel="noopener noreferrer">
               <img src="images/Афиша.jpg" alt="Афиша концерта «Быль да Небыль»">
             </a>
           </div>
 
-          <!-- Текстовый блок справа -->
           <div class="concert-details">
             <div class="concert-date-horizontal">31 октября</div>
             <h3 class="concert-title">Концерт «Быль да Небыль»</h3>
@@ -271,14 +291,13 @@
               Фолк-проект «Таволга» · ДК «Прикамье» · 16:00 · 500 ₽
             </p>
             <div class="concert-actions">
-              <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">СОЛИК</a>
-              <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКОНТ</a>
+              <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
+              <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- АРХИВ ВЫСТУПЛЕНИЙ -->
       <div id="archive-section" style="margin-top: 4rem; display: none;">
         <div class="mystic-title-wrap reveal reveal-delay-1">
           <span class="title-glyph" aria-hidden="true">
@@ -305,7 +324,7 @@
         <div class="concert-list" id="archive-list"></div>
       </div>
 
-    </div> <!-- closes container -->
+    </div>
 
   <div class="ornament">
     <div class="ornament-line"></div>
@@ -323,8 +342,7 @@
     <div class="ornament-line"></div>
   </div>
 
-  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
-  <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
+   <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
     <div class="container">
       <p class="section-label reveal">Навигация</p>
       <div class="page-links reveal reveal-delay-2">
@@ -338,7 +356,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
       <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
@@ -364,7 +381,6 @@
 
   <script src="script.js"></script>
 
-  <!-- Дополнительный скрипт для архивации -->
   <script>
     (function() {
       const today = new Date();
