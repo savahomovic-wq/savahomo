@@ -1,5 +1,4 @@
-  
-  (function() {
+ (function() {
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let W, H, raf;
@@ -211,36 +210,3 @@ function initCarousel() {
 
 // Инициализация после загрузки DOM
 document.addEventListener('DOMContentLoaded', initCarousel);
-
-// ============================================
-// НИЖНЯЯ НАВИГАЦИЯ — ДВЕ КНОПКИ С НАЗВАНИЯМИ
-// ============================================
-(function initPageNav() {
-  const nav = document.getElementById('pageNav');
-  if (!nav) return;
-
-  const pages = [
-    { file: 'index.html',    title: 'Главная' },
-    { file: 'about.html',    title: 'О проекте' },
-    { file: 'music.html',    title: 'Музыка' },
-    { file: 'concerts.html', title: 'Концерты' },
-    { file: 'band.html',     title: 'Состав' },
-    { file: 'contact.html',  title: 'Контакт' }
-  ];
-
-  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  let idx = pages.findIndex(p => p.file === current);
-  if (idx === -1) idx = 0;
-
-  const prev = pages[(idx - 1 + pages.length) % pages.length];
-  const next = pages[(idx + 1) % pages.length];
-
-  nav.innerHTML = `
-    <a href="${prev.file}" aria-label="${prev.title}">
-      <span class="nav-title">${prev.title}</span>
-    </a>
-    <a href="${next.file}" aria-label="${next.title}">
-      <span class="nav-title">${next.title}</span>
-    </a>
-  `;
-})();
