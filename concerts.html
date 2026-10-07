@@ -13,13 +13,16 @@
 </head>
 <body>
 
+  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
   <canvas id="bg-canvas"></canvas>
   <div class="logo-watermark"></div>
   <div class="bg-overlay"></div>
   <div class="bg-pattern"></div>
 
+  <!-- РАМКА ИЗ ЛОЗЫ -->
   <div class="rose-frame-container"></div>
 
+  <!-- NAV -->
   <nav>
     <a href="index.html" class="logo-link">
       <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
@@ -72,8 +75,9 @@
         <div class="mystic-sub-line"></div>
       </div>
 
+      <!-- БЛИЖАЙШИЕ КОНЦЕРТЫ -->
       <div class="concert-list" id="upcoming-list">
-
+        <!-- Концерт 1: 8 Июля 2026 (уже прошёл) – будет перемещён в архив -->
         <div class="concert-item reveal" data-date="2026-07-08">
           <div class="concert-date">
             <div class="concert-day">8</div>
@@ -88,7 +92,7 @@
           </div>
         </div>
 
-        <div class="concert-item reveal" data-date="2026-08-09">
+          <div class="concert-item reveal" data-date="2026-08-09">
           <div class="concert-date">
             <div class="concert-day">9</div>
             <div class="concert-month">Августа</div>
@@ -102,54 +106,47 @@
           </div>
         </div>
 
-        <div class="concert-item concert-item-with-poster reveal" data-date="2026-10-31">
-          <div class="concert-poster">
-            <a href="images/Афиша.jpg" target="_blank" rel="noopener noreferrer">
-              <img src="images/Афиша.jpg" alt="Афиша концерта «Быль да Небыль»">
-            </a>
+        <!-- Концерт 3: 31 Октября 2026 -->
+        <div class="concert-item reveal" data-date="2026-10-31">
+          <div class="concert-date">
+            <div class="concert-day">31</div>
+            <div class="concert-month">Октября</div>
           </div>
-
-          <div class="concert-details">
-            <div class="concert-date-horizontal">31 октября</div>
-            <h3 class="concert-title">Концерт «Быль да Небыль»</h3>
-            <p class="concert-description">
-              Фолк-проект «Таволга» · ДК «Прикамье» · 16:00 · 500 ₽
-            </p>
-            <div class="concert-actions">
-              <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
-              <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
-            </div>
+          <div class="concert-info">
+            <h3>БЫЛЬ да НЕБЫЛЬ</h3>
+          </div>
+          <div class="concert-actions" style="display:flex;gap:0.75rem;">
+            <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Билеты</a>
+            <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
         </div>
       </div>
-
-      <div id="archive-section" style="margin-top: 4rem; display: none;">
-        <div class="mystic-title-wrap reveal reveal-delay-1">
-          <span class="title-glyph" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
-              <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
-              <circle cx="13" cy="13" r="3"/>
-            </svg>
-          </span>
-          <h2 class="section-title">Архив выступлений</h2>
-          <span class="title-glyph right" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
-              <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
-              <circle cx="13" cy="13" r="3"/>
-            </svg>
-          </span>
-        </div>
-        <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
-          <div class="mystic-sub-line"></div>
-          <span>архив · хроники · турне</span>
-          <div class="mystic-sub-line"></div>
-        </div>
-        <div class="concert-list" id="archive-list"></div>
-      </div>
-
-    </div>
+      <!-- АРХИВ ВЫСТУПЛЕНИЙ -->
+<div id="archive-section" style="margin-top: 4rem; display: none;">
+ <div class="mystic-title-wrap reveal reveal-delay-1">
+    <span class="title-glyph" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
+        <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
+        <circle cx="13" cy="13" r="3"/>
+      </svg>
+    </span>
+    <h2 class="section-title">Архив выступлений</h2>
+    <span class="title-glyph right" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
+        <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
+        <circle cx="13" cy="13" r="3"/>
+      </svg>
+    </span>
+  </div>
+  <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
+    <div class="mystic-sub-line"></div>
+    <span>архив · хроники · турне</span>
+    <div class="mystic-sub-line"></div>
+  </div>
+  <div class="concert-list" id="archive-list"></div>
+</div>
 
   <div class="ornament">
     <div class="ornament-line"></div>
@@ -167,8 +164,22 @@
     <div class="ornament-line"></div>
   </div>
 
- <div class="page-links reveal reveal-delay-2" id="pageNav"></div>
+  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+  <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
+    <div class="container">
+      <p class="section-label reveal">Навигация</p>
+      <div class="page-links reveal reveal-delay-2">
+        <a href="index.html" class="contact-link">Главная</a>
+        <a href="about.html" class="contact-link">О проекте</a>
+        <a href="music.html" class="contact-link">Музыка</a>
+        <a href="concerts.html" class="contact-link active">Концерты</a>
+        <a href="band.html" class="contact-link">Состав</a>
+        <a href="contact.html" class="contact-link">Контакт</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer>
     <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
       <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
@@ -193,12 +204,14 @@
   </footer>
 
   <script src="script.js"></script>
-
+  <!-- Дополнительный скрипт для архивации -->
   <script>
     (function() {
+      // Получаем текущую дату (без времени)
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
+      // Находим все элементы концертов с data-date
       const concertItems = document.querySelectorAll('#upcoming-list .concert-item');
       const archiveList = document.getElementById('archive-list');
       const archiveSection = document.getElementById('archive-section');
@@ -210,15 +223,20 @@
         if (!dateAttr) return;
 
         const parts = dateAttr.split('-');
+        // парсим дату в UTC, чтобы избежать смещения часового пояса
         const concertDate = new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])));
+        // сравниваем только даты (без времени)
         if (concertDate < today) {
+          // концерт прошёл – перемещаем в архив
           archiveList.appendChild(item);
           hasArchived = true;
         }
       });
 
+      // Если есть архивированные концерты – показываем блок архива
       if (hasArchived) {
         archiveSection.style.display = 'block';
+        // Также можно скрыть заголовок "Ближайшие даты", если концертов не осталось
         const upcomingTitle = document.querySelector('#concerts .section-label');
         const upcomingList = document.getElementById('upcoming-list');
         if (upcomingList.children.length === 0) {
