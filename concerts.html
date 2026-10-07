@@ -13,7 +13,7 @@
 
   <style>
     /* =========================================================
-       0. Жёсткий запрет горизонтального переполнения
+       0. Запрет горизонтального переполнения, чтобы рамка не съезжала
        ========================================================= */
     html, body {
       overflow-x: hidden !important;
@@ -22,7 +22,7 @@
     }
 
     /* =========================================================
-       1. Сетка концерта с афишей
+       1. Сетка концерта с афишей (2 колонки) + мобильный адаптив
        ========================================================= */
     .concert-item-with-poster {
       display: grid !important;
@@ -158,60 +158,6 @@
     @media (max-width: 900px) {
       #concerts.section-wrap { padding-bottom: 1rem !important; }
       #concerts + .ornament { padding-top: 1rem !important; }
-    }
-
-    /* =========================================================
-       4. НИЖНЯЯ НАВИГАЦИЯ — ВЕРТИКАЛЬНЫЙ СПИСОК
-       Перебиваем любые старые стили из style.css
-       ========================================================= */
-    .page-links {
-      display: flex !important;
-      flex-direction: column !important;
-      flex-wrap: nowrap !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 0.75rem !important;
-      margin: 3rem auto 0 !important;
-      padding: 0 1rem !important;
-      max-width: 320px !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-
-    .page-links a {
-      display: block !important;
-      width: 100% !important;
-      max-width: 280px !important;
-      min-width: 0 !important;
-      flex: none !important;
-      padding: 0.75rem 1.5rem !important;
-      background: rgba(0, 0, 0, 0.45) !important;
-      border: 1px solid rgba(176, 138, 79, 0.2) !important;
-      border-radius: 6px !important;
-      text-align: center !important;
-      color: var(--text-muted) !important;
-      text-decoration: none !important;
-      font-size: 0.75rem !important;
-      letter-spacing: 0.25em !important;
-      text-transform: uppercase !important;
-      white-space: nowrap !important;
-      transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
-      box-sizing: border-box !important;
-    }
-
-    .page-links a:hover {
-      color: var(--accent-light) !important;
-      background: rgba(176, 138, 79, 0.12) !important;
-      border-color: rgba(176, 138, 79, 0.5) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-
-    .page-links a.active {
-      color: var(--accent-light) !important;
-      background: rgba(176, 138, 79, 0.18) !important;
-      border-color: var(--accent) !important;
-      box-shadow: 0 0 20px rgba(176, 138, 79, 0.1) !important;
     }
   </style>
 </head>
