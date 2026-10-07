@@ -10,96 +10,149 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  
-  <!-- Дополнительные стили для нового макета концерта с афишей -->
+
+  <!-- Дополнительные стили ТОЛЬКО для сетки с афишей и защиты от переполнения -->
   <style>
-    /* Специальный макет для концерта с афишей: 2 колонки (афиша и текст) */
-    .concert-item-with-poster {
-      display: grid !important;
-      grid-template-columns: 240px 1fr !important; /* Афиша 240px, остальное текст */
-      gap: 2rem !important;
-      align-items: start !important; /* Выравнивание по верхнему краю */
-    }
-    
-    .concert-item-with-poster .concert-poster {
-      width: 100%;
-    }
-    
-    .concert-item-with-poster .concert-poster img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      border: 2px solid rgba(176, 138, 79, 0.3);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-      transition: transform 0.3s, border-color 0.3s;
-      cursor: pointer;
-    }
-    
-    .concert-item-with-poster .concert-poster img:hover {
-      transform: scale(1.02);
-      border-color: rgba(176, 138, 79, 0.8);
+    /* Защита от горизонтального переполнения — чтобы рамка из роз не смещалась */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
-    /* Блок с текстом справа */
+    /* Сетка концерта с афишей: 2 колонки, minmax(0,...) не даёт растягивать страницу */
+    .concert-item-with-poster {
+      display: grid !important;
+      grid-template-columns: minmax(0, 350px) minmax(0, 1fr) !important;
+      gap: 3rem !important;
+      align-items: start !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .concert-item-with-poster .concert-poster {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .concert-item-with-poster .concert-poster img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 2px solid rgba(176, 138, 79, 0.4);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+      transition: transform 0.3s, border-color 0.3s;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .concert-item-with-poster .concert-poster img:hover {
+      transform: scale(1.02);
+      border-color: rgba(176, 138, 79, 0.9);
+    }
+
+    /* Текстовый блок справа */
     .concert-details {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.5rem;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     /* Дата над названием */
     .concert-date-horizontal {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
+      font-size: 2.4rem;
       font-weight: 300;
       color: var(--accent);
-      line-height: 1.2;
-      margin-bottom: 0.3rem;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
     }
 
     /* Название концерта */
     .concert-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
+      font-size: 2rem;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--text-pure);
       margin: 0;
+      line-height: 1.3;
+      overflow-wrap: break-word;
     }
 
     /* Описание */
     .concert-description {
-      font-size: 0.85rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1.2rem; /* Отступ перед кнопками */
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+      overflow-wrap: break-word;
     }
 
     /* Кнопки под описанием */
     .concert-details .concert-actions {
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 100%;
     }
 
-    /* Адаптив для планшетов и телефонов: текст центрируется под афишей */
+    .concert-details .btn-outline {
+      padding: 0.7rem 2rem !important;
+      font-size: 0.8rem !important;
+      letter-spacing: 0.25em !important;
+      white-space: nowrap !important;
+    }
+
+    /* Адаптив для планшетов и телефонов */
     @media (max-width: 900px) {
       .concert-item-with-poster {
         grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
+        gap: 2rem !important;
         justify-items: center;
         text-align: center;
       }
       .concert-item-with-poster .concert-poster {
-        max-width: 240px;
+        max-width: 320px !important;
+        width: 100% !important;
         margin: 0 auto;
       }
       .concert-details {
         align-items: center;
+        width: 100% !important;
       }
       .concert-details .concert-actions {
         justify-content: center;
       }
+      .concert-date-horizontal { font-size: 2rem; }
+      .concert-title { font-size: 1.6rem; }
+      .concert-description { font-size: 1rem; }
+    }
+
+    /* Только защита от переполнения — стили кнопок не трогаем */
+    section,
+    .container,
+    .concert-list,
+    .concert-item,
+    .concert-info,
+    .concert-details,
+    .concert-actions {
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -169,6 +222,7 @@
 
       <!-- БЛИЖАЙШИЕ КОНЦЕРТЫ -->
       <div class="concert-list" id="upcoming-list">
+
         <!-- Концерт 1: 8 Июля 2026 -->
         <div class="concert-item reveal" data-date="2026-07-08">
           <div class="concert-date">
@@ -199,9 +253,9 @@
           </div>
         </div>
 
-        <!-- Концерт 3: 31 Октября 2026 (НОВЫЙ МАКЕТ) -->
+        <!-- Концерт 3: 31 Октября 2026 (С АФИШЕЙ) -->
         <div class="concert-item concert-item-with-poster reveal" data-date="2026-10-31">
-          
+
           <!-- Афиша слева -->
           <div class="concert-poster">
             <a href="images/Афиша.jpg" target="_blank" rel="noopener noreferrer">
@@ -217,8 +271,8 @@
               Фолк-проект «Таволга» · ДК «Прикамье» · 16:00 · 500 ₽
             </p>
             <div class="concert-actions">
-              <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
-              <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+              <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">СОЛИК</a>
+              <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКОНТ</a>
             </div>
           </div>
         </div>
@@ -309,6 +363,7 @@
   </footer>
 
   <script src="script.js"></script>
+
   <!-- Дополнительный скрипт для архивации -->
   <script>
     (function() {
