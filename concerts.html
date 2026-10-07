@@ -10,6 +10,98 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Дополнительные стили для нового макета концерта с афишей -->
+  <style>
+    /* Специальный макет для концерта с афишей: 2 колонки (афиша и текст) */
+    .concert-item-with-poster {
+      display: grid !important;
+      grid-template-columns: 240px 1fr !important; /* Афиша 240px, остальное текст */
+      gap: 2rem !important;
+      align-items: start !important; /* Выравнивание по верхнему краю */
+    }
+    
+    .concert-item-with-poster .concert-poster {
+      width: 100%;
+    }
+    
+    .concert-item-with-poster .concert-poster img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 2px solid rgba(176, 138, 79, 0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s, border-color 0.3s;
+      cursor: pointer;
+    }
+    
+    .concert-item-with-poster .concert-poster img:hover {
+      transform: scale(1.02);
+      border-color: rgba(176, 138, 79, 0.8);
+    }
+
+    /* Блок с текстом справа */
+    .concert-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    /* Дата над названием */
+    .concert-date-horizontal {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Название концерта */
+    .concert-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-pure);
+      margin: 0;
+    }
+
+    /* Описание */
+    .concert-description {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.2rem; /* Отступ перед кнопками */
+    }
+
+    /* Кнопки под описанием */
+    .concert-details .concert-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    /* Адаптив для планшетов и телефонов: текст центрируется под афишей */
+    @media (max-width: 900px) {
+      .concert-item-with-poster {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        justify-items: center;
+        text-align: center;
+      }
+      .concert-item-with-poster .concert-poster {
+        max-width: 240px;
+        margin: 0 auto;
+      }
+      .concert-details {
+        align-items: center;
+      }
+      .concert-details .concert-actions {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -92,7 +184,7 @@
           </div>
         </div>
 
-        <!-- Концерт 2: 8 Августа 2026 -->
+        <!-- Концерт 2: 9 Августа 2026 -->
         <div class="concert-item reveal" data-date="2026-08-09">
           <div class="concert-date">
             <div class="concert-day">9</div>
@@ -107,18 +199,27 @@
           </div>
         </div>
 
-        <!-- Концерт 3: 31 Октября 2026 -->
-        <div class="concert-item reveal" data-date="2026-10-31">
-          <div class="concert-date">
-            <div class="concert-day">31</div>
-            <div class="concert-month">Октября</div>
+        <!-- Концерт 3: 31 Октября 2026 (НОВЫЙ МАКЕТ) -->
+        <div class="concert-item concert-item-with-poster reveal" data-date="2026-10-31">
+          
+          <!-- Афиша слева -->
+          <div class="concert-poster">
+            <a href="images/Афиша.jpg" target="_blank" rel="noopener noreferrer">
+              <img src="images/Афиша.jpg" alt="Афиша концерта «Быль да Небыль»">
+            </a>
           </div>
-          <div class="concert-info">
-            <h3>Концерт «Быль да Небыль»</h3>
-          </div>
-          <div class="concert-actions" style="display:flex;gap:0.75rem;">
-            <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
-            <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+
+          <!-- Текстовый блок справа -->
+          <div class="concert-details">
+            <div class="concert-date-horizontal">31 октября</div>
+            <h3 class="concert-title">Концерт «Быль да Небыль»</h3>
+            <p class="concert-description">
+              Фолк-проект «Таволга» · ДК «Прикамье» · 16:00 · 500 ₽
+            </p>
+            <div class="concert-actions">
+              <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
+              <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+            </div>
           </div>
         </div>
       </div>
@@ -211,11 +312,9 @@
   <!-- Дополнительный скрипт для архивации -->
   <script>
     (function() {
-      // Получаем текущую дату (без времени)
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      // Находим все элементы концертов с data-date
       const concertItems = document.querySelectorAll('#upcoming-list .concert-item');
       const archiveList = document.getElementById('archive-list');
       const archiveSection = document.getElementById('archive-section');
@@ -227,20 +326,15 @@
         if (!dateAttr) return;
 
         const parts = dateAttr.split('-');
-        // парсим дату в UTC, чтобы избежать смещения часового пояса
         const concertDate = new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])));
-        // сравниваем только даты (без времени)
         if (concertDate < today) {
-          // концерт прошёл – перемещаем в архив
           archiveList.appendChild(item);
           hasArchived = true;
         }
       });
 
-      // Если есть архивированные концерты – показываем блок архива
       if (hasArchived) {
         archiveSection.style.display = 'block';
-        // Также можно скрыть заголовок "Ближайшие даты", если концертов не осталось
         const upcomingTitle = document.querySelector('#concerts .section-label');
         const upcomingList = document.getElementById('upcoming-list');
         if (upcomingList.children.length === 0) {
