@@ -10,6 +10,69 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+  /* ==== ЛОКАЛЬНЫЕ ИСПРАВЛЕНИЯ ДЛЯ СТРАНИЦЫ КОНЦЕРТОВ ==== */
+
+  /* Ничего не выходит за экран по горизонтали */
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  /* Контейнеры и секции не шире вьюпорта */
+  .container, .section-wrap { max-width: 100%; box-sizing: border-box; }
+
+  /* Действия концерта: разрешаем перенос, убираем сжатие */
+  .concert-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  /* Сам концертный блок не должен распирать страницу */
+  .concert-item { max-width: 100%; box-sizing: border-box; }
+  .concert-info h3 { word-break: break-word; overflow-wrap: anywhere; }
+
+  /* Мобильная раскладка */
+  @media (max-width: 640px) {
+    .concert-item {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      padding: 1.25rem 1rem;
+    }
+    .concert-date { align-self: center; }
+    .concert-info { text-align: center; }
+    .concert-info h3 { font-size: 1.05rem; line-height: 1.35; }
+
+    .concert-actions {
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+    }
+    .concert-actions .btn-outline {
+      flex: 1 1 auto;
+      min-width: 120px;
+      padding: 0.7rem 1rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .concert-actions .btn-outline {
+      flex: 1 1 100%;
+      min-width: 0;
+      white-space: normal;
+    }
+  }
+
+  /* Рамка из лозы: страховка от вылезания за вьюпорт */
+  .rose-frame-container {
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+</style>
 </head>
 <body>
 
@@ -86,7 +149,7 @@
           <div class="concert-info">
             <h3>ЭкоФестиваль семьи «Лада» на Сользаводе</h3>
           </div>
-          <div class="concert-actions" style="display:flex;gap:0.75rem;">
+          <div class="concert-actions">
             <a href="https://quicktickets.ru/solikamsk-dk-prikame/e1" class="btn-outline" target="_blank" rel="noopener noreferrer">Соликамск</a>
             <a href="https://vk.com/wall-95826361_27993" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
@@ -100,7 +163,7 @@
           <div class="concert-info">
             <h3>Фестиваль «Биармия»</h3>
           </div>
-          <div class="concert-actions" style="display:flex;gap:0.75rem;">
+          <div class="concert-actions">
             <a href="https://quicktickets.ru/solikamsk-dk-prikame/e3" class="btn-outline" target="_blank" rel="noopener noreferrer">Плехово</a>
             <a href="https://vk.com/biarmiasolkam" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
@@ -115,7 +178,7 @@
           <div class="concert-info">
             <h3>БЫЛЬ да НЕБЫЛЬ</h3>
           </div>
-          <div class="concert-actions" style="display:flex;gap:0.75rem;">
+          <div class="concert-actions" >
             <a href="https://quicktickets.ru/solikamsk-dk-prikame/e101" class="btn-outline" target="_blank" rel="noopener noreferrer">Билеты</a>
             <a href="https://vk.ru/wall-202034065_521" class="btn-outline" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
           </div>
