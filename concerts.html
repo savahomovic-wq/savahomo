@@ -11,27 +11,116 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-  /* ===== КНОПКИ — РАСТЯНУТЫЕ ===== */
+  /* ===== СТИЛИЗАЦИЯ КОНЦЕРТОВ ПОД ОБЩИЙ СТИЛЬ САЙТА ===== */
+
+  /* Карточка концерта — лёгкая «пергаментная» рамка с золотым свечением */
+  .concert-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 1.75rem 2rem;
+    border: 1px solid rgba(198, 160, 90, 0.18);
+    border-radius: 4px;
+    background:
+      linear-gradient(180deg, rgba(198, 160, 90, 0.04), rgba(198, 160, 90, 0.01)),
+      rgba(10, 8, 12, 0.35);
+    backdrop-filter: blur(2px);
+    transition: border-color .4s ease, box-shadow .4s ease, transform .4s ease;
+  }
+  .concert-item + .concert-item { margin-top: 1.25rem; }
+
+  .concert-item::before,
+  .concert-item::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--accent, #c6a05a);
+    opacity: 0.35;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+  .concert-item::before {
+    top: 6px; left: 6px;
+    border-right: none; border-bottom: none;
+  }
+  .concert-item::after {
+    bottom: 6px; right: 6px;
+    border-left: none; border-top: none;
+  }
+  .concert-item:hover {
+    border-color: rgba(198, 160, 90, 0.45);
+    box-shadow: 0 0 40px -12px rgba(198, 160, 90, 0.35);
+  }
+  .concert-item:hover::before,
+  .concert-item:hover::after { opacity: 0.8; }
+
+  /* ДАТА — крупная цифра Cormorant + капительная подпись месяца */
+  .concert-date {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(198, 160, 90, 0.2);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--accent, #c6a05a);
+    text-align: center;
+  }
+  .concert-day {
+    font-size: 2.6rem;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .concert-month {
+    margin-top: .35rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent, #c6a05a);
+    opacity: 0.75;
+  }
+
+  /* ИНФО — заголовок в стиле section-title */
+  .concert-info {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .concert-info h3 {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.25;
+    color: #eae2d3;
+    letter-spacing: 0.005em;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* КНОПКИ — в стиле .btn-outline сайта (золотая окантовка, капитель) */
   .concert-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
-    align-items: stretch;
-    flex: 1 1 320px;          /* кнопочный блок сам растягивается */
-    justify-content: flex-end;
+    gap: 0.75rem;
+    align-items: center;
+    flex: 0 0 auto;
   }
-
   .concert-actions .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex: 1 1 160px;          /* растягиваются, но не уже 160px */
-    min-width: 160px;
-    padding: 0.85rem 2rem;    /* шире и выше */
+    padding: 0.65rem 1.35rem;
     font-family: 'Inter', sans-serif;
     font-size: 0.72rem;
     font-weight: 400;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent, #c6a05a);
     background: transparent;
@@ -73,18 +162,24 @@
     .concert-info h3 { font-size: 1.3rem; }
 
     .concert-actions {
-      flex: 1 1 100%;
-      justify-content: stretch;
+      justify-content: center;
       width: 100%;
-      gap: 0.6rem;
+      gap: 0.55rem;
     }
     .concert-actions .btn-outline {
-      flex: 1 1 100%;          /* на мобилке каждая кнопка — на всю ширину */
+      flex: 1 1 auto;
+      min-width: 130px;
+      padding: 0.7rem 1rem;
+      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .concert-actions .btn-outline {
+      flex: 1 1 100%;
       min-width: 0;
-      width: 100%;
-      padding: 0.9rem 1rem;
-      letter-spacing: 0.2em;
-      font-size: 0.7rem;
+      white-space: normal;
     }
   }
 </style>
