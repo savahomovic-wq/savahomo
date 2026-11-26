@@ -3,202 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#060408" />
+  <meta name="theme-color" content="#06100f" />
   <meta name="description" content="Ближайшие концерты и фестивали фолк-проекта «Таволга»." />
   <title>Концерты — ТАВОЛГА</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-  /* ===== СТИЛИЗАЦИЯ КОНЦЕРТОВ ПОД ОБЩИЙ СТИЛЬ САЙТА ===== */
-
-  /* Карточка концерта — лёгкая «пергаментная» рамка с золотым свечением */
-  .concert-item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    padding: 1.75rem 2rem;
-    border: 1px solid rgba(198, 160, 90, 0.18);
-    border-radius: 4px;
-    background:
-      linear-gradient(180deg, rgba(198, 160, 90, 0.04), rgba(198, 160, 90, 0.01)),
-      rgba(10, 8, 12, 0.35);
-    backdrop-filter: blur(2px);
-    transition: border-color .4s ease, box-shadow .4s ease, transform .4s ease;
-  }
-  .concert-item + .concert-item { margin-top: 1.25rem; }
-
-  .concert-item::before,
-  .concert-item::after {
-    content: "";
-    position: absolute;
-    width: 14px; height: 14px;
-    border: 1px solid var(--accent, #c6a05a);
-    opacity: 0.35;
-    pointer-events: none;
-    transition: opacity .4s ease;
-  }
-  .concert-item::before {
-    top: 6px; left: 6px;
-    border-right: none; border-bottom: none;
-  }
-  .concert-item::after {
-    bottom: 6px; right: 6px;
-    border-left: none; border-top: none;
-  }
-  .concert-item:hover {
-    border-color: rgba(198, 160, 90, 0.45);
-    box-shadow: 0 0 40px -12px rgba(198, 160, 90, 0.35);
-  }
-  .concert-item:hover::before,
-  .concert-item:hover::after { opacity: 0.8; }
-
-  /* ДАТА — крупная цифра Cormorant + капительная подпись месяца */
-  .concert-date {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 92px;
-    padding-right: 1.5rem;
-    border-right: 1px solid rgba(198, 160, 90, 0.2);
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--accent, #c6a05a);
-    text-align: center;
-  }
-  .concert-day {
-    font-size: 2.6rem;
-    line-height: 1;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-  }
-  .concert-month {
-    margin-top: .35rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 400;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--accent, #c6a05a);
-    opacity: 0.75;
-  }
-
-  /* ИНФО — заголовок в стиле section-title */
-  .concert-info {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  .concert-info h3 {
-    margin: 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.25;
-    color: #eae2d3;
-    letter-spacing: 0.005em;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-  }
-
-  /* КНОПКИ — в стиле .btn-outline сайта (золотая окантовка, капитель) */
-  .concert-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    align-items: center;
-    flex: 0 0 auto;
-  }
-  .concert-actions .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.65rem 1.35rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent, #c6a05a);
-    background: transparent;
-    border: 1px solid rgba(198, 160, 90, 0.45);
-    border-radius: 2px;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background-color .35s ease, color .35s ease,
-                border-color .35s ease, box-shadow .35s ease;
-  }
-  .concert-actions .btn-outline:hover {
-    color: #0a0810;
-    background: var(--accent, #c6a05a);
-    border-color: var(--accent, #c6a05a);
-    box-shadow: 0 0 24px -6px rgba(198, 160, 90, 0.6);
-  }
-
-  /* ===== МОБИЛЬНАЯ РАСКЛАДКА ===== */
-  @media (max-width: 720px) {
-    .concert-item {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1.1rem;
-      padding: 1.4rem 1.2rem;
-    }
-    .concert-date {
-      flex-direction: row;
-      align-items: baseline;
-      gap: .6rem;
-      min-width: 0;
-      padding: 0 0 .9rem 0;
-      border-right: none;
-      border-bottom: 1px solid rgba(198, 160, 90, 0.2);
-    }
-    .concert-day { font-size: 2rem; }
-    .concert-month { margin-top: 0; font-size: 0.65rem; }
-
-    .concert-info { text-align: center; }
-    .concert-info h3 { font-size: 1.3rem; }
-
-    .concert-actions {
-      justify-content: center;
-      width: 100%;
-      gap: 0.55rem;
-    }
-    .concert-actions .btn-outline {
-      flex: 1 1 auto;
-      min-width: 130px;
-      padding: 0.7rem 1rem;
-      letter-spacing: 0.18em;
-      font-size: 0.68rem;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .concert-actions .btn-outline {
-      flex: 1 1 100%;
-      min-width: 0;
-      white-space: normal;
-    }
-  }
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;1,400&family=Ponomar&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=2" />
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
-  <canvas id="bg-canvas"></canvas>
-  <div class="logo-watermark"></div>
-  <div class="bg-overlay"></div>
-  <div class="bg-pattern"></div>
-
-  <!-- РАМКА ИЗ ЛОЗЫ -->
-  <div class="rose-frame-container"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="fog" aria-hidden="true"></div>
 
   <!-- NAV -->
-  <nav>
+  <nav class="topbar">
     <a href="index.html" class="logo-link">
-      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
+      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img" width="1168" height="896">
     </a>
     <ul class="nav-links-desktop">
       <li><a href="index.html">Главная</a></li>
@@ -224,29 +45,13 @@
 
   <section id="concerts" class="section-wrap">
     <div class="container">
-      <p class="section-label reveal">Ближайшие даты</p>
+      
       <div class="mystic-title-wrap reveal reveal-delay-1">
-        <span class="title-glyph" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
-            <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
-            <circle cx="13" cy="13" r="3"/>
-          </svg>
-        </span>
-        <h2 class="section-title">Календарь выступлений</h2>
-        <span class="title-glyph right" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
-            <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
-            <circle cx="13" cy="13" r="3"/>
-          </svg>
-        </span>
+        <h1 class="section-title">Календарь выступлений</h1>
       </div>
       <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
-        <div class="mystic-sub-line"></div>
         <span>место · время · встреча</span>
-        <div class="mystic-sub-line"></div>
-      </div>
+        </div>
 
       <!-- БЛИЖАЙШИЕ КОНЦЕРТЫ -->
       <div class="concert-list" id="upcoming-list">
@@ -294,54 +99,25 @@
           </div>
         </div>
       </div>
+      <p class="concert-empty" id="upcoming-empty" hidden>Новые даты пока не объявлены. Следите за анонсами в <a href="https://vk.com/tavolga_folkgroup" target="_blank" rel="noopener noreferrer">нашей группе ВКонтакте</a>.</p>
       <!-- АРХИВ ВЫСТУПЛЕНИЙ -->
-<div id="archive-section" style="margin-top: 4rem; display: none;">
+<div id="archive-section" style="display: none;">
  <div class="mystic-title-wrap reveal reveal-delay-1">
-    <span class="title-glyph" aria-hidden="true">
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
-        <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
-        <circle cx="13" cy="13" r="3"/>
-      </svg>
-    </span>
     <h2 class="section-title">Архив выступлений</h2>
-    <span class="title-glyph right" aria-hidden="true">
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M13 2 L24 8 L24 18 L13 24 L2 18 L2 8 Z"/>
-        <path d="M13 7 L19 10.5 L19 17.5 L13 21 L7 17.5 L7 10.5 Z"/>
-        <circle cx="13" cy="13" r="3"/>
-      </svg>
-    </span>
   </div>
   <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
-    <div class="mystic-sub-line"></div>
     <span>архив · хроники · турне</span>
-    <div class="mystic-sub-line"></div>
-  </div>
+    </div>
   <div class="concert-list" id="archive-list"></div>
 </div>
+    </div>
+  </section>
 
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <span class="ornament-symbol">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="1.6"/>
-        <ellipse cx="12" cy="6" rx="1.6" ry="3.2"/>
-        <ellipse cx="12" cy="18" rx="1.6" ry="3.2"/>
-        <ellipse cx="6" cy="9" rx="1.6" ry="3.2" transform="rotate(-60 6 9)"/>
-        <ellipse cx="18" cy="9" rx="1.6" ry="3.2" transform="rotate(60 18 9)"/>
-        <ellipse cx="6" cy="15" rx="1.6" ry="3.2" transform="rotate(60 6 15)"/>
-        <ellipse cx="18" cy="15" rx="1.6" ry="3.2" transform="rotate(-60 18 15)"/>
-      </svg>
-    </span>
-    <div class="ornament-line"></div>
-  </div>
+  <div class="stitch" aria-hidden="true"></div>
 
   <!-- НИЖНЯЯ НАВИГАЦИЯ -->
-  <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
-    <div class="container">
-      <p class="section-label reveal">Навигация</p>
-      <div class="page-links reveal reveal-delay-2">
+  <nav class="page-links-wrap" aria-label="Разделы сайта">
+    <div class="page-links">
         <a href="index.html" class="contact-link">Главная</a>
         <a href="about.html" class="contact-link">О проекте</a>
         <a href="music.html" class="contact-link">Музыка</a>
@@ -349,34 +125,16 @@
         <a href="band.html" class="contact-link">Состав</a>
         <a href="contact.html" class="contact-link">Контакт</a>
       </div>
-    </div>
-  </section>
+  </nav>
 
   <!-- FOOTER -->
   <footer>
-    <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
-      <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
-        <path d="M32 12 L28 5 L36 8 Z"   fill="currentColor"/>
-        <path d="M80 16 L76 23 L84 20 Z"  fill="currentColor"/>
-        <path d="M140 11 L136 4 L144 7 Z" fill="currentColor"/>
-        <path d="M200 17 L196 24 L204 21 Z" fill="currentColor"/>
-        <path d="M248 12 L244 5 L252 8 Z" fill="currentColor"/>
-        <path d="M18 14 Q23 9, 28 14 T38 14"/>
-        <path d="M60 14 Q65 19, 70 14 T80 14"/>
-        <path d="M108 14 Q113 9, 118 14 T128 14"/>
-        <path d="M155 14 Q160 19, 165 14 T175 14"/>
-        <path d="M198 14 Q203 9, 208 14 T218 14"/>
-        <path d="M240 14 Q245 19, 250 14 T260 14"/>
-        <circle cx="5"   cy="14" r="2.5" fill="currentColor" opacity=".5"/>
-        <circle cx="275" cy="14" r="2.5" fill="currentColor" opacity=".5"/>
-      </svg>
-    </div>
+    <div class="forest" aria-hidden="true"></div>
     <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
     <div class="footer-copy">© Таволга, 2026. Все права защищены.</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
   <!-- Дополнительный скрипт для архивации -->
   <script>
     (function() {
@@ -410,10 +168,8 @@
       if (hasArchived) {
         archiveSection.style.display = 'block';
         // Также можно скрыть заголовок "Ближайшие даты", если концертов не осталось
-        const upcomingTitle = document.querySelector('#concerts .section-label');
-        const upcomingList = document.getElementById('upcoming-list');
-        if (upcomingList.children.length === 0) {
-          upcomingTitle.textContent = 'Нет ближайших выступлений';
+        if (document.getElementById('upcoming-list').children.length === 0) {
+          document.getElementById('upcoming-empty').hidden = false;
         }
       }
     })();
