@@ -3,31 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#060408" />
+  <meta name="theme-color" content="#06100f" />
   <meta name="description" content="Участники фолк-проекта «Таволга»." />
   <title>Состав — ТАВОЛГА</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;1,400&family=Ponomar&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=2" />
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="fog" aria-hidden="true"></div>
 
-   <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
+  <!-- NAV -->
 
-  <canvas id="bg-canvas"></canvas>
-  <div class="bg-overlay"></div>
-  <div class="bg-pattern"></div>
-
-   <!-- РАМКА ИЗ ЛОЗЫ -->
-
-  <div class="rose-frame-container"></div>
-
-   <!-- NAV -->
-
-  <nav>
+  <nav class="topbar">
     <a href="index.html" class="logo-link">
-      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
+      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img" width="1168" height="896">
     </a>
     <ul class="nav-links-desktop">
       <li><a href="index.html">Главная</a></li>
@@ -53,98 +46,62 @@
 
   <section id="band" class="section-wrap">
   <div class="container">
-    <p class="section-label reveal">Участники</p>
     <div class="mystic-title-wrap reveal reveal-delay-1">
-      <span class="title-glyph" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-          <circle cx="13" cy="13" r="11"/>
-          <ellipse cx="13" cy="13" rx="5" ry="11"/>
-          <ellipse cx="13" cy="13" rx="5" ry="11" transform="rotate(60 13 13)"/>
-          <ellipse cx="13" cy="13" rx="5" ry="11" transform="rotate(120 13 13)"/>
-          <circle cx="13" cy="13" r="2.5"/>
-        </svg>
-      </span>
-      <h2 class="section-title">Проводники звука</h2>
-      <span class="title-glyph right" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-          <circle cx="13" cy="13" r="11"/>
-          <ellipse cx="13" cy="13" rx="5" ry="11"/>
-          <ellipse cx="13" cy="13" rx="5" ry="11" transform="rotate(60 13 13)"/>
-          <ellipse cx="13" cy="13" rx="5" ry="11" transform="rotate(120 13 13)"/>
-          <circle cx="13" cy="13" r="2.5"/>
-        </svg>
-      </span>
+      <h1 class="section-title">Проводники звука</h1>
     </div>
     <div class="mystic-sub reveal reveal-delay-1" aria-hidden="true">
-      <div class="mystic-sub-line"></div>
       <span>душа · голос · дух</span>
-      <div class="mystic-sub-line"></div>
-    </div>
+      </div>
 
     <div class="band-grid">
-      <!-- Каждый участник обёрнут в ссылку -->
-      <a href="#" class="member-link reveal reveal-delay-1">
+            <article class="member-link reveal reveal-delay-1">
         <div class="member-card">
           <div class="member-portrait">
             <img src="images/надя.jpg" alt="Надежда Синицина">
           </div>
           <div class="member-name">Надежда Синицина</div>
           <div class="member-role">Вокал</div>
-          <p class="member-bio"></p>
         </div>
-      </a>
+      </article>
 
-      <a href="#" class="member-link reveal reveal-delay-2">
+      <article class="member-link reveal reveal-delay-2">
         <div class="member-card">
           <div class="member-portrait">
             <img src="images/алена.jpg" alt="Алена Давыдова">
           </div>
           <div class="member-name">Алена Давыдова</div>
           <div class="member-role">Вокал</div>
-          <p class="member-bio"></p>
         </div>
-      </a>
+      </article>
 
-      <a href="#" class="member-link reveal reveal-delay-1">
+      <article class="member-link reveal reveal-delay-1">
         <div class="member-card">
           <div class="member-portrait">
             <img src="images/савелий.jpg" alt="Савелий Хомович">
           </div>
           <div class="member-name">Савелий Хомович</div>
           <div class="member-role">Барабаны</div>
-          <p class="member-bio"></p>
         </div>
-      </a>
+      </article>
 
-      <a href="#" class="member-link reveal reveal-delay-2">
+      <article class="member-link reveal reveal-delay-2">
         <div class="member-card">
           <div class="member-portrait">
             <img src="images/серега.jpg" alt="Сергей Давыдов">
           </div>
           <div class="member-name">Сергей Давыдов</div>
           <div class="member-role">Аранжировка</div>
-          <p class="member-bio"></p>
         </div>
-      </a>
+      </article>
     </div>
   </div>
 </section>
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <span class="ornament-symbol">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2 L20 12 L12 22 L4 12 Z"/><path d="M12 7 L16 12 L12 17 L8 12 Z"/>
-      </svg>
-    </span>
-    <div class="ornament-line"></div>
-  </div>
+  <div class="stitch" aria-hidden="true"></div>
 
   <!-- ══════════ ПЕРЕХОДЫ ПО САЙТУ ══════════ -->
 
-  <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
-    <div class="container">
-      <p class="section-label reveal">Навигация</p>
-      <div class="page-links reveal reveal-delay-2">
+  <nav class="page-links-wrap" aria-label="Разделы сайта">
+    <div class="page-links">
         <a href="index.html" class="contact-link">Главная</a>
         <a href="about.html" class="contact-link">О проекте</a>
         <a href="music.html" class="contact-link">Музыка</a>
@@ -152,35 +109,16 @@
         <a href="band.html" class="contact-link active">Состав</a>
         <a href="contact.html" class="contact-link">Контакт</a>
       </div>
-    </div>
-  </section>
+  </nav>
 
    <!-- ══════════ FOOTER ══════════ -->
 
   <footer>
-    
-    <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
-      <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
-        <path d="M32 12 L28 5 L36 8 Z"   fill="currentColor"/>
-        <path d="M80 16 L76 23 L84 20 Z"  fill="currentColor"/>
-        <path d="M140 11 L136 4 L144 7 Z" fill="currentColor"/>
-        <path d="M200 17 L196 24 L204 21 Z" fill="currentColor"/>
-        <path d="M248 12 L244 5 L252 8 Z" fill="currentColor"/>
-        <path d="M18 14 Q23 9, 28 14 T38 14"/>
-        <path d="M60 14 Q65 19, 70 14 T80 14"/>
-        <path d="M108 14 Q113 9, 118 14 T128 14"/>
-        <path d="M155 14 Q160 19, 165 14 T175 14"/>
-        <path d="M198 14 Q203 9, 208 14 T218 14"/>
-        <path d="M240 14 Q245 19, 250 14 T260 14"/>
-        <circle cx="5"   cy="14" r="2.5" fill="currentColor" opacity=".5"/>
-        <circle cx="275" cy="14" r="2.5" fill="currentColor" opacity=".5"/>
-      </svg>
-    </div>
+    <div class="forest" aria-hidden="true"></div>
     <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
     <div class="footer-copy">© Таволга, 2026. Все права защищены.</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
