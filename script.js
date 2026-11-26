@@ -1,120 +1,88 @@
- (function() {
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, raf;
-    let mouse = { x: -9999, y: -9999 };
+// Болотные огоньки и пыльца таволги
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let W, H, raf, last = 0;
+  const mouse = { x: -9999, y: -9999 };
 
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  // свечение рисуется один раз и переиспользуется — так анимация легче для телефона
+  function glow(rgb) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 64;
+    const g = c.getContext('2d');
+    const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, `rgba(${rgb},1)`);
+    grad.addColorStop(0.12, `rgba(${rgb},.55)`);
+    grad.addColorStop(1, `rgba(${rgb},0)`);
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 64, 64);
+    return c;
+  }
+  const wisp = glow('168,230,196');
+  const bloom = glow('236,230,211');
 
-    const STAR_COUNT = 200;
-    const stars = Array.from({ length: STAR_COUNT }, () => ({
-      x: Math.random(),
-      y: Math.random(),
-      r: Math.random() * 1.2 + 0.2,
-      a: Math.random() * 0.7 + 0.1,
-      twinkle: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.008 + 0.002
-    }));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  let lights = [];
 
-    const FIREFLY_COUNT = 55;
-    const fireflies = Array.from({ length: FIREFLY_COUNT }, () => ({
-      x: Math.random() * 1,
-      y: Math.random() * 1,
-      r: Math.random() * 2.5 + 0.5,
-      vx: (Math.random() - 0.5) * 0.00015,
-      vy: (Math.random() - 0.5) * 0.00015 - 0.00005,
-      a: Math.random() * 0.6 + 0.1,
-      phase: Math.random() * Math.PI * 2,
-      freq: Math.random() * 0.012 + 0.004,
-      // Цвет: золотой или чуть фиолетовый
-      hue: Math.random() > 0.85 ? 270 : (Math.random() > 0.5 ? 38 : 30),
-      sat: Math.random() > 0.85 ? 40 : 65,
-    }));
-
-    const orbs = [
-      { x: 0.15, y: 0.25, r: 320, hue: 30,  sat: 60, baseA: 0.035, phase: 0 },
-      { x: 0.85, y: 0.70, r: 280, hue: 260, sat: 40, baseA: 0.025, phase: 1.5 },
-      { x: 0.50, y: 0.10, r: 400, hue: 20,  sat: 50, baseA: 0.04,  phase: 3.1 },
-      { x: 0.30, y: 0.85, r: 240, hue: 280, sat: 35, baseA: 0.02,  phase: 4.7 },
+  function seed() {
+    const small = W < 700;
+    const make = (n, f) => Array.from({ length: n }, f);
+    lights = [
+      ...make(small ? 12 : 24, () => ({ img: wisp, x: rnd(0, W), y: rnd(H * .25, H), s: rnd(14, 44),
+        vx: rnd(-.12, .12), vy: rnd(-.14, .04), a: rnd(.35, .85), p: rnd(0, 6.3), f: rnd(.008, .022), lure: true })),
+      ...make(small ? 45 : 90, () => ({ img: bloom, x: rnd(0, W), y: rnd(0, H), s: rnd(3, 9),
+        vx: rnd(-.08, .14), vy: rnd(.03, .2), a: rnd(.2, .7), p: rnd(0, 6.3), f: rnd(.004, .016) }))
     ];
+  }
 
-    let t = 0;
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const widthChanged = window.innerWidth !== W;
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // на телефоне высота прыгает при прокрутке — огоньки не пересоздаём
+    if (widthChanged) seed();
+    if (still.matches) frame(0);
+  }
 
-      orbs.forEach(o => {
-        const pulse = Math.sin(t * 0.003 + o.phase) * 0.4 + 0.6;
-        const grad = ctx.createRadialGradient(o.x*W, o.y*H, 0, o.x*W, o.y*H, o.r * pulse);
-        grad.addColorStop(0,   `hsla(${o.hue}, ${o.sat}%, 40%, ${o.baseA * pulse})`);
-        grad.addColorStop(0.5, `hsla(${o.hue}, ${o.sat}%, 30%, ${o.baseA * pulse * 0.4})`);
-        grad.addColorStop(1,   `hsla(${o.hue}, ${o.sat}%, 20%, 0)`);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(o.x*W, o.y*H, o.r * pulse, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      stars.forEach(s => {
-        s.twinkle += s.speed;
-        const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
-        ctx.fillStyle = `rgba(245, 235, 210, ${alpha})`;
-        ctx.beginPath();
-        ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      fireflies.forEach(f => {
-        const dx = mouse.x / W - f.x;
-        const dy = mouse.y / H - f.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 0.3) {
-          f.vx += dx * 0.0000008;
-          f.vy += dy * 0.0000008;
-        }
-
-        f.x += f.vx;
-        f.y += f.vy;
-
-        if (f.x < 0 || f.x > 1) f.vx *= -1;
-        if (f.y < 0 || f.y > 1) f.vy *= -1;
-        f.x = Math.max(0, Math.min(1, f.x));
-        f.y = Math.max(0, Math.min(1, f.y));
-
-        f.phase += f.freq;
-        const breathe = 0.5 + 0.5 * Math.sin(f.phase);
-        const alpha = f.a * breathe;
-        const radius = f.r * (0.7 + 0.3 * breathe);
-
-        const glowGrad = ctx.createRadialGradient(f.x*W, f.y*H, 0, f.x*W, f.y*H, radius * 12);
-        glowGrad.addColorStop(0,   `hsla(${f.hue}, ${f.sat}%, 65%, ${alpha * 0.5})`);
-        glowGrad.addColorStop(1,   `hsla(${f.hue}, ${f.sat}%, 55%, 0)`);
-        ctx.fillStyle = glowGrad;
-        ctx.beginPath();
-        ctx.arc(f.x*W, f.y*H, radius * 12, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = `hsla(${f.hue}, ${f.sat}%, 80%, ${alpha})`;
-        ctx.beginPath();
-        ctx.arc(f.x*W, f.y*H, radius, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      t++;
-      raf = requestAnimationFrame(draw);
-    }
-    draw();
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(raf);
-      else draw();
+  function frame(now) {
+    const k = last ? Math.min((now - last) / 16.7, 3) : 1;
+    last = now;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    lights.forEach(l => {
+      // огоньки тянутся к курсору, как к фонарю
+      if (l.lure) {
+        const dx = mouse.x - l.x, dy = mouse.y - l.y, d = Math.hypot(dx, dy);
+        if (d < 260 && d > 40) { l.x += dx / d * .35 * k; l.y += dy / d * .35 * k; }
+      }
+      l.p += l.f * k;
+      l.x += (l.vx + Math.sin(l.p * .7) * .12) * k;
+      l.y += l.vy * k;
+      if (l.x < -40) l.x = W + 40; else if (l.x > W + 40) l.x = -40;
+      if (l.y < -40) l.y = H + 40; else if (l.y > H + 40) l.y = -40;
+      ctx.globalAlpha = l.a * (.55 + .45 * Math.sin(l.p));
+      ctx.drawImage(l.img, l.x - l.s / 2, l.y - l.s / 2, l.s, l.s);
     });
-  })();
+    if (!still.matches) raf = requestAnimationFrame(frame);
+  }
+
+  function start() { cancelAnimationFrame(raf); last = 0; raf = requestAnimationFrame(frame); }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  window.addEventListener('pointerup', e => { if (e.pointerType === 'touch') mouse.x = mouse.y = -9999; });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf); else start();
+  });
+  still.addEventListener('change', start);
+  resize();
+  start();
+})();
 
   const revealEls = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver((entries) => {
@@ -141,8 +109,7 @@
   });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-  window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
-
+  
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       const target = document.querySelector(link.getAttribute('href'));
@@ -197,6 +164,7 @@ function initCarousel() {
 
     function startAuto() {
       clearInterval(interval);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       interval = setInterval(next, 5000);
     }
 
