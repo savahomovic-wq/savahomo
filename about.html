@@ -3,30 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#060408" />
+  <meta name="theme-color" content="#06100f" />
   <meta name="description" content="О фолк-проекте «Таволга»: сочетание электронной музыки с фольклорным колоритом." />
   <title>О проекте — ТАВОЛГА</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;1,400&family=Ponomar&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=2" />
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-  <!-- АНИМИРОВАННЫЙ ФОНОВЫЙ CANVAS -->
-  <canvas id="bg-canvas"></canvas>
-  <!-- Логотип на фоне (водяной знак) – добавлен ранее -->
-  <div class="logo-watermark"></div>
-  <div class="bg-overlay"></div>
-  <div class="bg-pattern"></div>
-
-  <!-- РАМКА ИЗ ЛОЗЫ -->
-  <div class="rose-frame-container"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="fog" aria-hidden="true"></div>
 
   <!-- NAV -->
-  <nav>
+  <nav class="topbar">
     <a href="index.html" class="logo-link">
-      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img">
+      <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип группы Таволга" class="logo-img" width="1168" height="896">
     </a>
     <ul class="nav-links-desktop">
       <li><a href="index.html">Главная</a></li>
@@ -56,35 +49,12 @@
 
         <!-- ЛЕВАЯ КОЛОНКА: ТЕКСТ + ИКОНКИ СОЦСЕТЕЙ -->
         <div>
-          <p class="section-label reveal">О проекте</p>
           <div class="mystic-title-wrap reveal reveal-delay-1">
-            <span class="title-glyph" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-                <circle cx="14" cy="14" r="12"/>
-                <circle cx="14" cy="14" r="7"/>
-                <line x1="14" y1="2"  x2="14" y2="26"/>
-                <line x1="2"  y1="14" x2="26" y2="14"/>
-                <line x1="5"  y1="5"  x2="23" y2="23"/>
-                <line x1="23" y1="5"  x2="5"  y2="23"/>
-              </svg>
-            </span>
-            <h2 class="section-title">Корни глубокого звука</h2>
-            <span class="title-glyph right" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-                <circle cx="14" cy="14" r="12"/>
-                <circle cx="14" cy="14" r="7"/>
-                <line x1="14" y1="2"  x2="14" y2="26"/>
-                <line x1="2"  y1="14" x2="26" y2="14"/>
-                <line x1="5"  y1="5"  x2="23" y2="23"/>
-                <line x1="23" y1="5"  x2="5"  y2="23"/>
-              </svg>
-            </span>
+            <h1 class="section-title">Корни глубокого звука</h1>
           </div>
           <div class="mystic-sub reveal reveal-delay-2" aria-hidden="true">
-            <div class="mystic-sub-line"></div>
             <span>древо · голос · земля</span>
-            <div class="mystic-sub-line"></div>
-          </div>
+            </div>
           <p class="body-text reveal reveal-delay-2">
             В творчестве фолк-проекта переплетаются наследие старины и энергия клубной культуры — так рождается синтез исконного и трендового. Под песни «Та́волги» можно отрываться на городском рейве и водить хороводы в поле.
           </p>
@@ -117,8 +87,8 @@
 
         <!-- ПРАВАЯ КОЛОНКА: КАРУСЕЛЬ -->
 <div class="reveal reveal-delay-2">
-  <div class="gothic-frame">
-    <div class="gothic-frame-inner">
+  <div class="portal">
+    <div class="portal-inner">
       <div class="carousel">
         <div class="carousel-track">
           <img src="images/фото таволги.jpg" alt="Фото группы 1" class="slide">
@@ -128,9 +98,9 @@
         <button class="carousel-btn prev" aria-label="Предыдущее фото">‹</button>
         <button class="carousel-btn next" aria-label="Следующее фото">›</button>
         <div class="carousel-indicators">
-          <span class="dot active" data-index="0"></span>
-          <span class="dot" data-index="1"></span>
-          <span class="dot" data-index="2"></span>
+          <button type="button" class="dot active" data-index="0" aria-label="Фото 1"></button>
+          <button type="button" class="dot" data-index="1" aria-label="Фото 2"></button>
+          <button type="button" class="dot" data-index="2" aria-label="Фото 3"></button>
         </div>
       </div>
     </div>
@@ -141,24 +111,11 @@
   </section>
 
   <!-- ОРНАМЕНТ -->
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <span class="ornament-symbol">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
-        <path d="M12 2 L12 22"/>
-        <path d="M12 6 Q9 5 7.5 2.5"/><path d="M12 6 Q15 5 16.5 2.5"/>
-        <path d="M12 11 Q9 10 7 7.5"/><path d="M12 11 Q15 10 17 7.5"/>
-        <path d="M12 16 Q9.5 15 8 13"/><path d="M12 16 Q14.5 15 16 13"/>
-      </svg>
-    </span>
-    <div class="ornament-line"></div>
-  </div>
+  <div class="stitch" aria-hidden="true"></div>
 
   <!-- НИЖНЯЯ НАВИГАЦИЯ -->
-  <section class="section-wrap" style="text-align:center; padding-top:4rem; padding-bottom:6rem;">
-    <div class="container">
-      <p class="section-label reveal">Навигация</p>
-      <div class="page-links reveal reveal-delay-2">
+  <nav class="page-links-wrap" aria-label="Разделы сайта">
+    <div class="page-links">
         <a href="index.html" class="contact-link">Главная</a>
         <a href="about.html" class="contact-link active">О проекте</a>
         <a href="music.html" class="contact-link">Музыка</a>
@@ -166,33 +123,15 @@
         <a href="band.html" class="contact-link">Состав</a>
         <a href="contact.html" class="contact-link">Контакт</a>
       </div>
-    </div>
-  </section>
+  </nav>
 
   <!-- FOOTER -->
   <footer>
-    <div style="display:flex;justify-content:center;margin-bottom:1.8rem;color:var(--accent);opacity:0.2;" aria-hidden="true">
-      <svg width="280" height="28" viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 14 Q70 4, 140 14 Q210 24, 275 14"/>
-        <path d="M32 12 L28 5 L36 8 Z"   fill="currentColor"/>
-        <path d="M80 16 L76 23 L84 20 Z"  fill="currentColor"/>
-        <path d="M140 11 L136 4 L144 7 Z" fill="currentColor"/>
-        <path d="M200 17 L196 24 L204 21 Z" fill="currentColor"/>
-        <path d="M248 12 L244 5 L252 8 Z" fill="currentColor"/>
-        <path d="M18 14 Q23 9, 28 14 T38 14"/>
-        <path d="M60 14 Q65 19, 70 14 T80 14"/>
-        <path d="M108 14 Q113 9, 118 14 T128 14"/>
-        <path d="M155 14 Q160 19, 165 14 T175 14"/>
-        <path d="M198 14 Q203 9, 208 14 T218 14"/>
-        <path d="M240 14 Q245 19, 250 14 T260 14"/>
-        <circle cx="5"   cy="14" r="2.5" fill="currentColor" opacity=".5"/>
-        <circle cx="275" cy="14" r="2.5" fill="currentColor" opacity=".5"/>
-      </svg>
-    </div>
+    <div class="forest" aria-hidden="true"></div>
     <img src="images/cbird_result_64fcea8e6c0a11f1b4a2062592aad52e.png" alt="Логотип" class="footer-logo">
     <div class="footer-copy">© Таволга, 2026. Все права защищены.</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
