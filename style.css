@@ -319,10 +319,31 @@ body::before {
 .page-links a:hover { color: var(--linen); border-color: var(--line); }
 .page-links a.active { color: var(--linen); border-color: var(--thread); }
 
-footer { margin-top: auto; text-align: center; padding: 0 1.25rem max(2rem, env(safe-area-inset-bottom)); background: linear-gradient(transparent 180px, #030807 180px); }
-footer .forest { position: relative; height: 180px; margin: 0 -1.25rem; background: linear-gradient(transparent 75%, #030807 75%); }
-.footer-logo { height: 70px; width: auto; margin: 0 auto .8rem; opacity: .8; }
-.footer-copy { color: #7f958c; font-size: .95rem; }
+footer {
+  position: relative; margin-top: auto; text-align: center;
+  padding: 0 1.25rem max(2.5rem, env(safe-area-inset-bottom));
+}
+/* ельник растворяется книзу, чтобы подвал не отличался от фона */
+footer .forest {
+  position: relative; height: 180px; margin: 0 -1.25rem .5rem;
+  -webkit-mask-image: linear-gradient(#000 40%, transparent 96%);
+          mask-image: linear-gradient(#000 40%, transparent 96%);
+}
+/* размытый прямоугольник без видимых граней под логотипом и подписью */
+footer::after {
+  content: ''; position: absolute; left: 50%; bottom: 0; translate: -50%;
+  width: min(34rem, 100%); height: calc(150px + max(2.5rem, env(safe-area-inset-bottom)));
+  background: rgba(3, 9, 8, .55);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 28% 72%, transparent), linear-gradient(transparent, #000 30% 70%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 28% 72%, transparent), linear-gradient(transparent, #000 30% 70%, transparent);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+  pointer-events: none;
+}
+.footer-logo, .footer-copy { position: relative; z-index: 1; }
+.footer-logo { height: 70px; width: auto; margin: 0 auto .8rem; opacity: .85; }
+.footer-copy { color: var(--mist); font-size: .95rem; }
 
 /* ─── 8. АДАПТИВНОСТЬ ─── */
 @media (max-width: 900px) {
