@@ -137,10 +137,10 @@ body::before {
 .forest { pointer-events: none; }
 .forest::before, .forest::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0;
-  background: url(decor/forest-far.svg) center bottom / auto 100% repeat-x;
+  background: url(forest-far.svg) center bottom / auto 100% repeat-x;
 }
 .forest::before { height: 100%; opacity: .92; }
-.forest::after { height: 82%; background-image: url(decor/forest-near.svg); }
+.forest::after { height: 82%; background-image: url(forest-near.svg); }
 .forest--hero { position: absolute; z-index: -2; left: 0; right: 0; bottom: 0; height: min(42vh, 380px); }
 #hero::after {
   content: ''; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 110px;
@@ -151,8 +151,8 @@ body::before {
   background: center bottom / contain no-repeat; pointer-events: none;
   transform-origin: 50% 100%; animation: sway 11s ease-in-out infinite alternate;
 }
-.meadow--left  { left: -2vw;  background-image: url(decor/tavolga-left.svg); }
-.meadow--right { right: -2vw; background-image: url(decor/tavolga-right.svg); animation-delay: -6s; }
+.meadow--left  { left: -2vw;  background-image: url(tavolga-left.svg); }
+.meadow--right { right: -2vw; background-image: url(tavolga-right.svg); animation-delay: -6s; }
 @keyframes sway { from { rotate: -1.2deg; } to { rotate: 1.2deg; } }
 
 /* ─── 5. ОБЩЕЕ ─── */
@@ -174,7 +174,7 @@ body::before {
 
 .stitch {
   height: 36px; width: min(392px, 80%); margin: 2.5rem auto;
-  background: url(decor/stitch.svg) center / 56px 36px repeat-x;
+  background: url(stitch.svg) center / 56px 36px repeat-x;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 35% 65%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 35% 65%, transparent);
 }
@@ -298,7 +298,7 @@ body::before {
 .sigil {
   width: 150px; aspect-ratio: 1; margin-bottom: 2rem; border-radius: 50%;
   border: 1px solid rgba(236, 230, 211, .35);
-  background: url(decor/star.svg) center / 62% no-repeat;
+  background: url(star.svg) center / 62% no-repeat;
   animation: breathe 6s ease-in-out infinite;
 }
 @keyframes breathe {
